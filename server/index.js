@@ -1,0 +1,5 @@
+const express = require('express')
+const app = express()
+const Router = require('./router')
+app.use(Router)
+app.listen(1234, () => console.log('http://127.0.0.1:1234'))

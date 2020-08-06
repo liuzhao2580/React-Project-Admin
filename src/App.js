@@ -1,9 +1,12 @@
 import React from 'react'
-
+import { BrowserRouter as Router } from 'react-router-dom'
+import routes from './routers/index'
 function App() {
     return (
         <div className="App">
-            hello world
+            <Router routes={routes}>
+                {routes}
+            </Router>
         </div>
     )
 }
