@@ -9,7 +9,7 @@ import { createStore, applyMiddleware } from 'redux'
 import logger from 'redux-logger'
 import thunk from 'redux-thunk'
 import rootReducer from './reducers'
-import 'antd/dist/antd.css';
+// import 'antd/dist/antd.css';
 
 const store = createStore(rootReducer, applyMiddleware(logger, thunk))
 ReactDOM.render(
