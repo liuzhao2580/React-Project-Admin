@@ -8,7 +8,7 @@ export default class SiberDom extends React.Component {
     }
     render() {
         return (
-            <Sider trigger={null} collapsible collapsed={this.state.collapsed} className='sider-box'>
+            <Sider trigger={null} collapsible collapsed={this.state.collapsed} className='sider-box' theme='light'>
                 <div className="logo" />
                 <Menu theme="light" mode="inline" defaultSelectedKeys={['1']}>
                     <Menu.Item key="1" icon={<UserOutlined />}>

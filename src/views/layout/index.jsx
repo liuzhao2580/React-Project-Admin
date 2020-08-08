@@ -5,10 +5,6 @@ import SiderDom from './components/sider'
 import HeaderDom from './components/header'
 import ContentDom from './components/content'
 export default class LayoutDom extends React.Component {
-    
-
-    
-
     render() {
         return (
             <Layout>

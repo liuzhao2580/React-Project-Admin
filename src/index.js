@@ -1,6 +1,6 @@
 import React from 'react'
 import ReactDOM from 'react-dom'
-import { ConfigProvider } from 'antd';
+import { ConfigProvider } from 'antd'
 import App from './App'
 import * as serviceWorker from './serviceWorker'
 
@@ -14,7 +14,7 @@ const store = createStore(rootReducer, applyMiddleware(logger, thunk))
 ReactDOM.render(
     <Provider store={store}>
         <ConfigProvider>
-        <App />
+            <App />
         </ConfigProvider>
     </Provider>,
     document.getElementById('root')
