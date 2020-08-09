@@ -10,6 +10,9 @@ import logger from 'redux-logger'
 import thunk from 'redux-thunk'
 import rootReducer from './reducers'
 
+// 导入全局样式
+import '@/styles/index.scss'
+
 const store = createStore(rootReducer, applyMiddleware(logger, thunk))
 ReactDOM.render(
     <Provider store={store}>
