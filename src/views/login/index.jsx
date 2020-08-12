@@ -29,9 +29,9 @@ export default class LoginDom extends React.Component {
                     <Form.Item name="remember" valuePropName="checked" noStyle>
                         <Checkbox>记住密码</Checkbox>
                     </Form.Item>
-                    <a className="login-form-forgot" href="">
+                    <span className="login-form-forgot">
                         忘记密码
-                    </a>
+                    </span>
                 </Form.Item>
             </Form>
         )

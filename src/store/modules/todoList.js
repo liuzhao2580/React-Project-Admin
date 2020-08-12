@@ -1,7 +1,7 @@
-const user = (state = {},action) => {
+const todoList = (state = {},action) => {
     switch (action.type) {
         default:
         return state
     }
 }
-export default user
+export default todoList

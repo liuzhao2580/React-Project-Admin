@@ -8,12 +8,12 @@ import { Provider } from 'react-redux'
 import { createStore, applyMiddleware } from 'redux'
 import logger from 'redux-logger'
 import thunk from 'redux-thunk'
-import rootReducer from './reducers'
+import rootStore from './store'
 
 // 导入全局样式
 import '@/styles/index.scss'
 
-const store = createStore(rootReducer, applyMiddleware(logger, thunk))
+const store = createStore(rootStore, applyMiddleware(logger, thunk))
 ReactDOM.render(
     <Provider store={store}>
         <ConfigProvider>
