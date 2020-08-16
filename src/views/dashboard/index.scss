@@ -1,0 +1,6 @@
+.todo-item {
+    cursor: pointer;
+    &:hover {
+        font-size: 20px;
+    }
+}

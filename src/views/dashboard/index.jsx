@@ -1,22 +1,44 @@
 import React from 'react'
+import { connect } from 'react-redux'
 import { Button, Input, List } from 'antd'
-const data = [
-    'Racing car sprays burning fuel into crowd.',
-    'Japanese princess to wed commoner.',
-    'Australian walks 100km after outback crash.',
-    'Man charged over missing wedding girl.',
-    'Los Angeles battles huge wildfires.'
-]
-export default class Home extends React.Component {
-    render() {
-        return (
-            <div>
-                <div>
-                    <Input placeholder="Basic usage" />
-                    <Button type="primary">新增</Button>
-                </div>
-                <List header={<div>ToDo List</div>} bordered dataSource={data} renderItem={(item) => <List.Item>{item}</List.Item>} />
+import './index.scss'
+const HomeDom = (props) => {
+    let { inputValue, insertItem, list } = props
+    return (
+        <div>
+            <div style={{ marginBottom: '10px' }}>
+                <Input placeholder='输入些什么' value={inputValue} style={{ width: '200px', marginRight: '10px' }} />
+                <Button type='primary' onClick={insertItem}>
+                    新增
+                </Button>
             </div>
-        )
+            <List
+                header={<div>ToDo List</div>}
+                bordered
+                dataSource={list}
+                renderItem={(item) => <List.Item className='todo-item'>{item.title}</List.Item>}
+            />
+        </div>
+    )
+}
+
+// 映射关系
+const todoListStateToProps = (state) => {
+    return {
+        inputValue: state.todoList.inputValue,
+        list: state.todoList.list
     }
 }
+
+const todoListDispatchToProps = (dispatch) => {
+    return {
+        insertItem() {
+            const action = {
+                type: 'ACT_insertItem'
+            }
+            dispatch(action)
+        }
+    }
+}
+
+export default connect(todoListStateToProps, todoListDispatchToProps)(HomeDom)
