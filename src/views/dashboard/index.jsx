@@ -1,6 +1,7 @@
 import React from 'react'
 import { connect } from 'react-redux'
 import { Button, Input, List } from 'antd'
+import ReactHooks from './components/reactHook'
 import './index.scss'
 const HomeDom = (props) => {
     let { inputValue, insertItem, list } = props
@@ -18,6 +19,7 @@ const HomeDom = (props) => {
                 dataSource={list}
                 renderItem={(item) => <List.Item className='todo-item'>{item.title}</List.Item>}
             />
+            <ReactHooks />
         </div>
     )
 }
