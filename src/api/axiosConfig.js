@@ -1,5 +1,5 @@
 import axios from 'axios'
-import { message } from 'antd'
+import {message} from 'antd'
 import { getCookie } from '@/utils/cookies'
 const axiosConfig = axios.create({
     baseURL: '/proxy',
@@ -21,9 +21,8 @@ axiosConfig.interceptors.response.use(
         return response.data
     },
     error => {
-        const {status} = error.response
-        // if(status === 404) 
-        console.log(error.response, 111)
+        message.error('请求出错：' + error)
+        return Promise.reject(error)
     }
 )
 
