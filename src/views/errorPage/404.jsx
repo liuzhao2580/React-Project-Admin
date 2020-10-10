@@ -1,11 +1,8 @@
 import React from 'react'
-
-export default class ErrorPage404 extends React.Component{
-    render() {
-        return (
-            <div>
-                404
-            </div>
-        )
-    }
+export default ErrorPage404 = () => {
+    return (
+        <div>
+            404
+        </div>
+    )
 }

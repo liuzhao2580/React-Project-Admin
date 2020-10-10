@@ -3,7 +3,7 @@ import { connect } from 'react-redux'
 import { Button, Input, List } from 'antd'
 import ReactHooks from './components/reactHook'
 import ColorChange from './components/colorChange/index'
-import './index.scss'
+import './index.less'
 const HomeDom = (props) => {
     let { inputValue, insertItem, list } = props
     return (

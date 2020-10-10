@@ -1,5 +1,5 @@
 import React from 'react'
-import './styles/header.scss'
+import './styles/header.less'
 import { Layout } from 'antd'
 import { MenuUnfoldOutlined, MenuFoldOutlined} from '@ant-design/icons'
 const { Header } = Layout

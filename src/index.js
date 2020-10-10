@@ -11,7 +11,7 @@ import thunk from 'redux-thunk'
 import rootStore from './store'
 
 // 导入全局样式
-import '@/styles/index.scss'
+import '@/styles/index.less'
 
 const composeHandle = window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__ ? window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__({}) : compose
 const applyMiddle = applyMiddleware(logger, thunk)

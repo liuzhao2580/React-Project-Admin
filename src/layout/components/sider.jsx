@@ -2,7 +2,7 @@ import React from 'react'
 import { Layout, Menu } from 'antd'
 import { UserOutlined, VideoCameraOutlined, UploadOutlined } from '@ant-design/icons'
 
-import './styles/sider.scss'
+import './styles/sider.less'
 const { Sider } = Layout
 export default class SiberDom extends React.Component {
     state = {

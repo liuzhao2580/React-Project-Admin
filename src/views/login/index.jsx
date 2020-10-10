@@ -1,39 +1,75 @@
-import React from 'react'
+import React, { useState } from 'react'
+import { useHistory } from 'react-router-dom'
 
-import { Form, Input, Button, Checkbox } from 'antd'
+import { Form, Input, Button, Checkbox, message } from 'antd'
 import { UserOutlined, LockOutlined } from '@ant-design/icons'
 
-import './login.scss'
-export default class LoginDom extends React.Component {
-    onFinish = (values) => {
-        console.log(values)
-        this.props.history.push('/')
+import './login.less'
+import { loginApi } from '@/api/modules/login'
+const LoginDom = () => {
+    const history = useHistory()
+    let [loginForm] = useState({ username: 'liuzhao', password: 123456 })
+    const onFinish = async values => {
+        const params = {
+            username: values.username,
+            password: values.password
+        }
+        const data = await loginApi(params)
+        console.log(data, 123)
+        if (data.code === 0) {
+            message.success('登录成功')
+            history.push('/')
+        } else message.error(data.msg)
     }
-    render() {
-        return (
-            <Form name="normal_login" className="login-form" initialValues={{ remember: true }} onFinish={this.onFinish}>
-                <p className="login-text">登录</p>
-                <Form.Item name="username" rules={[{ required: true, message: '请输入用户名!' }]}>
-                    <Input prefix={<UserOutlined className="site-form-item-icon" />} placeholder="用户名" />
-                </Form.Item>
-                <Form.Item name="password" rules={[{ required: true, message: '请输入密码' }]}>
-                    <Input prefix={<LockOutlined className="site-form-item-icon" />} type="password" placeholder="密码" />
-                </Form.Item>
+    return (
+        <Form
+            labelAlign='left'
+            labelCol={{ span: 6 }}
+            wrapperCol={{ span: 18 }}
+            name='normal_login'
+            className='login-form'
+            initialValues={loginForm}
+            onFinish={onFinish}
+        >
+            <p className='login-text'>登录</p>
+            <Form.Item
+                label='用户名'
+                name='username'
+                rules={[{ required: false, message: '请输入用户名!' }]}
+            >
+                <Input
+                    prefix={<UserOutlined className='site-form-item-icon' />}
+                    placeholder='用户名'
+                />
+            </Form.Item>
+            <Form.Item
+                label='密码'
+                name='password'
+                rules={[{ required: false, message: '请输入密码' }]}
+            >
+                <Input
+                    prefix={<LockOutlined className='site-form-item-icon' />}
+                    type='password'
+                    placeholder='密码'
+                />
+            </Form.Item>
 
-                <Form.Item>
-                    <Button type="primary" htmlType="submit" className="login-form-button">
-                        登录
-                    </Button>
+            <Form.Item wrapperCol={{ span: 24 }}>
+                <Button
+                    type='primary'
+                    htmlType='submit'
+                    className='login-form-button'
+                >
+                    登录
+                </Button>
+            </Form.Item>
+            <Form.Item wrapperCol={{ span: 24 }} className='password-opera'>
+                <Form.Item name='remember' valuePropName='checked' noStyle>
+                    <Checkbox>记住密码</Checkbox>
                 </Form.Item>
-                <Form.Item className='password-opera'>
-                    <Form.Item name="remember" valuePropName="checked" noStyle>
-                        <Checkbox>记住密码</Checkbox>
-                    </Form.Item>
-                    <span className="login-form-forgot">
-                        忘记密码
-                    </span>
-                </Form.Item>
-            </Form>
-        )
-    }
+                <span className='login-form-forgot'>忘记密码</span>
+            </Form.Item>
+        </Form>
+    )
 }
+export default LoginDom
