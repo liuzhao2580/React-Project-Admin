@@ -1,6 +1,6 @@
 import layout from '@/layout'
 import dashboard from '@/views/dashboard'
-import about from '@/views/about'
+import document from '@/views/document'
 import Login from '@/views/login'
 export const constRoutes = [
     {
@@ -16,8 +16,8 @@ export const constRoutes = [
                 component: dashboard,
             },
             {
-                path:'/about',
-                component:about,
+                path:'/document',
+                component: document
             }
         ]
     }
