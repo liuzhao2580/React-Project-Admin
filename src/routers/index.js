@@ -4,14 +4,16 @@ import { constRoutes } from './routerConfig'
 export default () => (
     <Router>
         <Switch>
-            {
-                constRoutes.map(router => {
-                    return <Route key={router.path} path={router.path} exact render={props => 
-                        <router.component {...props} routes={router.routes}/>
-                    }>
-                    </Route>
-                })
-            }
+            {constRoutes.map(router => {
+                return (
+                    <Route
+                        key={router.path}
+                        path={router.path}
+                        exact
+                        render={props => <router.component {...props} routes={router.routes} />}
+                    ></Route>
+                )
+            })}
         </Switch>
     </Router>
 )
