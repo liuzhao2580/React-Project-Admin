@@ -1,12 +1,12 @@
 import React , {useState} from 'react'
 import { useHistory } from 'react-router-dom'
 import { Layout, Menu } from 'antd'
-import { constRoutes } from '@/routers/routerConfig'
+import { constRoutes } from '@/routes/routerConfig'
 import './index.less'
 const { Sider } = Layout
 const SideBar = () => {
     let [collapsed] = useState(false)
-    const getMenu = (routerArr = constRoutes[1].routes) => {
+    const getMenu = (routerArr = constRoutes) => {
         // eslint-disable-next-line array-callback-return
         return routerArr.map(item => {
             if(!item.hidden) {

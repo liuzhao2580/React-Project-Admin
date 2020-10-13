@@ -1,6 +1,5 @@
 import React from 'react'
 import { Layout } from 'antd'
-import {withRouter} from 'react-router-dom'
 
 import SiderDom from './components/SideBar'
 import NavBarDom from './components/NavBar'
@@ -20,4 +19,4 @@ const LayoutDom = () => {
         </Layout>
     )
 }
-export default withRouter(LayoutDom)
+export default LayoutDom
