@@ -2,19 +2,29 @@ import React from 'react'
 import { HashRouter as Router, Switch, Route, Redirect } from 'react-router-dom'
 import { constRoutes } from './routerConfig'
 export default () => {
-    const getRoutes = constRoutes.map(router => {
-        return (
-            <Route
-                key={router.path}
-                path={router.path}
-                exact
-                render={props => <router.component {...props} routes={router.routes} />}
-            ></Route>
-        )
-    })
+    const routesFunc = (Routes = constRoutes, path) => {
+        // eslint-disable-next-line array-callback-return
+        return Routes.map(router => {
+            if (!router.children) {
+                return (
+                    <Route
+                        key={router.path}
+                        path={path ? `${path + router.path}` : router.path}
+                        exact
+                        render={props => <router.component {...props} routes={router.routes} />}
+                    ></Route>
+                )
+            } else if (router.children) {
+                return (
+                    routesFunc(router.children, path ? `${path + router.path}` : router.path)
+                )
+            }
+        })
+    }
+    const getRoutes = routesFunc()
     getRoutes.push(
         <Route path='/' exact key='/redirect'>
-            <Redirect  to='/dashboard'></Redirect>
+            <Redirect to='/dashboard'></Redirect>
         </Route>
     )
     getRoutes.push(
