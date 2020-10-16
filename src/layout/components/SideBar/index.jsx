@@ -17,20 +17,20 @@ const SideBar = () => {
         setSelectenMenu(pathname)
     }, [history.location])
     // 获取动态的侧边栏
-    const getMenu = (routerArr = constRoutes, path) => {
+    const getMenu = (routerArr = constRoutes[1].children) => {
         // eslint-disable-next-line array-callback-return
         return routerArr.map(item => {
             if (!item.hidden) {
                 if (!item.children) {
                     return (
-                        <Menu.Item key={path ? `${path + item.path}` : item.path} icon={item.icon}>
+                        <Menu.Item key={item.path} icon={item.icon}>
                             {item.title}
                         </Menu.Item>
                     )
                 } else if (item.children) {
                     return (
                         <SubMenu key={item.path} icon={item.icon} title={item.title}>
-                            {getMenu(item.children, path ? `${path + item.path}` : item.path)}
+                            {getMenu(item.children)}
                         </SubMenu>
                     )
                 }

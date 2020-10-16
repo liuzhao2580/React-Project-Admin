@@ -1,12 +1,15 @@
 import React from 'react'
 import { Layout } from 'antd'
 import './index.less'
-import Routes from '@/routes'
+import {LayoutRoutes} from '@/routes'
+import { Switch } from 'react-router-dom'
 const { Content } = Layout
 const ContentDom = () => {
     return (
         <Content className="content-box">
-            <Routes/>
+            <Switch>
+                {LayoutRoutes()}
+            </Switch>
         </Content>
     )
 }
