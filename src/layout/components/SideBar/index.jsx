@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react'
+import React, { useState,useEffect} from 'react'
 import { useHistory, withRouter } from 'react-router-dom'
 import { Layout, Menu } from 'antd'
 import { constRoutes } from '@/routes/routerConfig'
@@ -6,12 +6,17 @@ import './index.less'
 const { Sider } = Layout
 const { SubMenu } = Menu
 const SideBar = () => {
+    const history = useHistory()
     // 展开关闭侧边栏
     let [collapsed] = useState(false)
     // 默认选择的侧边栏 当前选中的菜单项 key 数组
     let [selectedKeys, setSelectenMenu] = useState(['/dashboard'])
-
-    const history = useHistory()
+    // 初始展开的 SubMenu 菜单项 key 数组
+    let [defaultOpenKeys] = useState(()=> {
+        const getOpenKeyArr = history.location.pathname.split('/')
+        const getOpenKey = getOpenKeyArr.length >=3 ? '/' + getOpenKeyArr[1] : null
+        return getOpenKey
+    })
     useEffect(() => {
         const { pathname } = history.location
         setSelectenMenu(pathname)
@@ -44,7 +49,13 @@ const SideBar = () => {
     return (
         <Sider className='sider-box' trigger={null} collapsible collapsed={collapsed} theme='light'>
             <div className='logo' />
-            <Menu theme='light' selectedKeys={selectedKeys} mode='inline' onClick={MenuClick}>
+            <Menu
+                theme='light'
+                selectedKeys={selectedKeys}
+                mode='inline'
+                onClick={MenuClick}
+                defaultOpenKeys={[defaultOpenKeys]}
+            >
                 {getMenu()}
             </Menu>
         </Sider>

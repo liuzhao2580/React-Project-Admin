@@ -18,6 +18,7 @@ export const constRoutes = [
         hidden: true,
         component: Login
     },
+
     {
         path: '/',
         component: Layout,
@@ -62,15 +63,16 @@ export const constRoutes = [
                 ]
             },
             {
+                path: '/404',
+                hidden: true,
+                exact: true,
+                component: ErrorPage404
+            },
+            {
                 path: '*',
-                redirect: '/404',
-                hidden: true
+                hidden: true,
+                redirect: '/404'
             }
         ]
-    },
-    {
-        path: '/404',
-        hidden: true,
-        component: ErrorPage404
     }
 ]

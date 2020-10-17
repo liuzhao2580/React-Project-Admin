@@ -1,12 +1,12 @@
 import React from 'react'
 import { HashRouter as Router, Switch, Route, Redirect } from 'react-router-dom'
 import { constRoutes } from './routerConfig'
-const RouteWithSubRoutes = (Routes) => {
-    return Routes.map((itemRoute, index) => {
+const RouteWithSubRoutes = Routes => {
+    return Routes.map(itemRoute => {
         if (!itemRoute.children) {
             return (
                 <Route
-                    key={index}
+                    key={itemRoute.path}
                     exact={itemRoute.exact}
                     path={itemRoute.path}
                     render={props =>
@@ -27,29 +27,30 @@ export default () => {
     return (
         <Router>
             <Switch>
-                {constRoutes.map((route, index) => {
-                    // 匹配 layout 的子路由数据
+                {constRoutes.map(route => {
+                    // 匹配 layout 的二级路由数据
                     if (route.path === '/') {
                         return (
                             <Route
-                                key={index}
+                                key={route.path}
                                 path={route.path}
+                                exact={route.exact}
                                 render={props => <route.component {...props} routes={route.children} />}
                             />
                         )
                     }
-                    // 匹配 包括登录页的全局路由数据 
+                    // 匹配 包括登录页的一级路由数据
                     else {
                         return (
                             <Route
-                                key={index}
+                                key={route.path}
                                 exact={route.exact}
                                 path={route.path}
                                 render={props => <route.component {...props} />}
                             />
                         )
                     }
-                })}
+                })} 
             </Switch>
         </Router>
     )
