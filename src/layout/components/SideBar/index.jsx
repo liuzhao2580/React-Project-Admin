@@ -22,7 +22,7 @@ const SideBar = () => {
         setSelectenMenu(pathname)
     }, [history.location])
     // 获取动态的侧边栏
-    const getMenu = (routerArr = constRoutes[1].children) => {
+    const getMenu = (routerArr = constRoutes) => {
         // eslint-disable-next-line array-callback-return
         return routerArr.map(item => {
             if (!item.hidden) {
