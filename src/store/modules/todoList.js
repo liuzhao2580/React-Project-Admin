@@ -1,5 +1,6 @@
+import { handleActions } from '../utils'
 // state
-const todolistArr = {
+const initialState = {
     inputValue: 'hello world',
     list: [
         {
@@ -18,14 +19,16 @@ const todolistArr = {
 }
 
 // reducer
-const todoList = (state = todolistArr, action) => {
-    switch (action.type) {
-        case 'ACT_insertItem':
-            return {
-                ...state
-            }
-        default:
-            return state
+const reducers = {
+    insertList(state, action) {
+        console.log(action, 'action')
+        // state.list.push(action.data)
     }
 }
-export default todoList
+export default (state = initialState, action) =>
+    handleActions({
+        namespace: 'todoList',
+        state,
+        reducers,
+        action
+    })

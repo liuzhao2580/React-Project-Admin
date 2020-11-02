@@ -1,14 +1,14 @@
 import React from 'react'
 import { connect } from 'react-redux'
-import { Button, Input, List } from 'antd'
 import ReactHooks from './components/reactHook'
 import ColorChange from './components/colorChange/index'
+import TodoList from './components/todoList'
 import './index.less'
 const HomeDom = (props) => {
     let { inputValue, insertItem, list } = props
     return (
         <div>
-            <div style={{ marginBottom: '10px' }}>
+            {/* <div style={{ marginBottom: '10px' }}>
                 <Input placeholder='输入些什么' value={inputValue} style={{ width: '200px', marginRight: '10px' }} />
                 <Button type='primary' onClick={insertItem}>
                     新增
@@ -20,7 +20,8 @@ const HomeDom = (props) => {
                 dataSource={list}
                 renderItem={(item) => <List.Item className='todo-item'>{item.title}</List.Item>}
             />
-            <ReactHooks />
+            <ReactHooks /> */}
+            <TodoList />
             <ColorChange />
         </div>
     )
