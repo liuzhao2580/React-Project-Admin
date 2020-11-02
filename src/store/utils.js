@@ -5,6 +5,13 @@ const getKey = (str, flag) => {
     return str.substring(i + 1, str.length + 1)
 }
 
+/**
+ * 处理函数
+ * @param {any} state  
+ * @param {any} action  
+ * @param {any} reducers  
+ * @param {any} namespace  命名空间
+ */
 export const handleActions = ({ state, action, reducers, namespace = '' }) =>
     Object.keys(reducers)
         .map(key => namespace + '/' + key)

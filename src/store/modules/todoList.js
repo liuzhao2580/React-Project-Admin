@@ -27,8 +27,8 @@ const reducers = {
 }
 export default (state = initialState, action) =>
     handleActions({
-        namespace: 'todoList',
         state,
+        action,
         reducers,
-        action
+        namespace: 'todoList'
     })
