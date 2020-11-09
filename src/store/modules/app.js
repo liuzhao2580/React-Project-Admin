@@ -6,8 +6,8 @@ const initailState = {
 }
 
 const reducers = {
-    CHANGE_sideStatus(state, action) {
-        state.sideStatus = action.data
+    CHANGE_sideStatus(state) {
+        state.sideStatus = !state.sideStatus
     }
 }
 

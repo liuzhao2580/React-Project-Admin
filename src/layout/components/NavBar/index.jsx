@@ -5,7 +5,7 @@ import { Layout } from 'antd'
 import { MenuUnfoldOutlined, MenuFoldOutlined } from '@ant-design/icons'
 
 const { Header } = Layout
-const NavBar = ({sideStatus, ChangeAsideStatus}) => {
+const NavBar = ({ sideStatus, ChangeAsideStatus }) => {
     return (
         <Header style={{ padding: 0 }} theme='light' className='header-box'>
             {/* 侧边栏开关按钮 */}
@@ -15,14 +15,14 @@ const NavBar = ({sideStatus, ChangeAsideStatus}) => {
         </Header>
     )
 }
-const mapStateAsideStatus = (state) => {
+const mapStateAsideStatus = state => {
     return {
         sideStatus: state.app.sideStatus
     }
 }
-const mapDispatchChangeAsideStatus = (dispatch) => {
+const mapDispatchChangeAsideStatus = dispatch => {
     return {
-        ChangeAsideStatus(){
+        ChangeAsideStatus() {
             dispatch('app/CHANGE_sideStatus')
         }
     }

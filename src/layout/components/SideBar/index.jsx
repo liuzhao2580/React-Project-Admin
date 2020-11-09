@@ -1,23 +1,21 @@
-import React, { useState,useEffect} from 'react'
+import React, { useState, useEffect } from 'react'
 import { useHistory, withRouter } from 'react-router-dom'
+import { connect } from 'react-redux'
 import { Layout, Menu } from 'antd'
 
 import { constRoutes } from '@/routes/routerConfig'
-import store from '@/store'
 import './index.less'
 const { Sider } = Layout
 const { SubMenu } = Menu
-const SideBar = () => {
+const SideBar = ({ sideStatus }) => {
     const history = useHistory()
-    // 展开关闭侧边栏
-    let [collapsed] = useState(store.getState().app.sideStatus)
     // 默认选择的侧边栏 当前选中的菜单项 key 数组
     let [selectedKeys, setSelectenMenu] = useState(['/dashboard'])
 
     // 初始展开的 SubMenu 菜单项 key 数组
-    let [defaultOpenKeys] = useState(()=> {
+    let [defaultOpenKeys] = useState(() => {
         const getOpenKeyArr = history.location.pathname.split('/')
-        const getOpenKey = getOpenKeyArr.length >=3 ? '/' + getOpenKeyArr[1] : null
+        const getOpenKey = getOpenKeyArr.length >= 3 ? '/' + getOpenKeyArr[1] : null
         return getOpenKey
     })
     // 获取当前的路由
@@ -51,7 +49,7 @@ const SideBar = () => {
         history.push(key)
     }
     return (
-        <Sider className='sider-box' trigger={null} collapsible collapsed={collapsed} theme='light'>
+        <Sider className='sider-box' trigger={null} collapsible collapsed={sideStatus} theme='light'>
             <div className='logo' />
             <Menu
                 theme='light'
@@ -65,4 +63,10 @@ const SideBar = () => {
         </Sider>
     )
 }
-export default withRouter(SideBar)
+
+const mapStateAsideStatus = state => {
+    return {
+        sideStatus: state.app.sideStatus
+    }
+}
+export default connect(mapStateAsideStatus)(withRouter(SideBar))
