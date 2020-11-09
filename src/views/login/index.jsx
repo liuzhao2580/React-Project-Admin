@@ -5,7 +5,7 @@ import { Form, Input, Button, Checkbox, message } from 'antd'
 import { UserOutlined, LockOutlined } from '@ant-design/icons'
 
 import './login.less'
-import { loginApi } from '@/api/modules/login'
+import { loginApi } from '@/api/modules/user'
 const LoginDom = () => {
     const history = useHistory()
     let [loginForm] = useState({ username: 'liuzhao', password: 123456 })
