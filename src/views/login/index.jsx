@@ -1,17 +1,25 @@
-import React, { useState } from 'react'
+import React, { useState, useEffect } from 'react'
 import { useHistory } from 'react-router-dom'
 
 import { Form, Input, Button, Checkbox, message } from 'antd'
 import { UserOutlined, LockOutlined } from '@ant-design/icons'
 
 import './login.less'
-import { loginApi } from '@/api/modules/user'
+import { getCSRFToken, loginApi } from '@/api/modules/user'
 const LoginDom = () => {
     const history = useHistory()
-    let [loginForm] = useState({ username: 'liuzhao', password: 123456 })
+
+    // 登录之前先获取 CSRFToken参数
+    useEffect(()=> {
+        async function getToken() {
+            getCSRFToken()
+        }
+        getToken()
+    }, [])
+    let [loginForm] = useState({ userName: 'liuzhao', password: 123456 })
     const onFinish = async values => {
         const params = {
-            username: values.username,
+            userName: values.userName,
             password: values.password
         }
         const data = await loginApi(params)
@@ -34,7 +42,7 @@ const LoginDom = () => {
             <p className='login-text'>登录</p>
             <Form.Item
                 label='用户名'
-                name='username'
+                name='userName'
                 rules={[{ required: false, message: '请输入用户名!' }]}
             >
                 <Input
