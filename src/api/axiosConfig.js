@@ -1,9 +1,9 @@
 import axios from 'axios'
-import {message} from 'antd'
+import { message } from 'antd'
 import { getCookie } from '@/utils/cookies'
 const axiosConfig = axios.create({
     baseURL: '/proxy',
-    timeout: 6000,
+    timeout: 60000,
     headers: {
         'X-Custom-Header': 'foobar'
     }
