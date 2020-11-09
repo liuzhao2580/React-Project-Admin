@@ -1,10 +1,7 @@
-import React,{ useState } from 'react'
+import React from 'react'
 import { Button, Input, List } from 'antd'
-import store from '@/store'
 const TodoList = () => {
-    const insertItem = ()=>{
-        store.dispatch('todoList/insertList', 111)
-    }
+    const insertItem = ()=>{}
     return (
         <div>
             <div style={{ marginBottom: '10px' }}>
