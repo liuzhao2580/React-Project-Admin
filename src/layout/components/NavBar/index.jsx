@@ -4,6 +4,8 @@ import './index.less'
 import { Layout } from 'antd'
 import { MenuUnfoldOutlined, MenuFoldOutlined } from '@ant-design/icons'
 
+import Breadcrumb from './components/Breadcrumb'
+
 const { Header } = Layout
 const NavBar = ({ sideStatus, ChangeAsideStatus }) => {
     return (
@@ -12,6 +14,8 @@ const NavBar = ({ sideStatus, ChangeAsideStatus }) => {
             <div className='trigger' onClick={ChangeAsideStatus}>
                 {sideStatus ? <MenuFoldOutlined /> : <MenuUnfoldOutlined />}
             </div>
+            {/* 面包屑 */}
+            <Breadcrumb></Breadcrumb>
         </Header>
     )
 }
