@@ -15,7 +15,6 @@ const BreadcrumbDom = () => {
     // 获取当前的路由
     useEffect(() => {
         breadcrumbChange(pathname)
-        // eslint-disable-next-line react-hooks/exhaustive-deps
     }, [pathname])
     // 每次路由切换的时候 面包屑变换
     const breadcrumbChange = pathname => {
