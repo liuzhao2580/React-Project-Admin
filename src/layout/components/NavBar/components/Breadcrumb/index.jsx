@@ -26,7 +26,7 @@ const BreadcrumbDom = () => {
                 if (item.path === pathname) {
                     if (item.path !== '/dashboard') {
                         getRouters.push({
-                            title: item.title,
+                            title: item.meta.title,
                             path: item.path
                         })
                         return true
@@ -35,7 +35,7 @@ const BreadcrumbDom = () => {
                     const getFind = routerLoop(item.children)
                     if (getFind) {
                         getRouters.splice(getRouters.length - 1, 0, {
-                            title: item.title,
+                            title: item.meta.title,
                             path: item.redirect
                         })
                     }
