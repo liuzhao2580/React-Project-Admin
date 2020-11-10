@@ -21,23 +21,36 @@ const BreadcrumbDom = () => {
     const breadcrumbChange = pathname => {
         const getRouters = []
         // 获取当前的路由
-        function routerLoop(routes = constRoutes){
-            routes.find(item => {
-                if(item.path === pathname) {
-                    return true
-                }
-                else if(item.children) {
-                    
-                }
+        function routerLoop(routes = constRoutes) {
+            return routes.find(item => {
+                if (item.path === pathname) {
+                    if (item.path !== '/dashboard') {
+                        getRouters.push({
+                            title: item.title,
+                            path: item.path
+                        })
+                        return true
+                    } else return false
+                } else if (item.children) {
+                    const getFind = routerLoop(item.children)
+                    if (getFind) {
+                        getRouters.splice(getRouters.length - 1, 0, {
+                            title: item.title,
+                            path: item.redirect
+                        })
+                    }
+                    return getFind
+                } else return false
             })
         }
-        const getArr = constRoutes.find(item => {
-            if(item.path === pathname) return true
-            else if(item.children) {
-               return item.children.find(item1 => item1.path === pathname)
-            }else return false
-        })
-        console.log(getArr, 'getArr')
+        routerLoop()
+        setBreadcrumbArr([
+            {
+                title: '首页',
+                path: '/dashboard'
+            },
+            ...getRouters
+        ])
     }
     return (
         <Breadcrumb className='breadcrumb-box'>
