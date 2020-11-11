@@ -14,7 +14,7 @@ const BreadcrumbDom = () => {
     useEffect(() => {
         breadcrumbChange(pathname)
         setAnimateFlag(!animateFlag)
-    }, [animateFlag, pathname])
+    }, [pathname])
     // 每次路由切换的时候 面包屑变换
     const breadcrumbChange = pathname => {
         const getRouters = []
