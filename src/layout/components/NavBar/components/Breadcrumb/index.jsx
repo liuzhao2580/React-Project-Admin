@@ -6,12 +6,7 @@ import './index.less'
 const BreadcrumbDom = () => {
     const history = useHistory()
     const { pathname } = history.location
-    const [breadcrumbArr, setBreadcrumbArr] = useState([
-        {
-            title: '首页',
-            path: '/dashboard'
-        }
-    ])
+    const [breadcrumbArr, setBreadcrumbArr] = useState([])
     // 获取当前的路由
     useEffect(() => {
         breadcrumbChange(pathname)
@@ -43,18 +38,14 @@ const BreadcrumbDom = () => {
             })
         }
         routerLoop()
-        setBreadcrumbArr([
-            {
-                title: '首页',
-                path: '/dashboard'
-            },
-            ...getRouters
-        ])
+        console.log(getRouters, 'getRouters')
+        setBreadcrumbArr([...getRouters])
     }
     return (
         <Breadcrumb className='breadcrumb-box'>
+            <Breadcrumb.Item href='/'>首页</Breadcrumb.Item>
             {breadcrumbArr.map(breadcrumb => {
-                return <Breadcrumb.Item key={breadcrumb.path}>{breadcrumb.title}</Breadcrumb.Item>
+                return <Breadcrumb.Item key={breadcrumb.path} href={`/#${breadcrumb.path}`}>{breadcrumb.title}</Breadcrumb.Item>
             })}
         </Breadcrumb>
     )
