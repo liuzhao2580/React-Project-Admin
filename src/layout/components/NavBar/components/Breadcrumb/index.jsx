@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react'
 import { useHistory, withRouter } from 'react-router-dom'
 import { Breadcrumb } from 'antd'
+
 import { constRoutes } from '@/routes/routerConfig'
 import './index.less'
 const BreadcrumbDom = () => {
@@ -38,14 +39,20 @@ const BreadcrumbDom = () => {
             })
         }
         routerLoop()
-        console.log(getRouters, 'getRouters')
         setBreadcrumbArr([...getRouters])
     }
     return (
         <Breadcrumb className='breadcrumb-box'>
             <Breadcrumb.Item href='/'>首页</Breadcrumb.Item>
             {breadcrumbArr.map(breadcrumb => {
-                return <Breadcrumb.Item key={breadcrumb.path} href={`/#${breadcrumb.path}`}>{breadcrumb.title}</Breadcrumb.Item>
+                return (
+                    <Breadcrumb.Item
+                        key={breadcrumb.path}
+                        href={`/#${breadcrumb.path}`}
+                    >
+                        {breadcrumb.title}
+                    </Breadcrumb.Item>
+                )
             })}
         </Breadcrumb>
     )
