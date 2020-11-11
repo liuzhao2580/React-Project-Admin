@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from 'react'
 import { useHistory, withRouter } from 'react-router-dom'
+import { CSSTransition } from 'react-transition-group'
 import { Breadcrumb } from 'antd'
 
 import { constRoutes } from '@/routes/routerConfig'
@@ -8,9 +9,11 @@ const BreadcrumbDom = () => {
     const history = useHistory()
     const { pathname } = history.location
     const [breadcrumbArr, setBreadcrumbArr] = useState([])
+    const [animateFlag, setAnimateFlag] = useState(false)
     // 获取当前的路由
     useEffect(() => {
         breadcrumbChange(pathname)
+        setAnimateFlag(!animateFlag)
     }, [pathname])
     // 每次路由切换的时候 面包屑变换
     const breadcrumbChange = pathname => {
@@ -42,19 +45,18 @@ const BreadcrumbDom = () => {
         setBreadcrumbArr([...getRouters])
     }
     return (
-        <Breadcrumb className='breadcrumb-box'>
-            <Breadcrumb.Item href='/'>首页</Breadcrumb.Item>
-            {breadcrumbArr.map(breadcrumb => {
-                return (
-                    <Breadcrumb.Item
-                        key={breadcrumb.path}
-                        href={`/#${breadcrumb.path}`}
-                    >
-                        {breadcrumb.title}
-                    </Breadcrumb.Item>
-                )
-            })}
-        </Breadcrumb>
+        <CSSTransition in={animateFlag} classNames='breadrumb-animate' timeout={300}>
+            <Breadcrumb className='breadcrumb-box'>
+                <Breadcrumb.Item href='/'>首页</Breadcrumb.Item>
+                {breadcrumbArr.map(breadcrumb => {
+                    return (
+                        <Breadcrumb.Item key={breadcrumb.path} href={`/#${breadcrumb.path}`}>
+                            {breadcrumb.title}
+                        </Breadcrumb.Item>
+                    )
+                })}
+            </Breadcrumb>
+        </CSSTransition>
     )
 }
 
