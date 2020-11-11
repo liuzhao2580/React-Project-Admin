@@ -14,6 +14,7 @@ const BreadcrumbDom = () => {
     useEffect(() => {
         breadcrumbChange(pathname)
         setAnimateFlag(!animateFlag)
+    // eslint-disable-next-line react-hooks/exhaustive-deps
     }, [pathname])
     // 每次路由切换的时候 面包屑变换
     const breadcrumbChange = pathname => {
@@ -47,7 +48,7 @@ const BreadcrumbDom = () => {
     return (
         <CSSTransition in={animateFlag} classNames='breadrumb-animate' timeout={300}>
             <Breadcrumb className='breadcrumb-box'>
-                <Breadcrumb.Item href='/'>首页</Breadcrumb.Item>
+                <Breadcrumb.Item href='#/dashboard'>首页</Breadcrumb.Item>
                 {breadcrumbArr.map(breadcrumb => {
                     return (
                         <Breadcrumb.Item key={breadcrumb.path} href={`/#${breadcrumb.path}`}>
