@@ -36,7 +36,7 @@ const SideBar = ({ sideStatus }) => {
                     )
                 } else if (item.children) {
                     return (
-                        <SubMenu key={item.path} icon={item.meta.icon} title={item.meta.title}>
+                        <SubMenu key={item.redirect} icon={item.meta.icon} title={item.meta.title}>
                             {getMenu(item.children)}
                         </SubMenu>
                     )
