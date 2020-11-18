@@ -26,7 +26,7 @@ const SideBar = ({ sideStatus }) => {
     // 获取动态的侧边栏
     const getMenu = (routerArr = constRoutes) => {
         // eslint-disable-next-line array-callback-return
-        return routerArr.map((item,index) => {
+        return routerArr.map(item => {
             if (!item.hidden) {
                 if (!item.children) {
                     return (
@@ -49,7 +49,13 @@ const SideBar = ({ sideStatus }) => {
         history.push(key)
     }
     return (
-        <Sider className='sider-box' trigger={null} collapsible collapsed={sideStatus} theme='light'>
+        <Sider
+            className='sider-box'
+            trigger={null}
+            collapsible
+            collapsed={sideStatus}
+            theme='light'
+        >
             <div className='logo' />
             <Menu
                 theme='light'

@@ -4,7 +4,8 @@ import {
     FileTextOutlined,
     DatabaseOutlined,
     DiffOutlined,
-    FileAddOutlined
+    FileAddOutlined,
+    GroupOutlined
 } from '@ant-design/icons'
 import Dashboard from '@/views/dashboard'
 import Document from '@/views/document'
@@ -49,7 +50,7 @@ export const constRoutes = [
     {
         path: '/multilevel-menu',
         redirect: '/multilevel-menu/first-menu',
-        meta: { icon: <DatabaseOutlined />, exact: true, title: '多级菜单' },
+        meta: { icon: <GroupOutlined />, exact: true, title: '多级菜单' },
         children: [
             {
                 path: '/multilevel-menu/first-menu',
@@ -58,22 +59,26 @@ export const constRoutes = [
             },
             {
                 path: '/multilevel-menu/first-one-menu',
-                redirect: '/multilevel-menu/first-one-menu/second-menu',
-                meta: { icon: <FileAddOutlined />, title: '1-1级菜单' },
+                redirect: '/multilevel-menu/first-one-menu/third-menu',
+                meta: { icon: <FileAddOutlined />, title: '二级菜单' },
                 children: [
                     {
-                        path: '/multilevel-menu/first-one-menu/second-menu',
-                        meta: { icon: <FileAddOutlined />, title: '二级菜单' },
+                        path: '/multilevel-menu/first-one-menu/third-menu',
+                        meta: { icon: <FileAddOutlined />, title: '三级菜单' },
                         component: SecondMenu
                     },
                     {
-                        path: '/multilevel-menu/first-one-menu/second-two-menu',
-                        redirect: '/multilevel-menu/first-one-menu/second-two-menu/third-menu',
-                        meta: { icon: <FileAddOutlined />, title: '2-2级菜单',breadcrumbShowFlag: false },
+                        path: '/multilevel-menu/first-one-menu/third-two-menu',
+                        redirect: '/multilevel-menu/first-one-menu/third-two-menu/four-menu',
+                        meta: {
+                            icon: <FileAddOutlined />,
+                            title: '3-2级菜单',
+                            breadcrumbShowFlag: false
+                        },
                         children: [
                             {
-                                path: '/multilevel-menu/first-one-menu/second-two-menu/third-menu',
-                                meta: { icon: <FileAddOutlined />, title: '三级菜单' },
+                                path: '/multilevel-menu/first-one-menu/third-two-menu/four-menu',
+                                meta: { icon: <FileAddOutlined />, title: '四级菜单' },
                                 component: ThirdMenu
                             }
                         ]
