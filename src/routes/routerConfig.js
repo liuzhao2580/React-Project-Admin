@@ -57,6 +57,7 @@ export const constRoutes = [
                 component: FirstMenu
             },
             {
+                path: '/multilevel-menu/first-one-menu',
                 redirect: '/multilevel-menu/first-one-menu/second-menu',
                 meta: { icon: <FileAddOutlined />, title: '1-1级菜单' },
                 children: [
@@ -66,8 +67,9 @@ export const constRoutes = [
                         component: SecondMenu
                     },
                     {
+                        path: '/multilevel-menu/first-one-menu/second-two-menu',
                         redirect: '/multilevel-menu/first-one-menu/second-two-menu/third-menu',
-                        meta: { icon: <FileAddOutlined />, title: '2-2级菜单' },
+                        meta: { icon: <FileAddOutlined />, title: '2-2级菜单',breadcrumbShowFlag: false },
                         children: [
                             {
                                 path: '/multilevel-menu/first-one-menu/second-two-menu/third-menu',

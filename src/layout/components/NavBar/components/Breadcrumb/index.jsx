@@ -14,32 +14,32 @@ const BreadcrumbDom = () => {
     useEffect(() => {
         breadcrumbChange(pathname)
         setAnimateFlag(!animateFlag)
-    // eslint-disable-next-line react-hooks/exhaustive-deps
+        // eslint-disable-next-line react-hooks/exhaustive-deps
     }, [pathname])
     // 每次路由切换的时候 面包屑变换
     const breadcrumbChange = pathname => {
+        function findBreadcrumb(routePATH) {
+            if (pathname.indexOf(routePATH) === -1) return false
+            else return true
+        }
         const getRouters = []
         // 获取当前的路由
         function routerLoop(routes = constRoutes) {
-            return routes.find(item => {
+            routes.forEach(item => {
                 if (item.path === pathname) {
-                    if (item.path !== '/dashboard') {
-                        getRouters.push({
-                            title: item.meta.title,
-                            path: item.path
-                        })
-                        return true
-                    } else return false
-                } else if (item.children) {
-                    const getFind = routerLoop(item.children)
-                    if (getFind) {
-                        getRouters.splice(getRouters.length - 1, 0, {
-                            title: item.meta.title,
-                            path: item.redirect
-                        })
+                    if (item.path === '/dashboard') return
+                }
+                if (!item.children) {
+                    // 说明该路由显示在面包屑上
+                    if (item.meta.breadcrumbShowFlag !== false) {
+                        if (findBreadcrumb(item.path)) getRouters.push(item)
                     }
-                    return getFind
-                } else return false
+                } else {
+                    if (findBreadcrumb(item.path) && item.meta.breadcrumbShowFlag !== false) {
+                        getRouters.push(item)
+                    }
+                    routerLoop(item.children)
+                }
             })
         }
         routerLoop()
@@ -49,10 +49,15 @@ const BreadcrumbDom = () => {
         <CSSTransition in={animateFlag} classNames='breadrumb-animate' timeout={300}>
             <Breadcrumb className='breadcrumb-box'>
                 <Breadcrumb.Item href='#/dashboard'>首页</Breadcrumb.Item>
-                {breadcrumbArr.map((breadcrumb,index) => {
+                {breadcrumbArr.map((breadcrumb, index) => {
                     return (
-                        <Breadcrumb.Item key={index} href={`/#${breadcrumb.path}`}>
-                            {breadcrumb.title}
+                        <Breadcrumb.Item
+                            key={index}
+                            href={`/#${
+                                breadcrumb.redirect ? breadcrumb.redirect : breadcrumb.path
+                            }`}
+                        >
+                            {breadcrumb.meta.title}
                         </Breadcrumb.Item>
                     )
                 })}
