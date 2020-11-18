@@ -49,9 +49,9 @@ const BreadcrumbDom = () => {
         <CSSTransition in={animateFlag} classNames='breadrumb-animate' timeout={300}>
             <Breadcrumb className='breadcrumb-box'>
                 <Breadcrumb.Item href='#/dashboard'>首页</Breadcrumb.Item>
-                {breadcrumbArr.map(breadcrumb => {
+                {breadcrumbArr.map((breadcrumb,index) => {
                     return (
-                        <Breadcrumb.Item key={breadcrumb.path} href={`/#${breadcrumb.path}`}>
+                        <Breadcrumb.Item key={index} href={`/#${breadcrumb.path}`}>
                             {breadcrumb.title}
                         </Breadcrumb.Item>
                     )

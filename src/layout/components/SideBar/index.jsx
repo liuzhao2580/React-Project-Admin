@@ -26,7 +26,7 @@ const SideBar = ({ sideStatus }) => {
     // 获取动态的侧边栏
     const getMenu = (routerArr = constRoutes) => {
         // eslint-disable-next-line array-callback-return
-        return routerArr.map(item => {
+        return routerArr.map((item,index) => {
             if (!item.hidden) {
                 if (!item.children) {
                     return (
