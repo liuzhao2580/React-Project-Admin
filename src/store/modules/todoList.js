@@ -1,6 +1,6 @@
 import { handleActions } from "../utils"
 // state
-const initialState = {
+const initState = {
   inputValue: "hello world",
   list: [
     {
@@ -20,12 +20,16 @@ const initialState = {
 
 // reducer
 const reducers = {
-  insertList(state, action) {
-    console.log(action, "action")
-    // state.list.push(action.data)
+  InsertList(state, action) {
+    if (action.data) {
+      state.list.push({
+        key: new Date().getTime(),
+        title: action.data,
+      })
+    }
   },
 }
-export default (state = initialState, action) =>
+export default (state = initState, action) =>
   handleActions({
     state,
     action,

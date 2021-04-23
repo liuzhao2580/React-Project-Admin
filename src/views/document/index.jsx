@@ -11,7 +11,7 @@ const Document = () => {
         title: "React",
       },
       {
-        url: "https://ant-design.gitee.io/index-cn",
+        url: "https://ant-design.gitee.io/components/overview-cn/",
         img:
           "https://gw.alipayobjects.com/zos/rmsportal/KDpgvguMpGfqaHPjicRK.svg",
         title: "Ant Design",
