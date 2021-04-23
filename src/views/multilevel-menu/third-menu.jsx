@@ -1,8 +1,6 @@
-import React from 'react'
+import React from "react"
 
 const ThirdMenu = () => {
-    return (
-        <div>ThirdMenu</div>
-    )
+  return <div>ThirdMenu</div>
 }
 export default ThirdMenu

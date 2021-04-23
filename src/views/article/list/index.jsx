@@ -1,9 +1,7 @@
-import React from 'react'
+import React from "react"
 
 const ArticleList = () => {
-    return (
-        <div>ArticleList</div>
-    )
+  return <div>ArticleList</div>
 }
 
 export default ArticleList

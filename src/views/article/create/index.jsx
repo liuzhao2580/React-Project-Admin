@@ -1,8 +1,6 @@
-import React from 'react'
+import React from "react"
 
 const ArticleCreate = () => {
-    return (
-        <div>ArticleCreate</div>
-    )
+  return <div>ArticleCreate</div>
 }
 export default ArticleCreate
