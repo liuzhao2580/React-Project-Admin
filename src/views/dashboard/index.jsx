@@ -1,10 +1,14 @@
 import React from "react"
 import { connect } from "react-redux"
-import TodoList from "./components/todoList"
+import HomeCard from "./components/HomeCard"
+import TodoList from "./components/TodoList"
 import "./index.scss"
 const HomeDom = () => {
   return (
     <div>
+      {/* 头部分块 */}
+      <HomeCard />
+      {/* todolist 组件 */}
       <TodoList />
     </div>
   )
