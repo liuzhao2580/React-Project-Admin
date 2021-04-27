@@ -10,7 +10,7 @@ const TodoList = ({ todoList, InsertTodoList }) => {
   }
   return (
     <div>
-      <div style={{ marginBottom: "10px" }}>
+      <div>
         <Input
           placeholder='输入些什么'
           ref={inputValueRef}
