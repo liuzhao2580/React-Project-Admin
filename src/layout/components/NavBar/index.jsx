@@ -11,7 +11,7 @@ const NavBar = ({ sideStatus, ChangeAsideStatus }) => {
   return (
     <Header style={{ padding: 0 }} theme='light' className='header-box'>
       {/* 侧边栏开关按钮 */}
-      <div className='trigger' onClick={ChangeAsideStatus}>
+      <div className='trigger' onClick={() => ChangeAsideStatus(!sideStatus)}>
         {sideStatus ? <MenuFoldOutlined /> : <MenuUnfoldOutlined />}
       </div>
       {/* 面包屑 */}
@@ -26,8 +26,8 @@ const mapStateAsideStatus = state => {
 }
 const mapDispatchChangeAsideStatus = dispatch => {
   return {
-    ChangeAsideStatus() {
-      dispatch("app/CHANGE_sideStatus")
+    ChangeAsideStatus(flag) {
+      dispatch("app/CHANGE_sideStatus", flag)
     },
   }
 }

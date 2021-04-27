@@ -7,8 +7,8 @@ const initailState = {
 
 const reducers = {
   // 修改侧边栏状态
-  CHANGE_sideStatus(state) {
-    state.sideStatus = !state.sideStatus
+  CHANGE_sideStatus(state, { data }) {
+    state.sideStatus = data
   },
 }
 

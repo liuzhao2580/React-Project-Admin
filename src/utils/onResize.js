@@ -8,7 +8,8 @@ export default {
   onResize() {
     const getClient = body.getBoundingClientRect()
     let mobile = getClient.width > width ? false : true
-    console.log(mobile, store)
+    // 通过 redux-store 改变当前的状态
+    store.dispatch("app/CHANGE_sideStatus", mobile)
   },
   /** 监听屏幕变化开始 */
   listenResize() {
