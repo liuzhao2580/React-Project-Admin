@@ -10,7 +10,7 @@ const HomeDom = () => {
       {/* 头部分块 */}
       <HomeCard />
       {/* Echarts 组件 */}
-      <EchartsCom></EchartsCom>
+      <EchartsCom option={12} />
       {/* todolist 组件 */}
       <TodoList />
     </div>
