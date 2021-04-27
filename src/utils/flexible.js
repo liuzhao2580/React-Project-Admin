@@ -4,6 +4,7 @@ function refreshRem() {
   let html = document.documentElement
   let wW = html.clientWidth // 窗口宽度
   let rem = (wW * 100) / designSize
+  if (rem >= 100) rem = 100
   document.documentElement.style.fontSize = rem + "px"
 }
 

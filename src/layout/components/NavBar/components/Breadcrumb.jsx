@@ -4,7 +4,6 @@ import { CSSTransition } from "react-transition-group"
 import { Breadcrumb } from "antd"
 
 import { constRoutes } from "@/routes/routerConfig"
-import "./index.scss"
 const BreadcrumbDom = () => {
   const history = useHistory()
   const { pathname } = history.location
