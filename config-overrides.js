@@ -3,6 +3,7 @@ const {
   fixBabelImports,
   addWebpackAlias,
   overrideDevServer,
+  addPostcssPlugins,
 } = require("customize-cra")
 const path = require("path")
 module.exports = {
@@ -17,6 +18,20 @@ module.exports = {
     addWebpackAlias({
       "@": path.resolve(__dirname, "src"),
     }),
+    // 配置 postcss-pxtorem https://www.npmjs.com/package/postcss-pxtorem
+    addPostcssPlugins([
+      require("postcss")(),
+      require("postcss-pxtorem")({
+        rootValue: 100,
+        unitPrecision: 5,
+        propList: ["font", "font-size", "line-height", "letter-spacing"],
+        selectorBlackList: [],
+        replace: true,
+        mediaQuery: false,
+        minPixelValue: 0,
+        exclude: /node_modules/i,
+      }),
+    ]),
   ),
   devServer: overrideDevServer(config => {
     config.proxy = {
