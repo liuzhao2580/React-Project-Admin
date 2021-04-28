@@ -4,5 +4,6 @@
   padding: 10px;
   background-color: #fff;
   max-height: calc(100vh - 64px - 20px);
-  overflow: auto;
+  overflow: hidden;
+  overflow-y: auto;
 }
