@@ -1,8 +1,9 @@
 import React from "react"
 import * as Echarts from "echarts"
+import PropTypes from "prop-types"
 import "./index.scss"
 import EchartsCom from "./index"
-export default prop => {
+const LineEcharts = prop => {
   console.log(prop, "this.prop")
   // 设置 echart 的 id
   const echartId =
@@ -68,3 +69,6 @@ export default prop => {
     </>
   )
 }
+LineEcharts.propTypes = {}
+
+export default LineEcharts
