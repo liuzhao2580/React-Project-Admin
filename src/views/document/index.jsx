@@ -3,21 +3,19 @@ import { List, Card } from "antd"
 const { Meta } = Card
 
 const Document = () => {
-  const [documentList] = useState(() => {
-    return [
-      {
-        url: "https://react.docschina.org/docs/getting-started.html",
-        img: "https://react.docschina.org/favicon.ico",
-        title: "React",
-      },
-      {
-        url: "https://ant-design.gitee.io/components/overview-cn/",
-        img:
-          "https://gw.alipayobjects.com/zos/rmsportal/KDpgvguMpGfqaHPjicRK.svg",
-        title: "Ant Design",
-      },
-    ]
-  })
+  const [documentList] = useState(() => [
+    {
+      url: "https://react.docschina.org/docs/getting-started.html",
+      img: "https://react.docschina.org/favicon.ico",
+      title: "React",
+    },
+    {
+      url: "https://ant-design.gitee.io/components/overview-cn/",
+      img:
+        "https://gw.alipayobjects.com/zos/rmsportal/KDpgvguMpGfqaHPjicRK.svg",
+      title: "Ant Design",
+    },
+  ])
   return (
     <List
       grid={{

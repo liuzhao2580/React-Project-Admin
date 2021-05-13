@@ -2,13 +2,13 @@ import React, { useEffect } from "react"
 
 export default prop => {
   console.log(prop, "prop")
-  useEffect(() => {
-    prop.init()
-    window.addEventListener("resize", onResize)
-    return () => {
-      window.removeEventListener("resize", onResize)
-    }
-  }, [onResize, prop])
+  // useEffect(() => {
+  //   prop.init()
+  //   // window.addEventListener("resize", onResize)
+  //   // return () => {
+  //   //   window.removeEventListener("resize", onResize)
+  //   // }
+  // }, [prop])
   const onResize = () => {
     prop.echartDom.resize()
   }

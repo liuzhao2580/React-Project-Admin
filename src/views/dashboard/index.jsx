@@ -12,7 +12,7 @@ const HomeDom = () => {
       <HomeCard />
       {/* Echarts 组件 */}
       <div className='echart-component'>
-        {/* <LineEcharts option={12} /> */}
+        <LineEcharts option={12} />
         {/* <PieEcharts /> */}
       </div>
       {/* todolist 组件 */}
