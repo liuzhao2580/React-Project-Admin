@@ -29,6 +29,8 @@
   console.log(obj === obj1, 'obj === obj1') // false
   ```
 
+### 在脚手架的基础上添加`typescript`
+
 # 使用 `react-app-rewired` 和 [`customize-cra`](https://github.com/arackaf/customize-cra) 对 `webpack`进行配置定义
 
 主要是用的插件`react-app-rewired customize-cra`

@@ -38,7 +38,7 @@ const SideBar = ({ sideStatus }) => {
           return (
             <SubMenu
               key={item.redirect}
-              icon={item.meta.icon}
+              icon={<item.meta.icon />}
               title={item.meta.title}
             >
               {getMenu(item.children)}

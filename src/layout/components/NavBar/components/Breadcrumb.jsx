@@ -1,9 +1,9 @@
-import React, { useState, useEffect } from "react"
-import { useHistory, withRouter } from "react-router-dom"
-import { CSSTransition } from "react-transition-group"
-import { Breadcrumb } from "antd"
+import React, { useState, useEffect } from 'react'
+import { useHistory, withRouter } from 'react-router-dom'
+import { CSSTransition } from 'react-transition-group'
+import { Breadcrumb } from 'antd'
 
-import { constRoutes } from "@/routes/routerConfig"
+import { constRoutes } from '@/routes/routerConfig'
 const BreadcrumbDom = () => {
   const history = useHistory()
   const { pathname } = history.location
@@ -26,7 +26,7 @@ const BreadcrumbDom = () => {
     function routerLoop(routes = constRoutes) {
       routes.forEach(item => {
         if (item.path === pathname) {
-          if (item.path === "/dashboard") return
+          if (item.path === '/dashboard') return
         }
         if (!item.children) {
           // 说明该路由显示在面包屑上
@@ -50,11 +50,11 @@ const BreadcrumbDom = () => {
   return (
     <CSSTransition
       in={animateFlag}
-      classNames='breadrumb-animate'
+      classNames="breadrumb-animate"
       timeout={300}
     >
-      <Breadcrumb className='breadcrumb-box'>
-        <Breadcrumb.Item href='#/dashboard'>首页</Breadcrumb.Item>
+      <Breadcrumb className="breadcrumb-box">
+        <Breadcrumb.Item href="#/dashboard">首页</Breadcrumb.Item>
         {breadcrumbArr.map((breadcrumb, index) => {
           return (
             <Breadcrumb.Item
