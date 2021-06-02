@@ -1,7 +1,7 @@
-import React, { useEffect } from "react"
+import React from 'react'
 
 export default prop => {
-  console.log(prop, "prop")
+  console.log(prop, 'prop')
   // useEffect(() => {
   //   prop.init()
   //   // window.addEventListener("resize", onResize)
@@ -9,14 +9,11 @@ export default prop => {
   //   //   window.removeEventListener("resize", onResize)
   //   // }
   // }, [prop])
-  const onResize = () => {
-    prop.echartDom.resize()
-  }
   return (
     <div
       id={prop.echartId}
-      className='echart-box'
-      style={{ height: prop.height || "300px" }}
+      className="echart-box"
+      style={{ height: prop.height || '300px' }}
     ></div>
   )
 }
