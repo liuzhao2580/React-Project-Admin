@@ -6,6 +6,7 @@ import { UserOutlined, LockOutlined } from '@ant-design/icons'
 
 import './login.scss'
 import { loginApi } from '@/api/modules/user'
+import { setUserInfoStorage, setTokenCookies } from '@/utils/commonSave'
 const LoginDom = () => {
   const history = useHistory()
   let [loginForm] = useState({ userName: 'liuzhao', password: 123456 })
@@ -18,6 +19,8 @@ const LoginDom = () => {
     console.log(data, 123)
     if (data.code === 0) {
       message.success('登录成功')
+      setUserInfoStorage(data.data)
+      setTokenCookies(`Bearer ${data.data.token}`)
       history.push('/')
     } else message.error(data.msg)
   }
