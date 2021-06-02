@@ -30,7 +30,7 @@ const SideBar = ({ sideStatus }) => {
       if (!item.meta.hidden) {
         if (!item.children) {
           return (
-            <Menu.Item key={item.path} icon={item.meta.icon}>
+            <Menu.Item key={item.path} icon={<item.meta.icon />}>
               {item.meta.title}
             </Menu.Item>
           )

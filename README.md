@@ -6,7 +6,7 @@
 
 ## 服务端的数据在[`server`](https://github.com/liuzhao2580/React-Antd-Admin-Service)
 
-### 改造`react-redux`
+### 1. 改造`react-redux`
 
 - 需要使用到[`immer`](https://github.com/immerjs/immer)第三方组件，用来设置`reducers`为纯函数，使用方法
 
@@ -29,7 +29,38 @@
   console.log(obj === obj1, 'obj === obj1') // false
   ```
 
-### 在脚手架的基础上添加`typescript`
+### 2. 在脚手架的基础上添加`typescript`[中文地址](http://www.html.cn/create-react-app/docs/adding-typescript/)   [英文地址]([Adding TypeScript | Create React App (create-react-app.dev)](https://create-react-app.dev/docs/adding-typescript/))
+
+`yarn add typescript @types/node @types/react @types/react-dom @types/jest`
+
+会出现这么一句话，但是生成的配置文件会出现 **每次运行项目，会重置`tsconfig.json`的所有配置**
+
+> 你不需要制作 [`tsconfig.json` 文件](https://www.typescriptlang.org/docs/handbook/tsconfig-json.html)，我们将为你制作一个文件。 你可以编辑生成的 TypeScript 配置。
+
+如果需要配置其他的选项，**可以在根目录下面创建一个`my-tsconfig.json`的文件**
+
+```json
+{
+  "compilerOptions": {
+    "baseUrl": ".",
+    "paths": {
+      "@/*": ["src/*"]
+    }
+  }
+}
+```
+
+再到`tsconfig.json`中`"extends": "./my-tsconfig.json"`继承
+
+```json
+...
+"include": ["src/**/*"],
+"exclude": ["node_modules", "**/*.spec.ts"],
+"extends": "./my-tsconfig.json"
+...
+```
+
+
 
 # 使用 `react-app-rewired` 和 [`customize-cra`](https://github.com/arackaf/customize-cra) 对 `webpack`进行配置定义
 

@@ -29,5 +29,5 @@
     "node_modules",
     "**/*.spec.ts"
   ],
-  "extends": "./paths.json"
+  "extends": "./my-tsconfig.json"
 }
