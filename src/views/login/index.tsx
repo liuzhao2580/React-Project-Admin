@@ -1,21 +1,13 @@
-import React, { useState, useEffect } from 'react'
+import React, { useState } from 'react'
 import { useHistory } from 'react-router-dom'
 
 import { Form, Input, Button, Checkbox, message } from 'antd'
 import { UserOutlined, LockOutlined } from '@ant-design/icons'
 
 import './login.scss'
-import { getCSRFToken, loginApi } from '@/api/modules/user'
+import { loginApi } from '@/api/modules/user'
 const LoginDom = () => {
   const history = useHistory()
-
-  // 登录之前先获取 CSRFToken参数
-  useEffect(() => {
-    async function getToken() {
-      getCSRFToken()
-    }
-    getToken()
-  }, [])
   let [loginForm] = useState({ userName: 'liuzhao', password: 123456 })
   const onFinish = async values => {
     const params = {

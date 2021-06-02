@@ -21,7 +21,7 @@ const SideBar = ({ sideStatus }) => {
   // 获取当前的路由
   useEffect(() => {
     const { pathname } = history.location
-    setSelectenMenu(pathname)
+    setSelectenMenu([pathname])
   }, [history.location])
   // 获取动态的侧边栏
   const getMenu = (routerArr = constRoutes) => {
