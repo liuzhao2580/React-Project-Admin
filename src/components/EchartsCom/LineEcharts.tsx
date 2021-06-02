@@ -16,7 +16,7 @@ const LineEcharts: React.FC<ILineParams> = prop => {
   /** 初始化 echarts */
   const initEcharts = () => {
     setEchartDom(document.getElementById(`${echartId}`))
-    console.log(echartDom)
+    console.log(111)
     if (!echartDom) return
     Echarts.init(echartDom).setOption({
       tooltip: {
@@ -62,10 +62,10 @@ const LineEcharts: React.FC<ILineParams> = prop => {
       ]
     })
   }
-  useMemo(initEcharts, [echartDom])
-  // useEffect(() => {
-  //   getU
-  // }, [getU])
+  const getU = useCallback(initEcharts, [echartDom])
+  useEffect(() => {
+    getU()
+  })
   console.log(echartDom)
   return (
     <div id={echartId} className="echart-box" style={{ height: '300px' }}></div>
