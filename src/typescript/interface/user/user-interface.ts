@@ -17,3 +17,9 @@ export interface IUserBaseInfo {
   /** 头像 */
   avatar?: string
 }
+
+/** 用户登录 */
+export interface ILoginParams {
+  userName: string
+  password: string | number
+}

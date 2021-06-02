@@ -6,7 +6,7 @@ import { getUserInfoApi } from '@/api/modules/user'
 const PersonalPage = () => {
   useEffect(() => {
     async function getUserInfo() {
-      const data = await getUserInfoApi()
+      const data = await getUserInfoApi(1)
       console.log(data)
     }
     getUserInfo()
