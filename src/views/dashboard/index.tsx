@@ -3,17 +3,18 @@ import { connect } from 'react-redux'
 import './index.scss'
 import HomeCard from './components/HomeCard'
 import TodoList from './components/TodoList'
-import LineEcharts from '@/components/EchartsCom/LineEcharts'
-// import PieEcharts from "@/components/EchartsCom/PieEcharts"
+import Echarts from '@/components/EchartsCom'
+import { LineOptions } from '@/utils/echarts-utils'
 const HomeDom = () => {
+  const lineEchartsOptions = LineOptions()
+  console.log('index')
   return (
     <div>
       {/* 头部分块 */}
       <HomeCard />
       {/* Echarts 组件 */}
       <div className="echart-component">
-        <LineEcharts option={12} />
-        {/* <PieEcharts /> */}
+        <Echarts option={lineEchartsOptions} />
       </div>
       {/* todolist 组件 */}
       <TodoList />
