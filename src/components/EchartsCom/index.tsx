@@ -19,22 +19,20 @@ const EchartsCom = prop => {
     myChart = Echarts.init(echartDom)
     myChart.setOption(prop.option)
   }
-  const getU = useCallback(initEcharts, [echartDom])
-  useEffect(() => {
-    getU()
-  })
 
   /** 监听屏幕的变化 */
   const windowResizeEcharts = () => {
     if (myChart) myChart.resize()
   }
+  const getU = useCallback(initEcharts, [echartDom])
   useEffect(() => {
+    getU()
     window.addEventListener('resize', windowResizeEcharts)
     return () => {
       window.removeEventListener('resize', windowResizeEcharts)
     }
-    // eslint-disable-next-line react-hooks/exhaustive-deps
   })
+
   return (
     <div
       id={echartId}

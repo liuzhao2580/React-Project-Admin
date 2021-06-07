@@ -1,7 +1,7 @@
-@import "./resect.scss";
-@import "./variables.scss";
-@import "./sidebar.scss";
-@import "./transition.scss";
+@import './resect.scss';
+@import './variables.scss';
+@import './sidebar.scss';
+@import './transition.scss';
 
 body {
   height: 100%;
@@ -19,6 +19,7 @@ label {
 html {
   height: 100%;
   box-sizing: border-box;
+  // font-size: 62.5%;
 }
 
 #root,
@@ -74,7 +75,7 @@ div:focus {
     visibility: hidden;
     display: block;
     font-size: 0;
-    content: " ";
+    content: ' ';
     clear: both;
     height: 0;
   }
