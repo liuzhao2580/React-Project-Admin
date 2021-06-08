@@ -1,14 +1,19 @@
 import React, { useRef } from 'react'
 import { Button, Input, List } from 'antd'
 import { connect } from 'react-redux'
+
+import todoListActions from '@/store/modules/todoList/actions'
 const TodoList = ({ todoList, InsertTodoList }) => {
-  const inputValueRef = useRef<any>(null)
+  const inputValueRef = useRef<Input>(null)
   /** 新增按钮 */
   const insertTodo = () => {
-    // if (inputValueRef.current) {
-    //   InsertTodoList(inputValueRef.current.state.value)
-    //   inputValueRef.current.state.value = ''
-    // }
+    console.log(inputValueRef.current)
+    if (inputValueRef.current) {
+      InsertTodoList({
+        key: new Date().getTime(),
+        title: inputValueRef.current.state.value
+      })
+    }
   }
   return (
     <div>
@@ -43,7 +48,7 @@ const mapStateToProps = state => {
 const mapDispatchToProps = dispatch => {
   return {
     InsertTodoList(data) {
-      dispatch('todoList/InsertList', data)
+      dispatch(todoListActions.insertTodoList(data))
     }
   }
 }

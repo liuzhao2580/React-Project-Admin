@@ -29,7 +29,7 @@
   console.log(obj === obj1, 'obj === obj1') // false
   ```
 
-### 2. 在脚手架的基础上添加`typescript`[中文地址](http://www.html.cn/create-react-app/docs/adding-typescript/)   [英文地址]([Adding TypeScript | Create React App (create-react-app.dev)](https://create-react-app.dev/docs/adding-typescript/))
+### 2. 在脚手架的基础上添加`typescript`[中文地址](http://www.html.cn/create-react-app/docs/adding-typescript/) [英文地址]([Adding TypeScript | Create React App (create-react-app.dev)](https://create-react-app.dev/docs/adding-typescript/))
 
 `yarn add typescript @types/node @types/react @types/react-dom @types/jest`
 
@@ -60,8 +60,6 @@
 ...
 ```
 
-
-
 # 使用 `react-app-rewired` 和 [`customize-cra`](https://github.com/arackaf/customize-cra) 对 `webpack`进行配置定义
 
 主要是用的插件`react-app-rewired customize-cra`
@@ -90,9 +88,9 @@
    const { override } = require('customize-cra')
    const path = require('path')
    module.exports = {
-     webpack: override(
-     // 设置配置代码
-     )
+     webpack:
+       override()
+       // 设置配置代码
    }
    ```
 
@@ -182,6 +180,26 @@ module.exports = {
     }
     return config
   })
+}
+```
+
+# 对于`TS`的使用配置
+
+## `useRef`（在给`useRef`声明类型的时候，`html`标签是什么就声明该类型）
+
+```tsx
+import React, { useRef } from 'react'
+export default ()=> {
+  const inputValueRef = useRef<Input>(null)
+  return (
+  	<div>
+      <Input
+        placeholder="输入些什么"
+        ref={inputValueRef}
+        style={{ width: '200px', marginRight: '10px' }}
+        />
+    </div>
+  )
 }
 ```
 
