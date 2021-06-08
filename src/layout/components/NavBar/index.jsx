@@ -3,6 +3,7 @@ import { connect } from 'react-redux'
 import './index.scss'
 import { Layout } from 'antd'
 import { MenuUnfoldOutlined, MenuFoldOutlined } from '@ant-design/icons'
+import appActions from '@/store/modules/app/actions'
 
 import Breadcrumb from './components/Breadcrumb'
 import Personal from './components/Personal'
@@ -31,14 +32,11 @@ const mapStateAsideStatus = state => {
     sideStatus: state.app.sideStatus
   }
 }
-const mapDispatchChangeAsideStatus = dispatch => {
+const mapDispatchToProps = dispatch => {
   return {
     ChangeAsideStatus(flag) {
-      dispatch('app/CHANGE_sideStatus', flag)
+      dispatch(appActions.changeSiderStatus(flag))
     }
   }
 }
-export default connect(
-  mapStateAsideStatus,
-  mapDispatchChangeAsideStatus
-)(NavBar)
+export default connect(mapStateAsideStatus, mapDispatchToProps)(NavBar)

@@ -74,9 +74,9 @@ const SideBar = ({ sideStatus }) => {
   )
 }
 
-const mapStateAsideStatus = state => {
+const mapStateToProps = state => {
   return {
     sideStatus: state.app.sideStatus
   }
 }
-export default connect(mapStateAsideStatus)(withRouter(SideBar))
+export default connect(mapStateToProps)(withRouter(SideBar))

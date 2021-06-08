@@ -5,10 +5,10 @@ const TodoList = ({ todoList, InsertTodoList }) => {
   const inputValueRef = useRef<any>(null)
   /** 新增按钮 */
   const insertTodo = () => {
-    if (inputValueRef.current) {
-      InsertTodoList(inputValueRef.current.state.value)
-      inputValueRef.current.state.value = ''
-    }
+    // if (inputValueRef.current) {
+    //   InsertTodoList(inputValueRef.current.state.value)
+    //   inputValueRef.current.state.value = ''
+    // }
   }
   return (
     <div>
@@ -34,17 +34,17 @@ const TodoList = ({ todoList, InsertTodoList }) => {
   )
 }
 // todolist的数组
-const mapStateTodoList = state => {
+const mapStateToProps = state => {
   return {
     todoList: state.todoList.list
   }
 }
 // 增加 todolist 元素
-const mapDispatchInsertTodoList = dispatch => {
+const mapDispatchToProps = dispatch => {
   return {
     InsertTodoList(data) {
       dispatch('todoList/InsertList', data)
     }
   }
 }
-export default connect(mapStateTodoList, mapDispatchInsertTodoList)(TodoList)
+export default connect(mapStateToProps, mapDispatchToProps)(TodoList)
