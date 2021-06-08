@@ -3,6 +3,7 @@ import ACTIONS_TYPE from './actions-type'
 
 export default (state = initState, action) => {
   switch (action.type) {
+    /** 添加 todolist */
     case ACTIONS_TYPE.ADD_TODOLIST:
       return {
         ...state
