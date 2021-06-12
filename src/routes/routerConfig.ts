@@ -7,7 +7,7 @@ import {
   GroupOutlined
 } from '@ant-design/icons'
 
-import { IRouterList } from '@/typescript/interface/router/router-interface'
+import { IRouterList } from '@/typescript/router/interface'
 
 import Dashboard from '@/views/dashboard'
 import Personal from '@/views/personal'

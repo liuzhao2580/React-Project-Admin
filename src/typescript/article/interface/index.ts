@@ -1,3 +1,5 @@
+import { EArticleStatus } from '../enum'
+
 /** 存储在数据库中的 文章的基本格式 */
 export interface IArticleBasic {
   /** 文章 id */
@@ -24,6 +26,8 @@ export interface IArticleBasic {
   userAvatar: string
   /** 创建时间 */
   article_time: Date
+  /** 文章的状态 */
+  status: EArticleStatus
   /** 更新时间 */
   article_update_time: Date
 }

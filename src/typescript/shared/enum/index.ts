@@ -5,5 +5,5 @@ export enum ResultCodeEnum {
   /** 成功 */
   success = 0,
   /** token 不合法 */
-  invalidToken = 50001,
+  invalidToken = 50001
 }

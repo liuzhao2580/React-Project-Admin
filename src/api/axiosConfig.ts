@@ -1,7 +1,7 @@
 import axios from 'axios'
 import { message } from 'antd'
 import { getTokenCookies } from '@/utils/commonSave'
-import { ResultCodeEnum } from '@/typescript/enum'
+import { ResultCodeEnum } from '@/typescript/shared/enum'
 import { ResultModel } from '@/typescript/model'
 const axiosConfig = axios.create({
   baseURL: '/proxy',

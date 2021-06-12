@@ -1,8 +1,11 @@
 import React, { useState, useEffect } from 'react'
 import { Table, Tag, Space, Button } from 'antd'
+import { CloseOutlined, EditOutlined } from '@ant-design/icons'
 
 import { articleListApi } from '@/api/modules/article'
-import { IArticleBasic } from '@/typescript/interface/article/article-config.interface'
+import { IArticleBasic } from '@/typescript/article/interface'
+
+import { ITimeType, formateNormalTime } from '@/utils/time-utils'
 
 const ArticleList: React.FC<any> = () => {
   const [tableData, setTableData] = useState<IArticleBasic[]>([])
@@ -22,18 +25,39 @@ const ArticleList: React.FC<any> = () => {
     },
     {
       title: '创建时间',
-      dataIndex: 'article_time'
+      dataIndex: 'article_time',
+      render: text => <span>{formateNormalTime(text, ITimeType.NYRSFM)}</span>
     },
     {
       title: '更新时间',
-      dataIndex: 'article_update_time'
+      dataIndex: 'article_update_time',
+      render: text => <span>{formateNormalTime(text, ITimeType.NYRSFM)}</span>
+    },
+    {
+      title: '文章状态',
+      dataIndex: 'status',
+      render: text => <span>{}</span>
     },
     {
       title: '操作',
       key: 'action',
+      width: 100,
       render: () => (
-        <Space size="middle">
-          <Button danger>删除</Button>
+        <Space size="small">
+          <Button
+            title="编辑"
+            shape="circle"
+            size="small"
+            type="primary"
+            icon={<EditOutlined />}
+          ></Button>
+          <Button
+            title="删除"
+            shape="circle"
+            danger
+            size="small"
+            icon={<CloseOutlined />}
+          ></Button>
         </Space>
       )
     }
@@ -41,7 +65,7 @@ const ArticleList: React.FC<any> = () => {
 
   return (
     <>
-      <Table rowKey="id" columns={columns} dataSource={tableData} />
+      <Table rowKey="id" bordered columns={columns} dataSource={tableData} />
     </>
   )
 }

@@ -1,6 +1,6 @@
 import axios from '../axiosConfig'
 import { ResultModel } from '@/typescript/model'
-import { IArticleBasic } from '@/typescript/interface/article/article-config.interface'
+import { IArticleBasic } from '@/typescript/article/interface'
 /** 获取数据 */
 export const articleListApi = (): Promise<ResultModel<IArticleBasic[]>> =>
   axios.get('/article/list')

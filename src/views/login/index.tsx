@@ -7,8 +7,8 @@ import { UserOutlined, LockOutlined } from '@ant-design/icons'
 import './login.scss'
 import { loginApi } from '@/api/modules/user'
 import { setUserInfoStorage, setTokenCookies } from '@/utils/commonSave'
-import { ILoginParams } from '@/typescript/interface/user/user-interface'
-import { ResultCodeEnum } from '@/typescript/enum'
+import { ILoginParams } from '@/typescript/user/interface'
+import { ResultCodeEnum } from '@/typescript/shared/enum'
 const LoginDom = () => {
   const history = useHistory()
   let [loginForm] = useState({ userName: 'liuzhao', password: 123456 })
