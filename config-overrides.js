@@ -25,19 +25,19 @@ module.exports = {
       extensions: ['.tsx', '.ts', '.js', '.jsx', '.json']
     }),
     // 配置 postcss-pxtorem https://www.npmjs.com/package/postcss-pxtorem
-    addPostcssPlugins([
-      require('postcss')(),
-      require('postcss-pxtorem')({
-        rootValue: 100,
-        unitPrecision: 5,
-        propList: ['font', 'font-size', 'line-height', 'letter-spacing'],
-        selectorBlackList: [],
-        replace: true,
-        mediaQuery: false,
-        minPixelValue: 0,
-        exclude: /node_modules/i
-      })
-    ]),
+    // addPostcssPlugins([
+    //   require('postcss')(),
+    //   require('postcss-pxtorem')({
+    //     rootValue: 100,
+    //     unitPrecision: 5,
+    //     propList: ['font', 'font-size', 'line-height', 'letter-spacing'],
+    //     selectorBlackList: [],
+    //     replace: true,
+    //     mediaQuery: false,
+    //     minPixelValue: 0,
+    //     exclude: /node_modules/i
+    //   })
+    // ]),
     // 配置 scss 全局的变量
     adjustStyleLoaders(({ use, test }) => {
       if (test.toString().includes('scss')) {

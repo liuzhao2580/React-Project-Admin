@@ -1,5 +1,6 @@
 import Moment from 'moment'
 
+/** 时间的格式 */
 export const ITimeType = {
   /** 年月日 */
   NYR: 'YYYY-MM-DD',

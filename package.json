@@ -10,6 +10,7 @@
     "axios": "^0.20.0",
     "echarts": "^5.1.1",
     "express": "^4.17.1",
+    "highlight.js": "^11.0.1",
     "immer": "^7.0.14",
     "js-cookie": "^2.2.1",
     "moment": "^2.29.1",
@@ -24,7 +25,8 @@
     "react-transition-group": "^4.4.1",
     "redux": "^4.0.5",
     "redux-logger": "^3.0.6",
-    "redux-thunk": "^2.3.0"
+    "redux-thunk": "^2.3.0",
+    "wangeditor": "^4.7.3"
   },
   "scripts": {
     "start": "react-app-rewired start",

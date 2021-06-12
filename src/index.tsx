@@ -10,7 +10,7 @@ import store from './store'
 // 导入全局样式
 import '@/assets/styles/index.scss'
 // 引入 rem布局
-import '@/utils/flexible.js'
+// import '@/utils/flexible.js'
 
 ReactDOM.render(
   <Provider store={store}>
