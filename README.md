@@ -183,6 +183,39 @@ module.exports = {
 }
 ```
 
+## 5.导入`scss`的全局变量[`adjustStyleLoaders`](https://github.com/arackaf/customize-cra/blob/HEAD/api.md#adjustStyleLoaders)
+
+首先安装`yarn add sass-resources-loader -D`
+
+```js
+const {
+  ...
+  adjustStyleLoaders,
+  ...
+} = require('customize-cra')
+const path = require("path")
+module.exports = {
+  webpack: override(
+  ...
+  // 配置 scss 全局的变量
+  adjustStyleLoaders(({ use, test }) => {
+    if (test.toString().includes('scss')) {
+      use.push({
+        loader: require.resolve('sass-resources-loader'),
+        options: {
+          //这里是你自己放公共scss变量的路径
+          resources: path.resolve('src/assets/styles/variables.scss')
+        }
+      })
+    }
+  })
+  ...
+  ),
+}
+```
+
+
+
 # 对于`TS`的使用配置
 
 ## `useRef`（在给`useRef`声明类型的时候，`html`标签是什么就声明该类型）

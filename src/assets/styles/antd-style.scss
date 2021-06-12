@@ -1,0 +1,15 @@
+// 重置部分 antd 的样式
+.ant-table {
+  .ant-table-container {
+    .ant-table-content {
+      .ant-table-thead {
+        > tr {
+          > th {
+            background-color: $color;
+            color: #fff;
+          }
+        }
+      }
+    }
+  }
+}

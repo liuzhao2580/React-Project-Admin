@@ -4,7 +4,8 @@ const {
   addWebpackAlias,
   overrideDevServer,
   addPostcssPlugins,
-  addWebpackResolve
+  addWebpackResolve,
+  adjustStyleLoaders
 } = require('customize-cra')
 const path = require('path')
 module.exports = {
@@ -36,7 +37,19 @@ module.exports = {
         minPixelValue: 0,
         exclude: /node_modules/i
       })
-    ])
+    ]),
+    // 配置 scss 全局的变量
+    adjustStyleLoaders(({ use, test }) => {
+      if (test.toString().includes('scss')) {
+        use.push({
+          loader: require.resolve('sass-resources-loader'),
+          options: {
+            //这里是你自己放公共scss变量的路径
+            resources: path.resolve('src/assets/styles/variables.scss')
+          }
+        })
+      }
+    })
   ),
   devServer: overrideDevServer(config => {
     config.proxy = {

@@ -17,8 +17,16 @@ const ArticleList: React.FC<any> = () => {
 
   const columns = [
     {
-      title: '文章名称',
+      title: '文章标题',
       dataIndex: 'article_title'
+    },
+    {
+      title: '创建时间',
+      dataIndex: 'article_time'
+    },
+    {
+      title: '更新时间',
+      dataIndex: 'article_update_time'
     },
     {
       title: '操作',

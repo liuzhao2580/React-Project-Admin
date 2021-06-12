@@ -1,4 +1,4 @@
 import Monent from 'moment'
 
-/** 返回 时间，类似于 2021-12-21 */
+/** 返回 处理的时间格式 */
 export const formateNormalTime = () => {}
