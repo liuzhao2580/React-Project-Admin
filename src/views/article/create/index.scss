@@ -1,0 +1,15 @@
+.article-create-box {
+  .header-box {
+    display: flex;
+    margin-bottom: 12px;
+    .title-input {
+      flex: 1;
+    }
+    .btn-box {
+      button {
+        width: 100px;
+        margin-left: 10px;
+      }
+    }
+  }
+}
