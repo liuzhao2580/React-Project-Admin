@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react'
+import React, { useState, useMemo } from 'react'
 import { useHistory, withRouter } from 'react-router-dom'
 import { connect } from 'react-redux'
 import { Layout, Menu } from 'antd'
@@ -13,16 +13,17 @@ const SideBar = ({ sideStatus }) => {
   let [selectedKeys, setSelectenMenu] = useState(['/dashboard'])
 
   // 初始展开的 SubMenu 菜单项 key 数组
-  let [defaultOpenKeys] = useState(() => {
-    const getOpenKeyArr = history.location.pathname.split('/')
-    const getOpenKey = getOpenKeyArr.length >= 3 ? '/' + getOpenKeyArr[1] : null
-    return getOpenKey
-  })
-  // 获取当前的路由
-  useEffect(() => {
+  let [defaultOpenKeys, setDefaultOpenKeys] = useState([])
+
+  useMemo(() => {
     const { pathname } = history.location
     setSelectenMenu([pathname])
+
+    const getOpenKeyArr = history.location.pathname.split('/')
+    const getOpenKey = getOpenKeyArr.length >= 3 ? '/' + getOpenKeyArr[1] : null
+    setDefaultOpenKeys([getOpenKey])
   }, [history.location])
+
   // 获取动态的侧边栏
   const getMenu = (routerArr = constRoutes) => {
     // eslint-disable-next-line array-callback-return
@@ -37,7 +38,7 @@ const SideBar = ({ sideStatus }) => {
         } else if (item.children) {
           return (
             <SubMenu
-              key={item.redirect}
+              key={item.path}
               icon={<item.meta.icon />}
               title={item.meta.title}
             >
@@ -66,7 +67,7 @@ const SideBar = ({ sideStatus }) => {
         selectedKeys={selectedKeys}
         mode="inline"
         onClick={MenuClick}
-        defaultOpenKeys={[defaultOpenKeys]}
+        defaultOpenKeys={defaultOpenKeys}
       >
         {getMenu()}
       </Menu>
