@@ -6,6 +6,8 @@ const USER_INFO = 'userInfo'
 /** token */
 const TOKEN = 'token'
 
+const CSRF_TOKEN = 'csrfToken'
+
 // -----------------------------------------------------cookies--------------------------------------------------
 
 /** 设置token */
@@ -15,6 +17,9 @@ export const setTokenCookies = token => {
 
 /** 获取token */
 export const getTokenCookies = () => getCookie(TOKEN)
+
+/** 获取 csrfToken */
+export const getCSRFTokenCookies = () => getCookie(CSRF_TOKEN)
 // -----------------------------------------------------cookies--------------------------------------------------
 
 // -----------------------------------------------------localStorage--------------------------------------------------

@@ -7,13 +7,28 @@ import 'highlight.js/styles/monokai-sublime.css'
 import './index.scss'
 import PreviewModalCom from './components/Preview-Modal'
 
+import { getArticleCategoryApi } from '@/api/modules/article'
+import { IArticleCategory } from '@/typescript/article/interface'
+import { ResultCodeEnum } from '@/typescript/shared/enum'
+
 const ArticleCreate = () => {
+  // 实例化 编辑器
   const [editor, setEditor] = useState<any | null>(null)
   // 用来设置 modal 的显示隐藏
-  const [isPreviewModal, setPreviewModal] = useState<Boolean>(false)
+  const [isPreviewModal, setPreviewModal] = useState<boolean>(false)
+  // 获取 文章分类的数据
+  const [articleCate, setArticleCate] = useState<IArticleCategory[]>([])
 
   // 初始化 编辑器
   useEffect(() => {
+    ;(async function () {
+      const data = await getArticleCategoryApi({ level: 2 })
+      console.log(data)
+      if (data.code === ResultCodeEnum.success) {
+        setArticleCate(data.data)
+      } else setArticleCate([])
+    })()
+
     setEditor(new E('#content'))
   }, [])
 
@@ -33,8 +48,6 @@ const ArticleCreate = () => {
       editor && editor.destroy()
     }
   }, [editor])
-  console.log(123)
-
   /** 预览按钮 */
   const previewBtn = () => {
     console.log(editor.txt.html())
@@ -55,6 +68,7 @@ const ArticleCreate = () => {
       {/* 预览 */}
       <PreviewModalCom
         isModalVisible={isPreviewModal}
+        articleCateList={articleCate}
         closeModal={() => setPreviewModal(false)}
       ></PreviewModalCom>
     </div>
