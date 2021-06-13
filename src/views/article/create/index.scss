@@ -13,10 +13,25 @@
     }
   }
   // 文章预览
-  // .preview-modal-box {
-  //   .modal-box {
-  //     .article-categroy {
-  //     }
-  //   }
-  // }
+  .preview-modal-box {
+    .modal-box {
+      // 标题
+      .article-title {
+        font-weight: 900;
+        font-size: 32px;
+      }
+      // 文章内容显示
+      .article-content {
+        height: 550px;
+        padding: 12px;
+        border: 1px solid #ccc;
+        border-radius: 5px;
+        overflow: auto;
+      }
+      // 文章分类选择
+      .article-categroy {
+        margin: 12px 0;
+      }
+    }
+  }
 }

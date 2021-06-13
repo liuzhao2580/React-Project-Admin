@@ -11,3 +11,11 @@ export enum EArticleStatus {
   /** 已发布 */
   '已发布' = 3
 }
+
+/** 编辑 新增文章时，保存为草稿还是 提交 */
+export enum EArticleSaveType {
+  /** 提交 审核 */
+  comfirm = 0,
+  /** 保存为草稿 */
+  draft = 1
+}
