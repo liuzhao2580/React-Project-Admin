@@ -1,6 +1,6 @@
 import axios from 'axios'
 import { message } from 'antd'
-import { getTokenCookies } from '@/utils/commonSave'
+import { getTokenCookies, getCSRFTokenCookies } from '@/utils/commonSave'
 import { ResultCodeEnum } from '@/typescript/shared/enum'
 import { ResultModel } from '@/typescript/model'
 const axiosConfig = axios.create({
@@ -8,6 +8,7 @@ const axiosConfig = axios.create({
   timeout: 60000,
   headers: {
     'X-Custom-Header': 'foobar',
+    'x-csrf-token': getCSRFTokenCookies(),
     Authorization: getTokenCookies()
   }
 })
