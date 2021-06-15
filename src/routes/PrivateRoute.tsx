@@ -1,9 +1,20 @@
-import React from 'react'
+import React, { useEffect } from 'react'
 import { Route, Redirect } from 'react-router-dom'
+import { connect } from 'react-redux'
 import { getTokenCookies } from '@/utils/commonSave'
+import { getUserInfoApi } from '@/api/modules/user'
+import userActions from '@/store/modules/user/actions'
 
 /** 用来处理路由拦截 */
-export default ({ component: Component, ...rest }) => {
+const PrivateRoute = ({
+  component: Component,
+  getUserInfoDispatch,
+  ...rest
+}) => {
+  useEffect(() => {
+    getUserInfoDispatch()
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [])
   return (
     <Route
       {...rest}
@@ -13,3 +24,18 @@ export default ({ component: Component, ...rest }) => {
     ></Route>
   )
 }
+
+const mapDispatchToProps = dispatch => {
+  return {
+    async getUserInfoDispatch() {
+      const data = await getUserInfoApi(1)
+      dispatch(
+        (function () {
+          return userActions.getUserInfo(data.data)
+        })()
+      )
+    }
+  }
+}
+
+export default connect(null, mapDispatchToProps)(PrivateRoute)
