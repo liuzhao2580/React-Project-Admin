@@ -7,14 +7,14 @@ const axiosConfig = axios.create({
   baseURL: '/proxy',
   timeout: 60000,
   headers: {
-    'X-Custom-Header': 'foobar',
-    'x-csrf-token': getCSRFTokenCookies(),
-    Authorization: getTokenCookies()
+    'X-Custom-Header': 'foobar'
   }
 })
 
 // 发送请求之前的拦截
 axiosConfig.interceptors.request.use(config => {
+  config.headers.Authorization = getTokenCookies()
+  config.headers['x-csrf-token'] = getCSRFTokenCookies()
   return config
 })
 
