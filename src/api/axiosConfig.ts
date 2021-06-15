@@ -21,7 +21,6 @@ axiosConfig.interceptors.request.use(config => {
 // 接收数据之前的拦截
 axiosConfig.interceptors.response.use(
   response => {
-    console.log(response, '')
     const { status } = response
     const data: ResultModel<any> = response.data
     // 说明是成功的请求
