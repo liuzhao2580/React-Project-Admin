@@ -4,9 +4,11 @@ import { createStore, applyMiddleware, compose } from 'redux'
 import thunk from 'redux-thunk'
 import todoList from './modules/todoList/reducers'
 import app from './modules/app/reducers'
+import user from './modules/user/reducers'
 const rootReducer = combineReducers({
   todoList,
-  app
+  app,
+  user
 })
 const setWindow: any = window
 const composeHandle = setWindow.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__

@@ -4,6 +4,8 @@ import { Modal, Radio, Button } from 'antd'
 import { IArticleCategory } from '@/typescript/article/interface'
 import { EArticleSaveType } from '@/typescript/article/enum'
 
+import { articleInsertApi } from '@/api/modules/article'
+
 interface IPreviewModal {
   isModalVisible: boolean
   articleCateList: IArticleCategory[]
@@ -18,12 +20,14 @@ const PreviewModalCom = (props: IPreviewModal) => {
   const [articleCateValue, setArticleCateValue] = useState(null)
   // 页面加载状态
   const [articleLoading, setArticleLoading] = useState(false)
+  // 提交按钮的禁用状态
+  const [articleConfirmDisabled, setArticleConfirmDisabled] = useState(true)
   const { isModalVisible, articleCateList, articleContent, articleTitle } =
     props
 
   /** 文章分类改变事件 */
   const changeArticleCate = e => {
-    console.log('radio checked', e.target.value)
+    setArticleConfirmDisabled(false)
     setArticleCateValue(e.target.value)
   }
 
@@ -37,6 +41,7 @@ const PreviewModalCom = (props: IPreviewModal) => {
         key="draft"
         type="primary"
         loading={articleLoading}
+        disabled={articleConfirmDisabled}
         onClick={() => handleConfirm(EArticleSaveType.draft)}
       >
         保存为草稿
@@ -45,6 +50,7 @@ const PreviewModalCom = (props: IPreviewModal) => {
         key="comfirm"
         type="primary"
         loading={articleLoading}
+        disabled={articleConfirmDisabled}
         onClick={() => handleConfirm(EArticleSaveType.comfirm)}
       >
         提交
@@ -55,19 +61,23 @@ const PreviewModalCom = (props: IPreviewModal) => {
   const handleCancel = () => {
     props.closeModal()
   }
-
   /** 保存为草稿 或者 提交 */
-  const handleConfirm = (type: EArticleSaveType) => {
+  const handleConfirm = async (type: EArticleSaveType) => {
     console.log(type, 'type')
-    setArticleLoading(true)
+    // const params = {
+    //   userId:
+    // }
+    // setArticleLoading(true)
+    // const data = await articleInsertApi(params)
+    // console.log(data)
   }
-
   return (
     <div className="preview-modal-box">
       <Modal
-        title="Basic Modal"
+        title="文章预览"
         visible={isModalVisible}
         width="60%"
+        onCancel={handleCancel}
         wrapClassName="modal-box"
         getContainer={() =>
           document.querySelector('.preview-modal-box') as HTMLElement
