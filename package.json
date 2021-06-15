@@ -8,6 +8,7 @@
     "@testing-library/user-event": "^7.2.1",
     "antd": "^4.5.2",
     "axios": "^0.20.0",
+    "crypto-js": "^4.0.0",
     "echarts": "^5.1.1",
     "express": "^4.17.1",
     "highlight.js": "^11.0.1",
@@ -50,6 +51,7 @@
     ]
   },
   "devDependencies": {
+    "@types/crypto-js": "^4.0.1",
     "@types/jest": "^26.0.23",
     "@types/node": "^15.6.1",
     "@types/react": "^17.0.8",
