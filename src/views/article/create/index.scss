@@ -22,16 +22,16 @@
       }
       // 文章内容显示
       .article-content {
+        margin: 12px 0;
         height: 550px;
-        padding: 12px;
+        padding: 8px;
         border: 1px solid #ccc;
         border-radius: 5px;
         overflow: auto;
       }
       // 文章分类选择
-      .article-categroy {
-        margin: 12px 0;
-      }
+      // .article-categroy {
+      // }
     }
   }
 }

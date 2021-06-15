@@ -6,7 +6,7 @@ import { UserOutlined, LockOutlined } from '@ant-design/icons'
 
 import './login.scss'
 import { loginApi } from '@/api/modules/user'
-import { setUserInfoStorage, setTokenCookies } from '@/utils/commonSave'
+import { setUserIdStorage, setTokenCookies } from '@/utils/commonSave'
 import { ILoginParams } from '@/typescript/user/interface'
 import { ResultCodeEnum } from '@/typescript/shared/enum'
 const LoginDom = () => {
@@ -21,7 +21,7 @@ const LoginDom = () => {
     console.log(data, 123)
     if (data.code === ResultCodeEnum.success) {
       message.success('登录成功')
-      setUserInfoStorage(data.data)
+      setUserIdStorage(data.data.id)
       setTokenCookies(`Bearer ${data.data.token}`)
       history.push('/')
     } else message.error(data.msg)

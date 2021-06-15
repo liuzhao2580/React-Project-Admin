@@ -54,6 +54,4 @@ export interface IArticleInsert {
   article_content: IArticleBasic['article_content']
   /** 文章类别 id */
   article_categoryId: IArticleBasic['article_categoryId']
-  /** 类别的父级 id */
-  category_parentId: IArticleBasic['category_parentId']
 }
