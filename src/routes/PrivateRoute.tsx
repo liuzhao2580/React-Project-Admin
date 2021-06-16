@@ -1,7 +1,7 @@
 import React, { useEffect } from 'react'
 import { Route, Redirect } from 'react-router-dom'
 import { connect } from 'react-redux'
-import { getTokenCookies } from '@/utils/commonSave'
+import { getTokenCookies, getUserIdStorage } from '@/utils/commonSave'
 import { getUserInfoApi } from '@/api/modules/user'
 import userActions from '@/store/modules/user/actions'
 
@@ -28,7 +28,7 @@ const PrivateRoute = ({
 const mapDispatchToProps = dispatch => {
   return {
     async getUserInfoDispatch() {
-      const data = await getUserInfoApi(1)
+      const data = await getUserInfoApi(getUserIdStorage())
       dispatch(
         (function () {
           return userActions.getUserInfo(data.data)
