@@ -3,7 +3,7 @@ import { EArticleStatus } from '../enum'
 /** 存储在数据库中的 文章的基本格式 */
 export interface IArticleBasic {
   /** 文章 id */
-  id?: string
+  id?: number
   /** 文章 名称 */
   article_title: string
   /** 内容 */
@@ -17,7 +17,7 @@ export interface IArticleBasic {
   /** 父级分类的名称 */
   category_parentName: string
   /** 创建者 id */
-  userId: string
+  userId: number
   /** 创建者 用户名 */
   userName: string
   /** 创建者 昵称 */
@@ -45,7 +45,7 @@ export interface IArticleCategory {
 /** 用户新增/编辑文章需要传递的数据 */
 export interface IArticleInsert {
   /** 文章id */
-  id?: string
+  id?: number
   /** 用户id */
   userId: IArticleBasic['userId']
   /** 文章标题 */

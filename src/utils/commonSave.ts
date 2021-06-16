@@ -27,5 +27,5 @@ export const setUserIdStorage = (userId: number) => {
   setStorage(USER_ID, userId, '1D')
 }
 /** 获取用户 id */
-export const getUserIdStorage = () => getStorage(USER_ID)
+export const getUserIdStorage = (): number => +getStorage(USER_ID)
 // -----------------------------------------------------localStorage--------------------------------------------------

@@ -1,10 +1,12 @@
 import React, { useState } from 'react'
 import { Modal, Radio, Button } from 'antd'
+import { connect } from 'react-redux'
 
 import { IArticleCategory } from '@/typescript/article/interface'
 import { EArticleSaveType } from '@/typescript/article/enum'
 
 import { articleInsertApi } from '@/api/modules/article'
+import { getUserIdStorage } from '@/utils/commonSave'
 
 interface IPreviewModal {
   isModalVisible: boolean
@@ -17,7 +19,7 @@ interface IPreviewModal {
 /** 编辑文章的预览 */
 const PreviewModalCom = (props: IPreviewModal) => {
   // 当前选中的 分类
-  const [articleCateValue, setArticleCateValue] = useState(null)
+  const [articleCateValue, setArticleCateValue] = useState<number | null>(null)
   // 页面加载状态
   const [articleLoading, setArticleLoading] = useState(false)
   // 提交按钮的禁用状态
@@ -64,12 +66,16 @@ const PreviewModalCom = (props: IPreviewModal) => {
   /** 保存为草稿 或者 提交 */
   const handleConfirm = async (type: EArticleSaveType) => {
     console.log(type, 'type')
-    // const params = {
-    //   userId:
-    // }
-    // setArticleLoading(true)
-    // const data = await articleInsertApi(params)
-    // console.log(data)
+    const params = {
+      userId: getUserIdStorage(),
+      article_title: articleTitle,
+      article_content: articleContent,
+      article_categoryId: articleCateValue as number
+    }
+    console.log(params, 'params')
+    setArticleLoading(true)
+    const data = await articleInsertApi(params)
+    console.log(data)
   }
   return (
     <div className="preview-modal-box">
@@ -105,4 +111,7 @@ const PreviewModalCom = (props: IPreviewModal) => {
     </div>
   )
 }
-export default PreviewModalCom
+
+/** 获取用户的基本信息 */
+
+export default connect()(PreviewModalCom)
