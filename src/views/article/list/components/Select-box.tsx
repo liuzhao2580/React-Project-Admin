@@ -1,8 +1,9 @@
 import React, { useState, useEffect } from 'react'
-import { Input, Row, Col, Cascader } from 'antd'
-
+import { Input, Row, Col, Cascader, DatePicker } from 'antd'
 import { getArticleCategoryApi } from '@/api/modules/article'
 import { ResultCodeEnum } from '@/typescript/shared/enum'
+
+const { RangePicker } = DatePicker
 /** 筛选条件 */
 const SelectBoxCom = () => {
   // 获取分类数据
@@ -51,7 +52,6 @@ const SelectBoxCom = () => {
       } else {
         targetOption.isLeaf = true
       }
-      console.log(data.data)
     }
     targetOption.loading = false
     setCategoryList([...articleCategroyList])
@@ -62,11 +62,11 @@ const SelectBoxCom = () => {
   }
   return (
     <Row gutter={12}>
-      <Col xs={2} sm={4}>
+      <Col xs={12} md={8} lg={6} xl={4}>
         <Input placeholder="请输入关键字" />
       </Col>
       {/* 文章分类 */}
-      <Col xs={2} sm={4}>
+      <Col xs={12} md={8} lg={6}>
         <Cascader
           options={articleCategroyList}
           placeholder="请选择文章分类"
@@ -75,6 +75,12 @@ const SelectBoxCom = () => {
           changeOnSelect
         />
       </Col>
+      {/* 时间选择器 */}
+      <Col>
+        <RangePicker />
+      </Col>
+      {/* 按钮 */}
+      <Col xs={2} sm={4}></Col>
     </Row>
   )
 }

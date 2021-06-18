@@ -2,7 +2,7 @@ import axios from 'axios'
 import { message } from 'antd'
 import { getTokenCookies, getCSRFTokenCookies } from '@/utils/commonSave'
 import { ResultCodeEnum } from '@/typescript/shared/enum'
-import { ResultModel } from '@/typescript/model'
+import { ResultModel } from '@/typescript/shared/model'
 const axiosConfig = axios.create({
   baseURL: '/proxy',
   timeout: 60000,

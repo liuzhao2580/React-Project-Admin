@@ -1,5 +1,5 @@
 import axios from '../axiosConfig'
-import { ResultModel } from '@/typescript/model'
+import { ResultModel } from '@/typescript/shared/model'
 import { IUserBaseInfo, ILoginParams } from '@/typescript/user/interface'
 /** 用户登录 */
 export const loginApi = (

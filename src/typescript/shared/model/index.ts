@@ -13,9 +13,19 @@ export class ResultModel<T> {
   /** 如果是列表 返回有分页页码 */
   public pageNum?: number
   /** 如果是列表 返回有分页每页条数 */
-  public size?: number
-  /** 如果是列表 返回有分页总页数 */
-  public totalCount?: number
-  /** 如果是列表 返回有分页总条数 */
-  public totalPage?: number
+  public pageSize?: number
+  /** 如果是列表 返回有数据总条数 */
+  public total?: number
+}
+
+/**
+ * 2.列表请求的参数
+ */
+export class ListRequestModel {
+  /** 当前页 */
+  pageNum: number = 1
+  /** 每页条数 */
+  pageSize: number = 10
+  /** 关键字 */
+  keyWord?: string
 }

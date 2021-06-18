@@ -1,6 +1,7 @@
 import React from 'react'
 import ReactDOM from 'react-dom'
 import { ConfigProvider } from 'antd'
+import zhCN from 'antd/lib/locale/zh_CN'
 import App from './App'
 import * as serviceWorker from './serviceWorker'
 
@@ -14,7 +15,7 @@ import '@/assets/styles/index.scss'
 
 ReactDOM.render(
   <Provider store={store}>
-    <ConfigProvider>
+    <ConfigProvider locale={zhCN}>
       <App />
     </ConfigProvider>
   </Provider>,

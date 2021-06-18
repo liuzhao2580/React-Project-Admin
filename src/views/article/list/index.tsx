@@ -1,5 +1,13 @@
 import React, { useState, useEffect, useCallback } from 'react'
-import { Table, Tag, Space, Button, Popconfirm, message } from 'antd'
+import {
+  Table,
+  Tag,
+  Space,
+  Button,
+  Popconfirm,
+  message,
+  Pagination
+} from 'antd'
 import {
   CloseOutlined,
   EditOutlined,
@@ -20,6 +28,7 @@ import { tranSpecifyType } from '@/utils'
 import { ResultCodeEnum } from '@/typescript/shared/enum'
 
 import SelectBoxCom from './components/Select-box'
+import { ListRequestModel } from '@/typescript/shared/model'
 
 const ArticleList: React.FC<any> = () => {
   const [tableData, setTableData] = useState<IArticleBasic[]>([])
@@ -29,7 +38,8 @@ const ArticleList: React.FC<any> = () => {
 
   /** 获取文章数据列表 */
   const initArticleList = async () => {
-    const data = await articleListApi()
+    const params = new ListRequestModel()
+    const data = await articleListApi(params)
     console.log(data.data)
     setTableData(data.data)
   }
@@ -158,6 +168,14 @@ const ArticleList: React.FC<any> = () => {
         pagination={false}
       />
       {/* 分页 */}
+      <div className="page-box">
+        <Pagination
+          total={85}
+          showSizeChanger
+          showQuickJumper
+          showTotal={total => `总数据 ${total}`}
+        />
+      </div>
     </div>
   )
 }
