@@ -20,3 +20,7 @@ export const getArticleCategoryApi = (params: {
 export const articleInsertApi = (
   params: IArticleInsert
 ): Promise<ResultModel<any>> => axios.post(`/article/insert`, params)
+
+/** 文章删除 */
+export const articleDeleteApi = (id: string): Promise<ResultModel<any>> =>
+  axios.delete(`/article/delete/${id}`)
