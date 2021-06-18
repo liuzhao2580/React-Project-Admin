@@ -40,13 +40,18 @@ const SelectBoxCom = () => {
     }
     const data = await getArticleCategoryApi(params)
     if (data.code === ResultCodeEnum.success) {
-      targetOption.children = data.data.map(item => {
-        return {
-          value: item.id,
-          label: item.category_name,
-          isLeaf: true
-        }
-      })
+      if (data.data.length) {
+        targetOption.children = data.data.map(item => {
+          return {
+            value: item.id,
+            label: item.category_name,
+            isLeaf: true
+          }
+        })
+      } else {
+        targetOption.isLeaf = true
+      }
+      console.log(data.data)
     }
     targetOption.loading = false
     setCategoryList([...articleCategroyList])
