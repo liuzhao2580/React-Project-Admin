@@ -13,9 +13,9 @@ export class ResultModel<T> {
   /** 如果是列表 返回有分页页码 */
   public pageNum?: number
   /** 如果是列表 返回有分页每页条数 */
-  public pageSize?: number
+  public pageSize!: number
   /** 如果是列表 返回有数据总条数 */
-  public total?: number
+  public total!: number
 }
 
 /**
@@ -28,4 +28,8 @@ export class ListRequestModel {
   pageSize: number = 10
   /** 关键字 */
   keyWord?: string
+  constructor(pageNum?, pageSize?) {
+    this.pageNum = pageNum
+    this.pageSize = pageSize
+  }
 }

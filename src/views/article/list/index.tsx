@@ -31,18 +31,31 @@ import SelectBoxCom from './components/Select-box'
 import { ListRequestModel } from '@/typescript/shared/model'
 
 const ArticleList: React.FC<any> = () => {
+  // 表格的数据
   const [tableData, setTableData] = useState<IArticleBasic[]>([])
+  // 数据总数
+  const [total, setTotal] = useState(0)
+  // 每页条数
+  const [pageSize, setPageSize] = useState(2)
+  // 当前页
+  const [pageNum, setPageNum] = useState(1)
+  /** 获取文章数据列表 */
+  const initArticleList = useCallback(() => {
+    ;(async function () {
+      /** 页码 */
+      const params: ListRequestModel = {
+        pageNum,
+        pageSize
+      }
+      const data = await articleListApi(params)
+      setTableData(data.data)
+      setTotal(data.total)
+    })()
+  }, [pageNum, pageSize])
+
   useEffect(() => {
     initArticleList()
-  }, [])
-
-  /** 获取文章数据列表 */
-  const initArticleList = async () => {
-    const params = new ListRequestModel()
-    const data = await articleListApi(params)
-    console.log(data.data)
-    setTableData(data.data)
-  }
+  }, [initArticleList])
 
   // 设置文章状态的 tag样式
   function statusTran(value: EArticleStatus) {
@@ -90,9 +103,8 @@ const ArticleList: React.FC<any> = () => {
         message.success('删除成功')
         initArticleList()
       }
-      console.log(data)
     },
-    []
+    [initArticleList]
   )
 
   const columns = [
@@ -152,6 +164,11 @@ const ArticleList: React.FC<any> = () => {
       )
     }
   ]
+  /** 页码或 pageSize 改变的回调*/
+  const onPageChange = useCallback((page, pageSize) => {
+    setPageNum(page)
+    setPageSize(pageSize)
+  }, [])
 
   return (
     <div className="article-list-box">
@@ -170,7 +187,10 @@ const ArticleList: React.FC<any> = () => {
       {/* 分页 */}
       <div className="page-box">
         <Pagination
-          total={85}
+          total={total}
+          pageSize={pageSize}
+          current={pageNum}
+          onChange={onPageChange}
           showSizeChanger
           showQuickJumper
           showTotal={total => `总数据 ${total}`}
