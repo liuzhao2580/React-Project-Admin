@@ -33,6 +33,8 @@ import { ListRequestModel } from '@/typescript/shared/model'
 const ArticleList: React.FC<any> = () => {
   // 表格的数据
   const [tableData, setTableData] = useState<IArticleBasic[]>([])
+  // 表格加载中
+  const [tableLoading, setTableLoading] = useState(false)
   // 数据总数
   const [total, setTotal] = useState(0)
   // 每页条数
@@ -42,6 +44,7 @@ const ArticleList: React.FC<any> = () => {
   /** 获取文章数据列表 */
   const initArticleList = useCallback(() => {
     ;(async function () {
+      setTableLoading(true)
       /** 页码 */
       const params: ListRequestModel = {
         pageNum,
@@ -50,6 +53,7 @@ const ArticleList: React.FC<any> = () => {
       const data = await articleListApi(params)
       setTableData(data.data)
       setTotal(data.total)
+      setTableLoading(false)
     })()
   }, [pageNum, pageSize])
 
@@ -180,6 +184,7 @@ const ArticleList: React.FC<any> = () => {
       <Table
         rowKey="id"
         bordered
+        loading={tableLoading}
         columns={columns}
         dataSource={tableData}
         pagination={false}
