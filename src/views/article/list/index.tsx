@@ -38,7 +38,7 @@ const ArticleList: React.FC<any> = () => {
   // 数据总数
   const [total, setTotal] = useState(0)
   // 每页条数
-  const [pageSize, setPageSize] = useState(2)
+  const [pageSize, setPageSize] = useState(10)
   // 当前页
   const [pageNum, setPageNum] = useState(1)
   /** 获取文章数据列表 */
@@ -115,11 +115,21 @@ const ArticleList: React.FC<any> = () => {
     {
       title: '序号',
       detaIndex: 'index',
-      render: (text, record, index) => index + 1
+      render: (text, record, index) => {
+        return pageSize * (pageNum - 1) + index + 1
+      }
     },
     {
       title: '文章标题',
       dataIndex: 'article_title'
+    },
+    {
+      title: '一级分类',
+      dataIndex: 'category_parentName'
+    },
+    {
+      title: '二级分类',
+      dataIndex: 'category_name'
     },
     {
       title: '创建时间',

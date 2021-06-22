@@ -1,5 +1,5 @@
 import React, { useState } from 'react'
-import { Modal, Radio, Button } from 'antd'
+import { Modal, Radio, Button, message } from 'antd'
 import { connect } from 'react-redux'
 
 import { IArticleCategory } from '@/typescript/article/interface'
@@ -7,6 +7,7 @@ import { EArticleSaveType } from '@/typescript/article/enum'
 
 import { articleInsertApi } from '@/api/modules/article'
 import { getUserIdStorage } from '@/utils/commonSave'
+import { ResultCodeEnum } from '@/typescript/shared/enum'
 
 interface IPreviewModal {
   isModalVisible: boolean
@@ -69,13 +70,19 @@ const PreviewModalCom = (props: IPreviewModal) => {
     const params = {
       userId: getUserIdStorage(),
       article_title: articleTitle,
-      article_content: articleContent,
-      article_categoryId: articleCateValue as number
+      article_content: articleContent.toString(),
+      article_categoryId: articleCateValue as number,
+      status: type
     }
     console.log(params, 'params')
     setArticleLoading(true)
     const data = await articleInsertApi(params)
     console.log(data)
+    if (data.code === ResultCodeEnum.success) {
+      message.success('新增成功')
+      handleCancel()
+    }
+    setArticleLoading(false)
   }
   return (
     <div className="preview-modal-box">

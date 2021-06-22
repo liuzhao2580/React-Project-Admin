@@ -25,7 +25,6 @@ const SelectBoxCom = () => {
         }
       }
     }
-    console.log(arr)
     return arr
   })
   useEffect(() => {
@@ -105,13 +104,13 @@ const SelectBoxCom = () => {
         />
       </Col>
       {/* 时间选择器 */}
-      <Col xs={12} md={6} lg={6} xl={4}>
+      <Col xs={12} md={6} lg={6} xl={6}>
         <RangePicker style={{ width: '100%' }} />
       </Col>
       {/* 按钮 */}
       <Col xs={12} md={6} lg={6} xl={4}>
         <Button type="primary" style={{ marginRight: '10px' }}>
-          确定
+          查询
         </Button>
         <Button type="primary">重置</Button>
       </Col>
