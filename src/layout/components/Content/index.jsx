@@ -1,6 +1,5 @@
 import React from 'react'
 import { Layout } from 'antd'
-import './index.scss'
 import Routes from '@/routes'
 const { Content } = Layout
 const ContentDom = () => {

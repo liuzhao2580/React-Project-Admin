@@ -1,6 +1,5 @@
 import React from 'react'
 import { connect } from 'react-redux'
-import './index.scss'
 import { Layout } from 'antd'
 import { MenuUnfoldOutlined, MenuFoldOutlined } from '@ant-design/icons'
 import appActions from '@/store/modules/app/actions'

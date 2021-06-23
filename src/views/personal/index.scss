@@ -1,3 +1,21 @@
 .personal-page-box {
   font-size: 16px;
+  background-color: pink;
+  .header-box {
+    margin-top: 40px;
+    display: flex;
+    align-items: center;
+    flex-direction: column;
+    .avatar-box {
+      display: inline-block;
+      width: 100px;
+      height: 100px;
+      border-radius: 50%;
+      border: 5px solid #fff;
+    }
+    .nick-name {
+      margin-top: 10px;
+      font-size: 24px;
+    }
+  }
 }

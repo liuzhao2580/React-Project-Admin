@@ -1,5 +1,61 @@
 .layout-box {
-  .site-layout {
-    height: 100%;
+  .sider-box {
+    max-height: 100%;
+    overflow: auto;
+  }
+  height: 100%;
+  .header-box {
+    display: flex;
+    background-color: #fff;
+    position: relative;
+    font-size: 16px;
+    .trigger {
+      margin: 0 20px;
+      cursor: pointer;
+    }
+    .breadcrumb-box {
+      line-height: inherit;
+    }
+    // 右上角的个人
+    .personal-box {
+      position: absolute;
+      right: 10px;
+      .personal-dropdown {
+        cursor: pointer;
+        .personal-img {
+          width: 50px;
+          height: 50px;
+        }
+      }
+    }
+  }
+  .content-box {
+    margin-top: 8px;
+    margin-left: 8px;
+    padding: 10px;
+    background-color: #fff;
+    max-height: calc(100vh - 64px - 20px);
+    overflow: hidden;
+    overflow-y: auto;
+  }
+
+  // 设置 面包屑的动画效果
+  .breadrumb-animate-enter {
+    opacity: 0;
+    transform: translateY(-20px);
+  }
+  .breadrumb-animate-enter-active {
+    opacity: 1;
+    transform: translateY(0);
+    transition: all 0.3s;
+  }
+  .breadrumb-animate-exit {
+    opacity: 1;
+    transform: translateY(0);
+  }
+  .breadrumb-animate-exit-active {
+    opacity: 0;
+    transform: translateY(-20px);
+    transition: all 0.3s;
   }
 }

@@ -4,7 +4,6 @@ import { connect } from 'react-redux'
 import { Layout, Menu } from 'antd'
 
 import { constRoutes } from '@/routes/routerConfig'
-import './index.scss'
 const { Sider } = Layout
 const { SubMenu } = Menu
 const SideBar = ({ sideStatus }) => {
