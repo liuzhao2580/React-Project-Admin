@@ -1,11 +1,13 @@
 .personal-page-box {
   font-size: 16px;
-  background-color: pink;
+  height: 100%;
+  background-size: cover;
+  // 头部
   .header-box {
-    margin-top: 40px;
     display: flex;
     align-items: center;
     flex-direction: column;
+    background-color: transparent;
     .avatar-box {
       display: inline-block;
       width: 100px;

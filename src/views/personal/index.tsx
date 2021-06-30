@@ -8,7 +8,10 @@ const PersonalPage = ({ userInfo }) => {
     console.log(userInfo)
   }, [userInfo])
   return (
-    <div className="personal-page-box">
+    <div
+      className="personal-page-box"
+      style={{ backgroundImage: `url(${userInfo && userInfo.avatar})` }}
+    >
       {userInfo && (
         <header className="header-box">
           <img src={userInfo.avatar} alt="" className="avatar-box" />
