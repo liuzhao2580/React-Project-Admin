@@ -8,17 +8,19 @@ const PersonalPage = ({ userInfo }) => {
     console.log(userInfo)
   }, [userInfo])
   return (
-    <div
-      className="personal-page-box"
-      style={{ backgroundImage: `url(${userInfo && userInfo.avatar})` }}
-    >
+    <>
       {userInfo && (
-        <header className="header-box">
-          <img src={userInfo.avatar} alt="" className="avatar-box" />
-          <p className="nick-name">{userInfo.nickName}</p>
-        </header>
+        <div
+          className="personal-page-box"
+          style={{ backgroundImage: `url(${userInfo.avatar})` }}
+        >
+          <header className="header-box">
+            <img src={userInfo.avatar} alt="" className="avatar-box" />
+            <p className="nick-name">{userInfo.nickName}</p>
+          </header>
+        </div>
       )}
-    </div>
+    </>
   )
 }
 
