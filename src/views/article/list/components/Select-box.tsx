@@ -41,7 +41,7 @@ const SelectBoxCom = () => {
       const getOptionList = data.data.map(item => {
         return {
           value: item.id,
-          label: item.category_name,
+          label: item.category,
           isLeaf: false
         }
       })
@@ -63,7 +63,7 @@ const SelectBoxCom = () => {
         targetOption.children = data.data.map(item => {
           return {
             value: item.id,
-            label: item.category_name,
+            label: item.category,
             isLeaf: true
           }
         })

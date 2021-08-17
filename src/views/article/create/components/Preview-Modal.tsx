@@ -109,7 +109,7 @@ const PreviewModalCom = (props: IPreviewModal) => {
           <Radio.Group onChange={changeArticleCate} value={articleCateValue}>
             {articleCateList.map((item, index) => (
               <Radio value={item.id} key={item.id}>
-                {item.category_name}
+                {item.category}
               </Radio>
             ))}
           </Radio.Group>
