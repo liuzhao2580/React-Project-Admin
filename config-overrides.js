@@ -3,7 +3,6 @@ const {
   fixBabelImports,
   addWebpackAlias,
   overrideDevServer,
-  addPostcssPlugins,
   addWebpackResolve,
   adjustStyleLoaders
 } = require('customize-cra')
@@ -52,13 +51,13 @@ module.exports = {
     })
   ),
   devServer: overrideDevServer(config => {
-    config.proxy = {
-      '/proxy/': {
-        target: 'http://127.0.0.1:7001/v1/api',
-        changeOrigin: true,
-        pathRewrite: { '^/proxy': '/' }
-      }
-    }
+    // config.proxy = {
+    //   '/proxy/': {
+    //     target: 'http://127.0.0.1:7001/v1/api',
+    //     changeOrigin: true,
+    //     pathRewrite: { '^/proxy': '/' }
+    //   }
+    // }
     return config
   })
 }

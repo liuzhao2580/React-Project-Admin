@@ -15,6 +15,8 @@ const axiosConfig = axios.create({
 axiosConfig.interceptors.request.use(config => {
   config.headers.Authorization = getTokenCookies()
   config.headers['x-csrf-token'] = getCSRFTokenCookies()
+  // 说明是使用 uniapp 的 uniCloud 发送请求
+  config.headers.isunicloud = true
   return config
 })
 
