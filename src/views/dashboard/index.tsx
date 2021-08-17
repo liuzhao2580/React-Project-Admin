@@ -7,7 +7,6 @@ import Echarts from '@/components/EchartsCom'
 import { LineOptions } from '@/utils/echarts-utils'
 const HomeDom = () => {
   const lineEchartsOptions = LineOptions()
-  console.log('index')
   return (
     <div>
       {/* 头部分块 */}

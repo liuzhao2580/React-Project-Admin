@@ -1,16 +1,14 @@
 import React from 'react'
+import {connect} from "react-redux"
 import { Menu, Dropdown } from 'antd'
 import { DownOutlined, UserOutlined, ExportOutlined } from '@ant-design/icons'
 import { useHistory } from 'react-router-dom'
 
-// 静态图片
-import personalImg from '@/assets/images/funny.png'
 /** 右上角的个人 */
-const Personal = () => {
+const Personal = ({userInfo}) => {
   const history = useHistory()
   // 点击 菜单项
   const menuClick = e => {
-    console.log(e)
     const { key } = e
     switch (key) {
       // 个人中心
@@ -47,8 +45,8 @@ const Personal = () => {
     <div className="personal-box">
       <Dropdown overlay={menu} trigger={['click']}>
         <div className="personal-dropdown">
-          <span className="personal-name">HI 123</span>
-          <img className="personal-img" src={personalImg} alt="" />
+          <span className="personal-name">Hi~ { userInfo.nickName }</span>
+          <img className="personal-img" src={userInfo.avatar} alt="" />
           <DownOutlined />
         </div>
       </Dropdown>
@@ -56,4 +54,11 @@ const Personal = () => {
   )
 }
 
-export default Personal
+const mapUserInfoStateToProps = (state)=> {
+  return {
+    userInfo: state.user.userInfo
+  }
+}
+
+
+export default connect(mapUserInfoStateToProps)(Personal)
