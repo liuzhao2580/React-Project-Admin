@@ -8,23 +8,21 @@ import './login.scss'
 import { loginApi } from '@/api/modules/user'
 import { setUserIdStorage, setTokenCookies } from '@/utils/commonSave'
 import { ILoginParams } from '@/typescript/user/interface'
-import { ResultCodeEnum } from '@/typescript/shared/enum'
 const LoginDom = () => {
   const history = useHistory()
   let [loginForm] = useState({ userName: 'liuzhao', password: 123456 })
+
+  /** 登录请求 */
   const onFinish = async values => {
     const params: ILoginParams = {
       userName: values.userName,
       password: values.password
     }
-    const data = await loginApi(params)
-    console.log(data, 123)
-    if (data.code === ResultCodeEnum.success) {
-      message.success('登录成功')
-      setUserIdStorage(data.data.id)
-      setTokenCookies(`Bearer ${data.data.token}`)
-      history.push('/')
-    } else message.error(data.msg)
+    const { data } = await loginApi(params)
+    message.success('登录成功')
+    setUserIdStorage(data._id)
+    setTokenCookies(`Bearer ${data.token}`)
+    history.push('/')
   }
   return (
     <Form

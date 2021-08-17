@@ -3,8 +3,10 @@ import { message } from 'antd'
 import { getTokenCookies, getCSRFTokenCookies } from '@/utils/commonSave'
 import { ResultCodeEnum } from '@/typescript/shared/enum'
 import { ResultModel } from '@/typescript/shared/model'
+/** 使用 unicloud 的 请求地址 */
+const baseURL = 'https://50f2e90e-f860-4396-bbc7-b912e93fa987.bspapp.com'
 const axiosConfig = axios.create({
-  baseURL: '/proxy',
+  baseURL,
   timeout: 60000,
   headers: {
     'X-Custom-Header': 'foobar'
@@ -25,14 +27,23 @@ axiosConfig.interceptors.response.use(
   response => {
     const { status } = response
     const data: ResultModel<any> = response.data
-    // 说明是成功的请求
-    if (status === 200) {
-      if (data.code !== ResultCodeEnum.success)
-        message.error('请求失败：' + data.msg || '未知错误')
-    }
-    // 说明是失败的请求
-    else message.error('请求失败：' + data.msg || '未知错误')
-    return response.data
+
+    return new Promise((resolve, reject) => {
+      const errorMsg = '请求失败：' + data.msg || '未知错误'
+      // 说明是成功的请求
+      if (status === 200) {
+        if (data.code !== ResultCodeEnum.success) {
+          message.error(errorMsg)
+        } else {
+          resolve(response.data)
+        }
+      }
+      // 说明是失败的请求
+      else {
+        message.error(errorMsg)
+        reject(errorMsg)
+      }
+    })
   },
   error => {
     message.error('请求出错：' + error)
