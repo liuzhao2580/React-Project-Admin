@@ -20,7 +20,7 @@ interface IPreviewModal {
 /** 编辑文章的预览 */
 const PreviewModalCom = (props: IPreviewModal) => {
   // 当前选中的 分类
-  const [articleCateValue, setArticleCateValue] = useState<number | null>(null)
+  const [articleCateValue, setArticleCateValue] = useState<string>("")
   // 页面加载状态
   const [articleLoading, setArticleLoading] = useState(false)
   // 提交按钮的禁用状态
@@ -71,7 +71,7 @@ const PreviewModalCom = (props: IPreviewModal) => {
       userId: getUserIdStorage(),
       article_title: articleTitle,
       article_content: articleContent.toString(),
-      article_categoryId: articleCateValue as number,
+      article_categoryId: articleCateValue,
       status: type
     }
     console.log(params, 'params')

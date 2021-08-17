@@ -7,5 +7,5 @@ export const loginApi = (
 ): Promise<ResultModel<IUserBaseInfo>> => axios.post('user/login', params)
 
 /** 获取用户的信息 */
-export const getUserInfoApi = (id: number | string) =>
-  axios.get(`/userInfo/${id}`)
+export const getUserInfoApi = (id: string) =>
+  axios.get(`user/userInfo`,{params: {id}})

@@ -9,7 +9,7 @@ export interface IArticleBasic {
   /** 内容 */
   article_content: string
   /** 文章分类 id */
-  article_categoryId: number
+  article_categoryId: string
   /** 分类名称 */
   category_name: string
   /** 父级分类的id */
@@ -17,7 +17,7 @@ export interface IArticleBasic {
   /** 父级分类的名称 */
   category_parentName: string
   /** 创建者 id */
-  creator_id: number
+  creator_id: string
   /** 创建时间 */
   article_time: Date
   /** 文章的状态 */

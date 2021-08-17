@@ -2,7 +2,6 @@ import React, { useState, useEffect, useCallback } from 'react'
 import * as Echarts from 'echarts'
 
 const EchartsCom = prop => {
-  console.log(prop, 'prop')
   /** 设置 echarts的id */
   let echartId =
     'echartId-' + new Date().getTime() + Math.floor(Math.random() * 10000)

@@ -28,10 +28,10 @@ const PrivateRoute = ({
 const mapDispatchToProps = dispatch => {
   return {
     async getUserInfoDispatch() {
-      const data = await getUserInfoApi(getUserIdStorage())
+      const { data } = await getUserInfoApi(getUserIdStorage())
       dispatch(
         (function () {
-          return userActions.getUserInfo(data.data)
+          return userActions.getUserInfo(data)
         })()
       )
     }
