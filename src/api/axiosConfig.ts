@@ -34,6 +34,7 @@ axiosConfig.interceptors.response.use(
       if (status === 200) {
         if (data.code !== ResultCodeEnum.success) {
           message.error(errorMsg)
+          reject(errorMsg)
         } else {
           resolve(response.data)
         }

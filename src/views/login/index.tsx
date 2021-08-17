@@ -11,18 +11,24 @@ import { ILoginParams } from '@/typescript/user/interface'
 const LoginDom = () => {
   const history = useHistory()
   let [loginForm] = useState({ userName: 'liuzhao', password: 123456 })
+  let [loading, setLoading] = useState(false)
 
   /** 登录请求 */
   const onFinish = async values => {
+    setLoading(true)
     const params: ILoginParams = {
       userName: values.userName,
       password: values.password
     }
-    const { data } = await loginApi(params)
-    message.success('登录成功')
-    setUserIdStorage(data._id)
-    setTokenCookies(`Bearer ${data.token}`)
-    history.push('/')
+    try {
+      const { data } = await loginApi(params)
+      message.success('登录成功')
+      setUserIdStorage(data._id)
+      setTokenCookies(`Bearer ${data.token}`)
+      history.push('/')
+    } finally {
+      setLoading(false)
+    }
   }
   return (
     <Form
@@ -58,7 +64,12 @@ const LoginDom = () => {
       </Form.Item>
 
       <Form.Item wrapperCol={{ span: 24 }}>
-        <Button type="primary" htmlType="submit" className="login-form-button">
+        <Button
+          type="primary"
+          htmlType="submit"
+          className="login-form-button"
+          loading={loading}
+        >
           登录
         </Button>
       </Form.Item>
