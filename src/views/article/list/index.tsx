@@ -192,7 +192,7 @@ const ArticleList: React.FC<any> = () => {
       </div>
       {/* 表格 */}
       <Table
-        rowKey="id"
+        rowKey="_id"
         bordered
         loading={tableLoading}
         columns={columns}

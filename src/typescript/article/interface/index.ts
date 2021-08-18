@@ -17,7 +17,7 @@ export interface IArticleBasic {
   /** 父级分类的名称 */
   category_parentName: string
   /** 创建者 id */
-  creator_id: string
+  user_id: string
   /** 创建时间 */
   article_time: Date
   /** 文章的状态 */
@@ -41,7 +41,7 @@ export interface IArticleInsert {
   /** 文章id */
   id?: number
   /** 用户id */
-  user_id: IArticleBasic['creator_id']
+  user_id: IArticleBasic['user_id']
   /** 文章标题 */
   article_title: IArticleBasic['article_title']
   /** 文章内容 */

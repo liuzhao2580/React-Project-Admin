@@ -83,12 +83,15 @@ const PreviewModalCom = (props: IPreviewModal) => {
       status: type
     }
     setArticleLoading(true)
-    const data = await articleInsertApi(params)
-    if (data.code === ResultCodeEnum.success) {
-      message.success('新增成功')
-      handleCancel()
+    try {
+      const data = await articleInsertApi(params)
+      if (data.code === ResultCodeEnum.success) {
+        message.success('新增成功')
+        handleCancel()
+      }
+    } finally {
+      setArticleLoading(false)
     }
-    setArticleLoading(false)
   }
 
   return (
