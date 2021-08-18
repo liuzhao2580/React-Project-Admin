@@ -20,7 +20,7 @@ interface IPreviewModal {
 /** 编辑文章的预览 */
 const PreviewModalCom = (props: IPreviewModal) => {
   // 当前选中的 分类
-  const [articleCateValue, setArticleCateValue] = useState<string>("")
+  const [articleCateValue, setArticleCateValue] = useState<string>('')
   // 页面加载状态
   const [articleLoading, setArticleLoading] = useState(false)
   // 提交按钮的禁用状态
@@ -60,30 +60,37 @@ const PreviewModalCom = (props: IPreviewModal) => {
       </Button>
     ]
   }
+
   /** 关闭 modal 弹出框 */
   const handleCancel = () => {
     props.closeModal()
   }
+
   /** 保存为草稿 或者 提交 */
   const handleConfirm = async (type: EArticleSaveType) => {
-    console.log(type, 'type')
+    // 用来获取 分类的中文名称
+    const getFindCategory = articleCateList.find(
+      item => item.id === articleCateValue
+    )
+    let category_name: string = ''
+    if (getFindCategory) category_name = getFindCategory.category
     const params = {
-      userId: getUserIdStorage(),
+      user_id: getUserIdStorage(),
       article_title: articleTitle,
       article_content: articleContent.toString(),
       article_categoryId: articleCateValue,
+      category_name,
       status: type
     }
-    console.log(params, 'params')
     setArticleLoading(true)
     const data = await articleInsertApi(params)
-    console.log(data)
     if (data.code === ResultCodeEnum.success) {
       message.success('新增成功')
       handleCancel()
     }
     setArticleLoading(false)
   }
+
   return (
     <div className="preview-modal-box">
       <Modal

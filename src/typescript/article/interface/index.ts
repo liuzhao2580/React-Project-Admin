@@ -41,7 +41,7 @@ export interface IArticleInsert {
   /** 文章id */
   id?: number
   /** 用户id */
-  userId: IArticleBasic['creator_id']
+  user_id: IArticleBasic['creator_id']
   /** 文章标题 */
   article_title: IArticleBasic['article_title']
   /** 文章内容 */
