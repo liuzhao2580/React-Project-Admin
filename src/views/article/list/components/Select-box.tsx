@@ -52,7 +52,6 @@ const SelectBoxCom = () => {
   const loadArticleData = async selectedOptions => {
     const targetOption = selectedOptions[selectedOptions.length - 1]
     targetOption.loading = true
-    console.log(targetOption)
     const params = {
       level: 2,
       id: targetOption.value
