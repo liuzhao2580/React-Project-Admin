@@ -23,6 +23,7 @@ const EchartsCom = prop => {
   const windowResizeEcharts = () => {
     if (myChart) myChart.resize()
   }
+  /** 每次都用来再次初始化 echarts */
   const getU = useCallback(initEcharts, [echartDom])
   useEffect(() => {
     getU()
