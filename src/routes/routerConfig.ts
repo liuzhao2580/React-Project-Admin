@@ -4,7 +4,7 @@ import {
   DatabaseOutlined,
   DiffOutlined,
   FileAddOutlined,
-  GroupOutlined
+  GroupOutlined,
 } from '@ant-design/icons'
 
 import { IRouterList } from '@/typescript/router/interface'
@@ -30,11 +30,13 @@ export const constRoutes: Array<IRouterList> = [
     meta: { hidden: true, title: '个人中心' },
     component: Personal
   },
+  // 文档页面
   {
     path: '/document',
     meta: { icon: FileTextOutlined, title: '文档' },
     component: Document
   },
+  // 文章
   {
     path: '/article',
     redirect: '/article/list',
@@ -52,6 +54,7 @@ export const constRoutes: Array<IRouterList> = [
       }
     ]
   },
+  // 多级菜单
   {
     path: '/multilevel-menu',
     redirect: '/multilevel-menu/first-menu',
@@ -59,17 +62,17 @@ export const constRoutes: Array<IRouterList> = [
     children: [
       {
         path: '/multilevel-menu/first-menu',
-        meta: { icon: DiffOutlined, title: '一级菜单' },
+        meta: { icon: 'icon-sishi', title: '一级菜单' },
         component: FirstMenu
       },
       {
         path: '/multilevel-menu/first-one-menu',
         redirect: '/multilevel-menu/first-one-menu/third-menu',
-        meta: { icon: FileAddOutlined, title: '二级菜单' },
+        meta: { icon: 'icon-jinganglang', title: '二级菜单' },
         children: [
           {
             path: '/multilevel-menu/first-one-menu/third-menu',
-            meta: { icon: FileAddOutlined, title: '三级菜单' },
+            meta: { icon: 'icon-zhizhuxia', title: '三级菜单' },
             component: SecondMenu
           },
           {

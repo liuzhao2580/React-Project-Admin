@@ -1,4 +1,4 @@
-import { ComponentType } from 'react'
+import { FC } from 'react'
 /** 路由 */
 export interface IRouterList {
   /** 路由的地址 */
@@ -8,7 +8,7 @@ export interface IRouterList {
   /** 路由的元数据 */
   meta?: IMeta
   /** 路由组件 */
-  component?: ComponentType
+  component?: FC
   /** 子路由 */
   children?: Array<IRouterList>
 }
@@ -26,5 +26,5 @@ export interface IMeta {
   /** 侧边栏的名称 */
   title: string
   /** 侧边栏的图标 */
-  icon?: ComponentType
+  icon?: FC | String
 }

@@ -3,6 +3,7 @@ import { useHistory, withRouter } from 'react-router-dom'
 import { connect } from 'react-redux'
 import { Layout, Menu } from 'antd'
 
+import CustomIconCom from '@/components/CustomIcon'
 import { constRoutes } from '@/routes/routerConfig'
 const { Sider } = Layout
 const { SubMenu } = Menu
@@ -30,7 +31,7 @@ const SideBar = ({ sideStatus }) => {
       if (!item.meta.hidden) {
         if (!item.children) {
           return (
-            <Menu.Item key={item.path} icon={<item.meta.icon />}>
+            <Menu.Item key={item.path} icon={handleIcon(item)}>
               {item.meta.title}
             </Menu.Item>
           )
@@ -38,7 +39,7 @@ const SideBar = ({ sideStatus }) => {
           return (
             <SubMenu
               key={item.path}
-              icon={<item.meta.icon />}
+              icon={handleIcon(item)}
               title={item.meta.title}
             >
               {getMenu(item.children)}
@@ -47,6 +48,17 @@ const SideBar = ({ sideStatus }) => {
         }
       }
     })
+  }
+  /** 处理侧边栏图标 */
+  const handleIcon = (item)=> {
+    if(typeof item.meta.icon === 'string') {
+      return <CustomIconCom iconPath={item.meta.icon}/>
+    }
+    else {
+      return <item.meta.icon />
+    }
+    // return <iconCom />
+    
   }
   // 点击侧边栏跳转
   let MenuClick = ({ key }) => {

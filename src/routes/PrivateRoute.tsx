@@ -13,8 +13,7 @@ const PrivateRoute = ({
 }) => {
   useEffect(() => {
     getUserInfoDispatch()
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [])
+  }, [getUserInfoDispatch])
   return (
     <Route
       {...rest}
