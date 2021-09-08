@@ -10,6 +10,8 @@ import store from './store'
 
 // 导入全局样式
 import '@/assets/styles/index.scss'
+// 引入 svg 的字体图标
+import "@/assets/styles/iconfont-svg"
 // 引入 rem布局
 // import '@/utils/flexible.js'
 
