@@ -10,8 +10,7 @@ export default () => {
             key={router.path}
             path={router.path}
             exact={router.meta && router.meta.exact}
-            // @ts-ignore
-            render={() => <router.component />}
+            component={router.component}
           ></Route>
         )
       } else {

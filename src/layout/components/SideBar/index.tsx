@@ -1,5 +1,5 @@
-import React, { useState, useMemo } from 'react'
-import { useHistory, withRouter } from 'react-router-dom'
+import React, { useState, useMemo, FC } from 'react'
+import { useHistory, withRouter, RouteComponentProps } from 'react-router-dom'
 import { connect } from 'react-redux'
 import { Layout, Menu } from 'antd'
 
@@ -7,13 +7,18 @@ import CustomIconCom from '@/components/CustomIcon'
 import { constRoutes } from '@/routes/routerConfig'
 const { Sider } = Layout
 const { SubMenu } = Menu
-const SideBar = ({ sideStatus }) => {
+
+interface ISideBar extends RouteComponentProps {
+  sideStatus?: boolean
+}
+
+const SideBar: FC<ISideBar> = ({ sideStatus }) => {
   const history = useHistory()
   // 默认选择的侧边栏 当前选中的菜单项 key 数组
   let [selectedKeys, setSelectenMenu] = useState(['/dashboard'])
 
   // 初始展开的 SubMenu 菜单项 key 数组
-  let [defaultOpenKeys, setDefaultOpenKeys] = useState([])
+  let [defaultOpenKeys, setDefaultOpenKeys] = useState<Array<any>>([])
 
   useMemo(() => {
     const { pathname } = history.location
@@ -26,40 +31,43 @@ const SideBar = ({ sideStatus }) => {
 
   // 获取动态的侧边栏
   const getMenu = (routerArr = constRoutes) => {
-    // eslint-disable-next-line array-callback-return
-    return routerArr.map(item => {
-      if (!item.meta.hidden) {
-        if (!item.children) {
-          return (
-            <Menu.Item key={item.path} icon={handleIcon(item)}>
-              {item.meta.title}
-            </Menu.Item>
-          )
-        } else if (item.children) {
-          return (
-            <SubMenu
-              key={item.path}
-              icon={handleIcon(item)}
-              title={item.meta.title}
-            >
-              {getMenu(item.children)}
-            </SubMenu>
-          )
+    let getMenuList: any = []
+    for (let index = 0; index < routerArr.length; index++) {
+      const element = routerArr[index]
+      if (element.meta) {
+        if (!element.meta.hidden) {
+          if (!element.children) {
+            getMenuList.push(
+              <Menu.Item key={element.path} icon={handleIcon(element)}>
+                {element.meta.title}
+              </Menu.Item>
+            )
+          } else if (element.children) {
+            getMenuList.push(
+              <SubMenu
+                key={element.path}
+                icon={handleIcon(element)}
+                title={element.meta.title}
+              >
+                {getMenu(element.children)}
+              </SubMenu>
+            )
+          }
         }
       }
-    })
+    }
+    return getMenuList
   }
   /** 处理侧边栏图标 */
-  const handleIcon = (item)=> {
-    if(typeof item.meta.icon === 'string') {
-      return <CustomIconCom iconPath={item.meta.icon}/>
-    }
-    else {
+  const handleIcon = item => {
+    if (typeof item.meta.icon === 'string') {
+      return <CustomIconCom iconPath={item.meta.icon} />
+    } else {
       return <item.meta.icon />
     }
     // return <iconCom />
-    
   }
+  getMenu()
   // 点击侧边栏跳转
   let MenuClick = ({ key }) => {
     history.push(key)
