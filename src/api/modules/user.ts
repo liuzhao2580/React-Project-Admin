@@ -8,4 +8,4 @@ export const loginApi = (
 
 /** 获取用户的信息 */
 export const getUserInfoApi = (id: string) =>
-  axios.get(`user/userInfo`,{params: {id}})
+  axios.get(`hello`,{params: {id}})

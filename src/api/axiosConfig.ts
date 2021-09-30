@@ -4,10 +4,10 @@ import { getTokenCookies, getCSRFTokenCookies } from '@/utils/commonSave'
 import { ResultCodeEnum } from '@/typescript/shared/enum'
 import { ResultModel } from '@/typescript/shared/model'
 /** 使用 unicloud 的 请求地址 */
-const baseURL = 'https://50f2e90e-f860-4396-bbc7-b912e93fa987.bspapp.com'
+// const baseURL = 'https://50f2e90e-f860-4396-bbc7-b912e93fa987.bspapp.com'
 const axiosConfig = axios.create({
-  baseURL,
-  timeout: 60000,
+  // baseURL,
+  timeout: 20000,
   headers: {
     'X-Custom-Header': 'foobar'
   }
@@ -18,7 +18,7 @@ axiosConfig.interceptors.request.use(config => {
   config.headers.Authorization = getTokenCookies()
   config.headers['x-csrf-token'] = getCSRFTokenCookies()
   // 说明是使用 uniapp 的 uniCloud 发送请求
-  config.headers.isunicloud = true
+  // config.headers.isunicloud = true
   return config
 })
 
