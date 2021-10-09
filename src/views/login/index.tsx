@@ -6,7 +6,7 @@ import { UserOutlined, LockOutlined } from '@ant-design/icons'
 
 import './login.scss'
 import { loginApi } from '@/api/modules/user'
-import { setUserIdStorage, setTokenCookies } from '@/utils/commonSave'
+import { setUserIdStorage, setToken } from '@/utils/commonSave'
 import { ILoginParams } from '@/typescript/user/interface'
 const LoginDom = () => {
   const history = useHistory()
@@ -23,8 +23,8 @@ const LoginDom = () => {
     try {
       const { data } = await loginApi(params)
       message.success('登录成功')
-      setUserIdStorage(data._id)
-      setTokenCookies(`Bearer ${data.token}`)
+      setUserIdStorage(data.id)
+      setToken(`Bearer ${data.token}`)
       history.push('/')
     } finally {
       setLoading(false)

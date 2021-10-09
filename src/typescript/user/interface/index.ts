@@ -1,21 +1,21 @@
 /** 1. 用户基本信息的接口 */
 export interface IUserBaseInfo {
   /** 用户 id */
-  _id: number
-  /** 用户的权限 */
-  roleId?: number
-  /** 当前权限的中文说明 */
-  roleName?: string
+  id: number
   /** 用户名 */
   userName: string
-  /** 密码 */
-  password?: string
   /** 昵称 */
   nickName?: string
+  /** 用户的权限 */
+  roleId: number
+  /** 头像 */
+  avatar: string
+  /** 手机号 */
+  phone?: string
+  /** 邮箱 */
+  email?: string
   /** token */
   token?: string
-  /** 头像 */
-  avatar?: string
 }
 
 /** 用户登录 */

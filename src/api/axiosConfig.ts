@@ -1,6 +1,6 @@
 import axios from 'axios'
 import { message } from 'antd'
-import { getTokenCookies, getCSRFTokenCookies } from '@/utils/commonSave'
+import { getToken } from '@/utils/commonSave'
 import { ResultCodeEnum } from '@/typescript/shared/enum'
 import { ResultModel } from '@/typescript/shared/model'
 /** 使用 unicloud 的 请求地址 */
@@ -15,8 +15,7 @@ const axiosConfig = axios.create({
 
 // 发送请求之前的拦截
 axiosConfig.interceptors.request.use(config => {
-  config.headers.Authorization = getTokenCookies()
-  config.headers['x-csrf-token'] = getCSRFTokenCookies()
+  config.headers.Authorization = getToken()
   // 说明是使用 uniapp 的 uniCloud 发送请求
   // config.headers.isunicloud = true
   return config

@@ -1,7 +1,7 @@
 import React, { useEffect } from 'react'
 import { Route, Redirect } from 'react-router-dom'
 import { connect } from 'react-redux'
-import { getTokenCookies, getUserIdStorage } from '@/utils/commonSave'
+import { getToken, getUserIdStorage } from '@/utils/commonSave'
 import { getUserInfoApi } from '@/api/modules/user'
 import userActions from '@/store/modules/user/actions'
 
@@ -18,7 +18,7 @@ const PrivateRoute = ({
     <Route
       {...rest}
       render={() =>
-        !!getTokenCookies() ? <Component /> : <Redirect to="/login"></Redirect>
+        !!getToken() ? <Component /> : <Redirect to="/login"></Redirect>
       }
     ></Route>
   )
