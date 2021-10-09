@@ -4,6 +4,7 @@ import { connect } from 'react-redux'
 import { getToken, getUserIdStorage } from '@/utils/commonSave'
 import { getUserInfoApi } from '@/api/modules/user'
 import userActions from '@/store/modules/user/actions'
+import { Dispatch } from 'redux'
 
 /** 用来处理路由拦截 */
 const PrivateRoute = ({
@@ -24,7 +25,7 @@ const PrivateRoute = ({
   )
 }
 
-const mapDispatchToProps = dispatch => {
+const mapDispatchToProps = (dispatch: Dispatch) => {
   return {
     async getUserInfoDispatch() {
       const { data } = await getUserInfoApi(getUserIdStorage())

@@ -1,6 +1,7 @@
 import initState from './state'
 import ACTIONS_TYPE from './actions-type'
-export default (state = initState, action) => {
+import { IAction } from '../shared/interface'
+export default (state = initState, action: IAction) => {
   switch (action.type) {
     case ACTIONS_TYPE.CHANGE_SIDER_STATUS:
       return {
