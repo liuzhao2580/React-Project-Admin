@@ -16,8 +16,7 @@ const axiosConfig = axios.create({
 // 发送请求之前的拦截
 axiosConfig.interceptors.request.use(config => {
   config.headers.Authorization = getToken()
-  // 说明是使用 uniapp 的 uniCloud 发送请求
-  // config.headers.isunicloud = true
+  config.url = "/api/" + config.url
   return config
 })
 
