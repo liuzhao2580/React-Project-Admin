@@ -1,11 +1,13 @@
 import React, { useEffect } from 'react'
-import { Layout } from 'antd'
+import { Layout, Spin } from 'antd'
+import { connect } from 'react-redux'
 import './index.scss'
 import SiderDom from './components/SideBar'
 import NavBarDom from './components/NavBar'
 import ContentDom from './components/Content'
 import resizeMethods from '../utils/onResize'
-const LayoutDom = () => {
+const LayoutDom = ({userInfo}) => {
+
   useEffect(() => {
     resizeMethods.onResize()
     resizeMethods.listenResize()
@@ -14,7 +16,8 @@ const LayoutDom = () => {
     }
   }, [])
   return (
-    <Layout className="layout-box">
+    <Spin tip="加载中..." delay={300} style={{maxHeight: "initial"}} spinning={!userInfo.id}>
+      <Layout className="layout-box">
       {/* 侧边栏 */}
       <SiderDom />
       {/* 右边内容区域 */}
@@ -25,6 +28,14 @@ const LayoutDom = () => {
         <ContentDom></ContentDom>
       </Layout>
     </Layout>
+    </Spin>
   )
 }
-export default LayoutDom
+
+const mapUserInfoStateToProps = state => {
+  return {
+    userInfo: state.user.userInfo
+  }
+}
+
+export default connect(mapUserInfoStateToProps)(LayoutDom)
