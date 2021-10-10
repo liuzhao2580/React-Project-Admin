@@ -7,24 +7,22 @@ const PersonalPage = ({ userInfo }) => {
   useEffect(() => {
     console.log(userInfo)
   }, [userInfo])
+  console.log(3333)
   return (
     <>
-      {userInfo && (
         <div
           className="personal-page-box"
-          style={{ backgroundImage: `url(${userInfo.avatar})` }}
         >
           <header className="header-box">
             <img src={userInfo.avatar} alt="" className="avatar-box" />
             <p className="nick-name">{userInfo.nickName}</p>
           </header>
         </div>
-      )}
     </>
   )
 }
 
-const mapUserInfoStateToProps = state => {
+const mapUserInfoStateToProps = (state) => {
   return {
     userInfo: state.user.userInfo
   }
