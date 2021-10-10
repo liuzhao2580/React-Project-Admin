@@ -1,0 +1,20 @@
+.info-com-box {
+  .title {
+    font-size: 22px;
+    font-weight: 700;
+    padding: 10px 0;
+  }
+  .info-item {
+    display: flex;
+    padding: 10px 0;
+    border-bottom: 1px dashed #eee;
+    .label {
+      width: 100px;
+      font-size: 18px;
+      font-weight: 700;
+    }
+    .value {
+      flex: 1;
+    }
+  }
+}

@@ -11,6 +11,8 @@ export class MUserInfo implements IUserBaseInfo  {
   roleId
   /** 头像 */
   avatar
+  /** 性别 true代表 男  false代表女 */
+  gender = true
   /** 手机号 */
   phone?
   /** 邮箱 */
