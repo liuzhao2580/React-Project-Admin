@@ -5,9 +5,10 @@ import HomeCard from './components/HomeCard'
 import TodoList from './components/TodoList'
 import Echarts from '@/components/EchartsCom'
 import { LineOptions } from '@/utils/modules/echarts-utils'
-const HomeDom = (props) => {
-  console.log(props)
+const HomeDom = () => {
   const lineEchartsOptions = LineOptions()
+
+  
   return (
     <div>
       {/* 头部分块 */}
