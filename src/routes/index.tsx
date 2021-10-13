@@ -1,5 +1,9 @@
 import React from 'react'
-import { HashRouter as Router, Switch, Route, Redirect } from 'react-router-dom'
+import {
+  Switch,
+  Route,
+  Redirect
+} from 'react-router-dom'
 import { constRoutes } from './routerConfig'
 export default () => {
   const routesFunc = (Routes = constRoutes) => {
@@ -29,9 +33,5 @@ export default () => {
       <Redirect to="/404"></Redirect>
     </Route>
   )
-  return (
-    <Router>
-      <Switch>{getRoutes}</Switch>
-    </Router>
-  )
+  return <Switch>{getRoutes}</Switch>
 }

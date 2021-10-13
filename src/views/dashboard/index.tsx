@@ -5,7 +5,8 @@ import HomeCard from './components/HomeCard'
 import TodoList from './components/TodoList'
 import Echarts from '@/components/EchartsCom'
 import { LineOptions } from '@/utils/modules/echarts-utils'
-const HomeDom = () => {
+const HomeDom = (props) => {
+  console.log(props)
   const lineEchartsOptions = LineOptions()
   return (
     <div>

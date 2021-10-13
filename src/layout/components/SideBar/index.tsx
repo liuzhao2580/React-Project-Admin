@@ -70,7 +70,7 @@ const SideBar: FC<ISideBar> = ({ sideStatus }) => {
   getMenu()
   // 点击侧边栏跳转
   let MenuClick = ({ key }) => {
-    history.push(key)
+    history.push({pathname: key})
   }
   return (
     <Sider

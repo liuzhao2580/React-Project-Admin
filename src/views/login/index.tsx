@@ -25,7 +25,11 @@ const LoginDom = () => {
       message.success('登录成功')
       setUserIdStorage(data.id)
       setToken(`Bearer ${data.token}`)
-      history.push('/')
+      history.push({pathname: '/', state: {
+        query: {
+          test: 123
+        }
+      }})
     } finally {
       setLoading(false)
     }
