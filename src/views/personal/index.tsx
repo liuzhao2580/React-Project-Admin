@@ -5,11 +5,11 @@ import './index.scss'
 import InfoCom from './components/InfoCom'
 
 /** 个人中心页面 */
-const PersonalPage = ({ userInfo }) => {
+const PersonalPage = ({ userInfo }, props) => {
   useEffect(() => {
     console.log(userInfo)
   }, [userInfo])
-  console.log(3333)
+  console.log(props, 'props')
   return (
     <div className="personal-page-box">
       <header className="header-box">

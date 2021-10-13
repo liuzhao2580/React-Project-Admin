@@ -6,14 +6,14 @@ import { useHistory } from 'react-router-dom'
 
 /** 右上角的个人 */
 const Personal = ({ userInfo }) => {
-  const history = useHistory()
+  const history:any = useHistory()
   // 点击 菜单项
   const menuClick = e => {
     const { key } = e
     switch (key) {
       // 个人中心
       case 'personal':
-        history.push('/personal')
+        history.push('/personal', 222)
         break
       // 退出登录
       case 'logout':

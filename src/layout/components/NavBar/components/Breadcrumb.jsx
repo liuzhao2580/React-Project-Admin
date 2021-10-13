@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react'
-import { useHistory, withRouter } from 'react-router-dom'
+import { useHistory, withRouter,Link } from 'react-router-dom'
 import { Breadcrumb } from 'antd'
 
 import { constRoutes } from '@/routes/routerConfig'
@@ -46,16 +46,17 @@ const BreadcrumbDom = () => {
   }
   return (
     <Breadcrumb className="breadcrumb-box">
-      <Breadcrumb.Item href="#/dashboard">首页</Breadcrumb.Item>
+      <Breadcrumb.Item>
+        <Link to="/">首页</Link>
+      </Breadcrumb.Item>
       {breadcrumbArr.map((breadcrumb, index) => {
         return (
           <Breadcrumb.Item
             key={index}
-            href={`/#${
-              breadcrumb.redirect ? breadcrumb.redirect : breadcrumb.path
-            }`}
           >
-            <span className="breadcrumb-item">{breadcrumb.meta.title}</span>
+            <Link className="breadcrumb-item" to={`${
+              breadcrumb.redirect ? breadcrumb.redirect : breadcrumb.path
+            }`}>{breadcrumb.meta.title}</Link>
           </Breadcrumb.Item>
         )
       })}
