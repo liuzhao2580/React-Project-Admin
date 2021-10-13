@@ -37,7 +37,7 @@ const SelectBoxCom = () => {
       id: undefined
     }
     const data = await getArticleCategoryApi(params)
-    if (data.code === ResultCodeEnum.success) {
+    if (data.code === ResultCodeEnum.SUCCESS) {
       const getOptionList = data.data.map(item => {
         return {
           value: item.id,
@@ -57,7 +57,7 @@ const SelectBoxCom = () => {
       id: targetOption.value
     }
     const data = await getArticleCategoryApi(params)
-    if (data.code === ResultCodeEnum.success) {
+    if (data.code === ResultCodeEnum.SUCCESS) {
       if (data.data.length) {
         targetOption.children = data.data.map(item => {
           return {

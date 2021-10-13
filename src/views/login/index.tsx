@@ -6,7 +6,7 @@ import { UserOutlined, LockOutlined } from '@ant-design/icons'
 
 import './login.scss'
 import { loginApi } from '@/api/modules/user'
-import { setUserIdStorage, setToken } from '@/utils/commonSave'
+import { setUserIdStorage, setToken } from '@/utils/modules/commonSave'
 import { ILoginParams } from '@/typescript/user/interface'
 const LoginDom = () => {
   const history = useHistory()

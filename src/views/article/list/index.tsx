@@ -23,7 +23,7 @@ import { articleListApi, articleDeleteApi } from '@/api/modules/article'
 import { IArticleBasic } from '@/typescript/article/interface'
 import { EArticleStatus } from '@/typescript/article/enum'
 
-import { ITimeType, formateNormalTime } from '@/utils/time-utils'
+import { ITimeType, formateNormalTime } from '@/utils/modules/time-utils'
 import { tranSpecifyType } from '@/utils'
 import { ResultCodeEnum } from '@/typescript/shared/enum'
 
@@ -103,7 +103,7 @@ const ArticleList: React.FC<any> = () => {
     async (text, record: IArticleBasic, index) => {
       const { id } = record
       const data = await articleDeleteApi(id)
-      if (data.code === ResultCodeEnum.success) {
+      if (data.code === ResultCodeEnum.SUCCESS) {
         message.success('删除成功')
         initArticleList()
       }

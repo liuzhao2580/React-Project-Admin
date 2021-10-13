@@ -2,9 +2,8 @@
 
 /** 1. 请求的状态参数返回的枚举 */
 export enum ResultCodeEnum {
-  /** 成功 */
-  success = 0,
-
+  /** 成功 0 */
+  SUCCESS = 0,
   /**
    * 失败 100
    */
@@ -14,5 +13,5 @@ export enum ResultCodeEnum {
    */
   SERVER_ERROR = 500,
   /** token 不合法 */
-  invalidToken = 50001
+  TOKEN_ERROR = 50001
 }

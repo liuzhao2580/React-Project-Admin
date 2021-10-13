@@ -30,7 +30,7 @@ const ArticleCreate = () => {
     ;(async function () {
       const data = await getArticleCategoryApi({ level: 2 })
       console.log(data)
-      if (data.code === ResultCodeEnum.success) {
+      if (data.code === ResultCodeEnum.SUCCESS) {
         setArticleCate(data.data)
       } else setArticleCate([])
     })()

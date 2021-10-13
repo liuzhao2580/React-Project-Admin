@@ -5,7 +5,7 @@ import './index.scss'
 import SiderDom from './components/SideBar'
 import NavBarDom from './components/NavBar'
 import ContentDom from './components/Content'
-import resizeMethods from '../utils/onResize'
+import resizeMethods from '../utils/modules/onResize'
 const LayoutDom = ({userInfo}) => {
 
   useEffect(() => {

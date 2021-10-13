@@ -1,7 +1,7 @@
 import React, { useEffect } from 'react'
 import { Route, Redirect } from 'react-router-dom'
 import { connect } from 'react-redux'
-import { getToken, getUserIdStorage } from '@/utils/commonSave'
+import { getToken, getUserIdStorage } from '@/utils/modules/commonSave'
 import { getUserInfoApi } from '@/api/modules/user'
 import userActions from '@/store/modules/user/actions'
 import { Dispatch } from 'redux'

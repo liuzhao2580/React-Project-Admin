@@ -6,7 +6,7 @@ import { IArticleCategory } from '@/typescript/article/interface'
 import { EArticleSaveType } from '@/typescript/article/enum'
 
 import { articleInsertApi } from '@/api/modules/article'
-import { getUserIdStorage } from '@/utils/commonSave'
+import { getUserIdStorage } from '@/utils/modules/commonSave'
 import { ResultCodeEnum } from '@/typescript/shared/enum'
 
 interface IPreviewModal {
@@ -85,7 +85,7 @@ const PreviewModalCom = (props: IPreviewModal) => {
     setArticleLoading(true)
     try {
       const data = await articleInsertApi(params)
-      if (data.code === ResultCodeEnum.success) {
+      if (data.code === ResultCodeEnum.SUCCESS) {
         message.success('新增成功')
         handleCancel()
       }

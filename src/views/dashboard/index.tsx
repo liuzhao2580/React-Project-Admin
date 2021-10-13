@@ -4,7 +4,7 @@ import './index.scss'
 import HomeCard from './components/HomeCard'
 import TodoList from './components/TodoList'
 import Echarts from '@/components/EchartsCom'
-import { LineOptions } from '@/utils/echarts-utils'
+import { LineOptions } from '@/utils/modules/echarts-utils'
 const HomeDom = () => {
   const lineEchartsOptions = LineOptions()
   return (
