@@ -1,0 +1,13 @@
+$HEIGHT: 350px;
+.personal-header-modal-box {
+  .user-avatar-upload {
+    height: $HEIGHT;
+    .ant-upload-list-picture-card-container,.ant-upload-select-picture-card {
+      height: $HEIGHT;
+      width: $HEIGHT;
+    }
+    &-add {
+
+    }
+  }
+}

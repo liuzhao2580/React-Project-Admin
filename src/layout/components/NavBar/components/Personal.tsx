@@ -6,18 +6,17 @@ import { useHistory } from 'react-router-dom'
 
 /** 右上角的个人 */
 const Personal = ({ userInfo }) => {
-  const history:any = useHistory()
+  const history = useHistory()
   // 点击 菜单项
   const menuClick = e => {
     const { key } = e
     switch (key) {
       // 个人中心
       case 'personal':
-        history.push('/personal', 222)
+        history.push({pathname: '/personal', state: { test: 'dashboard' }})
         break
       // 退出登录
       case 'logout':
-        console.log(history)
         history.replace('/login')
         break
       default:
