@@ -1,13 +1,28 @@
-$HEIGHT: 350px;
-.personal-header-modal-box {
-  .user-avatar-upload {
-    height: $HEIGHT;
-    .ant-upload-list-picture-card-container,.ant-upload-select-picture-card {
-      height: $HEIGHT;
-      width: $HEIGHT;
+$BASE_WIDTH: 100px;
+.user-avatar-upload {
+  border-radius: 50%;
+  .ant-upload-list-picture-card {
+    border-radius: 50%;
+    .ant-upload-list-picture-card-container {
+      border-radius: 50%;
+      margin: 0;
+      width: $BASE_WIDTH;
+      height: $BASE_WIDTH;
+      .ant-upload-list-item {
+        border-radius: 50%;
+        padding: 0;
+        .ant-upload-list-item-info {
+          border-radius: 50%;
+        }
+        &:hover {
+          .ant-upload-list-item-info {
+            border-radius: 50%;
+          }
+        }
+      }
     }
-    &-add {
+  }
 
-    }
+  &-add {
   }
 }
