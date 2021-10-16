@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import React from 'react'
 import ChangeAvatarCom from './ChangeAvatarCom'
 
 /** 个人中心页面 */
@@ -11,8 +11,6 @@ const PersonalHeader = ({ userInfo }) => {
         </div>
         <p className="nick-name">{userInfo.nickName}</p>
       </header>
-
-      
     </>
   )
 }

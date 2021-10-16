@@ -2,27 +2,39 @@ $BASE_WIDTH: 100px;
 .user-avatar-upload {
   border-radius: 50%;
   .ant-upload-list-picture-card {
-    border-radius: 50%;
     .ant-upload-list-picture-card-container {
+      display: none;
+    }
+    .ant-upload-select-picture-card {
       border-radius: 50%;
-      margin: 0;
-      width: $BASE_WIDTH;
-      height: $BASE_WIDTH;
-      .ant-upload-list-item {
-        border-radius: 50%;
-        padding: 0;
-        .ant-upload-list-item-info {
+      border: none;
+      .user-avatar-img {
+        width: $BASE_WIDTH;
+        height: $BASE_WIDTH;
+        >img {
+          display: inline-block;
+          width: 100%;
+          height: 100%; 
           border-radius: 50%;
         }
-        &:hover {
-          .ant-upload-list-item-info {
-            border-radius: 50%;
+        .change-avatar-span {
+          position: absolute;
+          left: 0;
+          display: inline-block;
+          width: $BASE_WIDTH;
+          height: $BASE_WIDTH;
+          border-radius: 50%;
+          font-size: 0px;
+          &:hover {
+            background: rgba(0,0,0,0.5);
+            font-size: 12px;
+            text-align: center;
+            line-height: $BASE_WIDTH;
+            color: #fff;
           }
         }
       }
     }
-  }
-
-  &-add {
+    
   }
 }
