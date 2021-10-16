@@ -1,7 +1,7 @@
 import React from 'react'
 import ChangeAvatarCom from './ChangeAvatarCom'
 
-/** 个人中心页面 */
+/** 个人中心页面组件 */
 const PersonalHeader = ({ userInfo }) => {
   return (
     <>
