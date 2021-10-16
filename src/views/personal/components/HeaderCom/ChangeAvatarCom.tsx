@@ -8,6 +8,8 @@ import './avatar-upload.scss'
 interface ICom {
   avatar: string
 }
+
+/** 用户上传头像组件 */
 const ChangeAvatarCom: FC<ICom> = ({ avatar }) => {
   const onChange = ({ fileList: newFileList }) => {
     console.log(newFileList)
