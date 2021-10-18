@@ -1,11 +1,13 @@
 /** 提供公共的 model */
 
+import { ResultCodeEnum } from "../enum"
+
 /**
  * 1. 返回参数的 model
  */
 export class ResultModel<T> {
   /** 返回的状态码 */
-  public code!: string | number
+  public code!: ResultCodeEnum
   /** 返回的消息*/
   public msg!: string
   /** 返回的数据 T 可能是数组、对象 */
