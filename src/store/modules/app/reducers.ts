@@ -8,6 +8,12 @@ export default (state = initState, action: IAction) => {
         ...state,
         sideStatus: action.data
       }
+    /** 全局的加载状态 */
+    case ACTIONS_TYPE.CHANGE_LAYOUT_LOADING:
+      return {
+        ...state,
+        layoutLoading: action.data
+      }
     default:
       return state
   }

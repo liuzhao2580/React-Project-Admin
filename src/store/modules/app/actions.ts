@@ -6,5 +6,12 @@ export default {
       type: ACTIONS_TYPE.CHANGE_SIDER_STATUS,
       data
     }
+  },
+  /** 全局的加载状态 */
+  layoutLoadingStatus(data: boolean) {
+    return {
+      type: ACTIONS_TYPE.CHANGE_LAYOUT_LOADING,
+      data
+    }
   }
 }

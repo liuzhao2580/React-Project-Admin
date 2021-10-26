@@ -6,7 +6,7 @@ import SiderDom from './components/SideBar'
 import NavBarDom from './components/NavBar'
 import ContentDom from './components/Content'
 import resizeMethods from '../utils/modules/onResize'
-const LayoutDom = ({ userInfo }) => {
+const LayoutDom = ({ layoutLoading }) => {
   useEffect(() => {
     resizeMethods.onResize()
     resizeMethods.listenResize()
@@ -14,13 +14,12 @@ const LayoutDom = ({ userInfo }) => {
       window.removeEventListener('resize', resizeMethods.onResize)
     }
   }, [])
-  console.log(userInfo, 'userInfo')
   return (
     <Spin
       tip="加载中..."
       delay={300}
       style={{ maxHeight: 'initial' }}
-      spinning={!userInfo.id}
+      spinning={layoutLoading}
     >
       <Layout className="layout-box">
         {/* 侧边栏 */}
@@ -39,7 +38,7 @@ const LayoutDom = ({ userInfo }) => {
 
 const mapUserInfoStateToProps = state => {
   return {
-    userInfo: state.user.userInfo
+    layoutLoading: state.app.layoutLoading
   }
 }
 
