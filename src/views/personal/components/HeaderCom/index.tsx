@@ -7,7 +7,7 @@ const PersonalHeader = ({ userInfo }) => {
     <>
       <header className="personal-header-box">
         <div className="header-img-box">
-          <ChangeAvatarCom avatar={userInfo.avatar}/>
+          <ChangeAvatarCom userInfo={userInfo}/>
         </div>
         <p className="nick-name">{userInfo.nickName}</p>
       </header>

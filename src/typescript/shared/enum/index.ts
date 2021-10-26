@@ -15,3 +15,4 @@ export enum ResultCodeEnum {
   /** token 不合法 */
   TOKEN_ERROR = 50001
 }
+

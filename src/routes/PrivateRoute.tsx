@@ -11,11 +11,14 @@ import { Dispatch } from 'redux'
 const PrivateRoute = ({
   component: Component,
   getUserInfoDispatch,
+  isNeedUserInfo,
   ...rest
 }) => {
   useEffect(() => {
-    getUserInfoDispatch()
-  }, [getUserInfoDispatch])
+    if (isNeedUserInfo === true) {
+      getUserInfoDispatch()
+    }
+  }, [getUserInfoDispatch, isNeedUserInfo])
   return (
     <Route
       {...rest}
@@ -26,6 +29,12 @@ const PrivateRoute = ({
   )
 }
 
+const mapAppStateToProps = (state) => {
+  return {
+    isNeedUserInfo: state.app.isNeedUserInfo
+  }
+}
+
 const mapDispatchToProps = (dispatch: Dispatch) => {
   return {
     async getUserInfoDispatch() {
@@ -34,6 +43,7 @@ const mapDispatchToProps = (dispatch: Dispatch) => {
       const { data } = await getUserInfoApi(getUserIdStorage())
       // 清除全局的加载状态
       dispatch(appActions.layoutLoadingStatus(false))
+      dispatch(appActions.isNeedUserInfo(false))
       dispatch(
         (function () {
           return userActions.getUserInfo(data)
@@ -43,4 +53,4 @@ const mapDispatchToProps = (dispatch: Dispatch) => {
   }
 }
 
-export default connect(null, mapDispatchToProps)(PrivateRoute)
+export default connect(mapAppStateToProps, mapDispatchToProps)(PrivateRoute)

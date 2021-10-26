@@ -6,11 +6,11 @@ $BASE_WIDTH: 100px;
       display: none;
     }
     .ant-upload-select-picture-card {
+      width: $BASE_WIDTH;
+      height: $BASE_WIDTH;
       border-radius: 50%;
       border: none;
       .user-avatar-img {
-        width: $BASE_WIDTH;
-        height: $BASE_WIDTH;
         >img {
           display: inline-block;
           width: 100%;
@@ -19,6 +19,7 @@ $BASE_WIDTH: 100px;
         }
         .change-avatar-span {
           position: absolute;
+          top: 0;
           left: 0;
           display: inline-block;
           width: $BASE_WIDTH;

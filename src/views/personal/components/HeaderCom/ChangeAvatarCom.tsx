@@ -1,26 +1,54 @@
 import React, { FC } from 'react'
-import { Upload } from 'antd'
-
+import { connect } from 'react-redux'
+import { Dispatch } from 'redux'
+import { Upload, message } from 'antd'
 import ImgCrop from 'antd-img-crop'
-
 import './avatar-upload.scss'
 
+import { IUserBaseInfo } from '@/typescript/user/interface'
+import { uploadPictureApi } from '@/api/modules/common'
+import { uploadUserInfoApi } from '@/api/modules/user'
+
+import { ResultCodeEnum } from '@/typescript/shared/enum'
+import { MUploadUserInfo } from '@/typescript/user/modules/uploadUserInfo'
+
+import appActions from '@/store/modules/app/actions'
 interface ICom {
-  avatar: string
+  userInfo: IUserBaseInfo,
+  isNeedUserInfo: any
 }
 
 /** 用户上传头像组件 */
-const ChangeAvatarCom: FC<ICom> = ({ avatar }) => {
-  const onChange = ({ fileList: newFileList }) => {
-    console.log(newFileList)
+const ChangeAvatarCom: FC<ICom> = ({ userInfo, isNeedUserInfo }) => {
+  const { avatar, id } = userInfo
+
+  /** 自定义上传方法 */
+  const customRequest = async file => {
+    const formData = new FormData()
+    formData.append('file', file.file)
+    formData.append('uploadByUserId', id.toString())
+
+    const urlData = await uploadPictureApi(formData)
+    if(urlData.code === ResultCodeEnum.SUCCESS) {
+      const uploadUser = new MUploadUserInfo()
+      uploadUser.avatar = urlData.data.url
+      const data = await uploadUserInfoApi(id, uploadUser)
+      if (data.code === ResultCodeEnum.SUCCESS) {
+        isNeedUserInfo(true)
+        message.success('更新成功')
+      }
+      else {
+        message.error(data.msg)
+      }
+    }
   }
 
   return (
     <ImgCrop rotate>
       <Upload
         action=""
+        customRequest={customRequest}
         listType="picture-card"
-        onChange={onChange}
         maxCount={1}
         className="user-avatar-upload"
       >
@@ -32,4 +60,14 @@ const ChangeAvatarCom: FC<ICom> = ({ avatar }) => {
     </ImgCrop>
   )
 }
-export default ChangeAvatarCom
+
+const mapAppDispatchToProps = (dispatch: Dispatch) => {
+  return {
+    // 用来设置需要重新获取用户数据
+    isNeedUserInfo(status:boolean) {
+      return dispatch(appActions.isNeedUserInfo(status))
+    }
+  }
+}
+
+export default connect(null, mapAppDispatchToProps)(ChangeAvatarCom)
