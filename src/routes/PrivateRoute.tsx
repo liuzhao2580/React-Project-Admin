@@ -1,11 +1,12 @@
 import React, { useEffect } from 'react'
 import { Route, Redirect } from 'react-router-dom'
 import { connect } from 'react-redux'
+import { Dispatch } from 'redux'
 import { getToken, getUserIdStorage } from '@/utils/modules/commonSave'
 import { getUserInfoApi } from '@/api/modules/user'
 import userActions from '@/store/modules/user/actions'
 import appActions from '@/store/modules/app/actions'
-import { Dispatch } from 'redux'
+import IStoreState from '@/typescript/store'
 
 /** 用来处理路由拦截 */
 const PrivateRoute = ({
@@ -29,7 +30,7 @@ const PrivateRoute = ({
   )
 }
 
-const mapAppStateToProps = (state) => {
+const mapAppStateToProps = (state: IStoreState) => {
   return {
     isNeedUserInfo: state.app.isNeedUserInfo
   }
