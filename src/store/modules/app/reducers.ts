@@ -14,6 +14,12 @@ export default (state = initState, action: IAction) => {
         ...state,
         layoutLoading: action.data
       }
+    /** 是否需要重新获取用户的基本信息 */
+    case ACTIONS_TYPE.CHNAGE_ISNEED_USERINFO:
+      return {
+        ...state,
+        isNeedUserInfo: action.data
+      }
     default:
       return state
   }
