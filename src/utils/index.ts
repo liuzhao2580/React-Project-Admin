@@ -14,7 +14,7 @@ export const tokenExpired = () => {
   removeToken()
   removeUserId()
   const history = createHashHistory()
-  history.replace('login')
+  history.replace('/login')
 }
 
 /** 深拷贝 */
