@@ -1,8 +1,10 @@
 /** 配置 echarts */
 
+import { EChartsOption } from "echarts"
+
 /** 折线图的配置 */
-export const LineOptions = () => {
-  const option = {
+export const LineOptions = ():EChartsOption => {
+  return {
     title: {
       text: '折线图堆叠'
     },
@@ -45,5 +47,5 @@ export const LineOptions = () => {
       }
     ]
   }
-  return option
+  
 }

@@ -3,7 +3,7 @@ import { connect } from 'react-redux'
 import './index.scss'
 import HomeCard from './components/HomeCard'
 import TodoList from './components/TodoList'
-import Echarts from '@/components/EchartsCom'
+import EchartsCom from '@/components/EchartsCom'
 import { LineOptions } from '@/utils/modules/echarts-utils'
 const HomeDom = () => {
   const lineEchartsOptions = LineOptions()
@@ -15,7 +15,7 @@ const HomeDom = () => {
       <HomeCard />
       {/* Echarts 组件 */}
       <div className="echart-component">
-        <Echarts option={lineEchartsOptions} />
+        <EchartsCom options={lineEchartsOptions} />
       </div>
       {/* todolist 组件 */}
       <TodoList />
