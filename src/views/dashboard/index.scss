@@ -25,4 +25,17 @@
 .echart-component {
   width: 100%;
   margin: 10px 0;
+  &-main {
+    margin: 10px 0;
+    .echart-item-col {
+      .echart-item-div {
+        border: 1px solid #ccc;
+        border-radius: 5px;
+        padding: 6px;
+        height: 320px;
+        overflow: auto;
+      }
+    }
+    
+  }
 }

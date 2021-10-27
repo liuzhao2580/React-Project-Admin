@@ -1,51 +1,331 @@
 /** 配置 echarts */
+import { EChartsOption, graphic } from 'echarts'
 
-import { EChartsOption } from "echarts"
+const yData = ['Angular', 'React', 'Vue', 'JavaScript']
 
-/** 折线图的配置 */
-export const LineOptions = ():EChartsOption => {
+/** X轴滚动条-折线图的配置 */
+export const LineOptions = (): EChartsOption => {
+  let base = +new Date(2000, 1, 2)
+  let oneDay = 24 * 3600 * 1000
+  let data = [[base, Math.random() * 300]]
+  for (let i = 1; i < 10000; i++) {
+    let now = new Date((base += oneDay))
+    data.push([+now, Math.round((Math.random() - 0.5) * 20 + data[i - 1][1])])
+  }
   return {
     title: {
-      text: '折线图堆叠'
+      text: 'X轴滚动条-折线图的配置'
+    },
+    grid: {
+      left: '5%',
+      right: '5%'
+    },
+    xAxis: {
+      type: 'time',
+      boundaryGap: false
+    },
+    yAxis: {
+      type: 'value',
+      boundaryGap: [0, '100%']
+    },
+    dataZoom: [
+      {
+        type: 'inside',
+        start: 0,
+        end: 20
+      },
+      {
+        start: 0,
+        end: 20
+      }
+    ],
+    series: [
+      {
+        type: 'line',
+        smooth: true,
+        symbol: 'none',
+        data
+      }
+    ]
+  }
+}
+
+/** 堆叠的柱形图 */
+export const BarOptions = (): EChartsOption => {
+  const fontColor = '#000'
+  const seriesData = [50, 60, 70, 80]
+  return {
+    title: {
+      text: '堆叠的柱形图'
     },
     tooltip: {
-      trigger: 'axis'
+      trigger: 'axis',
+      axisPointer: {
+        type: 'shadow'
+      },
+      formatter: params => {
+        const { axisValueLabel, value } = params[0]
+        return `<span style="display: inline-block;
+          width: 12px;
+          height: 12px;
+          border-radius: 50%;
+          background: rgba(0, 255, 253, 1)"></span> <span>${axisValueLabel}</span> <span>${value}</span>`
+      }
     },
-    legend: {},
+    legend: {
+      show: false
+    },
     grid: {
       left: '3%',
       right: '4%',
       bottom: '3%',
-      containLabel: true
+      top: '12%'
     },
     xAxis: {
-      type: 'category',
-      boundaryGap: false,
-      data: ['周一', '周二', '周三', '周四', '周五', '周六', '周日']
+      type: 'value',
+      show: false
     },
-    yAxis: {
-      type: 'value'
-    },
+    yAxis: [
+      {
+        axisLine: { show: false },
+        splitLine: { show: false },
+        axisTick: { show: false },
+        axisLabel: {
+          color: fontColor,
+          verticalAlign: 'bottom',
+          lineHeight: 50,
+          align: 'left',
+          padding: [0, 0, 0, 10],
+          formatter: (value, index) => {
+            return `{a|TOP${seriesData.length - index}}  ${value}`
+          },
+          rich: {
+            a: {
+              padding: 5,
+              borderRadius: 4,
+              color: '#000',
+              backgroundColor: '#00F1FF'
+            }
+          }
+        },
+        data: yData
+      },
+      {
+        axisLine: { show: false },
+        splitLine: { show: false },
+        axisTick: { show: false },
+        axisLabel: {
+          color: fontColor,
+          verticalAlign: 'bottom',
+          lineHeight: 50,
+          align: 'right',
+          formatter: (value, index) => {
+            return seriesData[index] + '%'
+          }
+        },
+        data: yData
+      }
+    ],
     series: [
       {
-        name: '邮件营销',
-        type: 'line',
-        smooth: true,
-        data: [120, 132, 101, 134, 90, 230, 210]
+        type: 'bar',
+        zlevel: 10,
+        barWidth: 8,
+        itemStyle: {
+          borderRadius: 10,
+          color: new graphic.LinearGradient(0, 0, 1, 0, [
+            { offset: 0, color: 'rgba(1, 140, 255, 0)' },
+            { offset: 0.5, color: '#00708f' },
+            { offset: 1, color: 'rgba(0, 255, 253, 1)' }
+          ])
+        },
+        data: seriesData
       },
       {
-        name: '联盟广告',
-        type: 'line',
-        smooth: true,
-        data: [220, 182, 191, 234, 290, 330, 310]
-      },
-      {
-        name: '视频广告',
-        type: 'line',
-        smooth: true,
-        data: [150, 232, 201, 154, 190, 330, 410]
+        type: 'bar',
+        barGap: '-100%',
+        barWidth: 8,
+        itemStyle: {
+          color: '#000911',
+          borderRadius: 10
+        },
+        data: [100, 100, 100, 100]
       }
     ]
   }
-  
+}
+
+/** 堆叠的柱形图 */
+export const BarOtherOptions = (): EChartsOption => {
+  const fontColor = '#000'
+  const seriesData = [30, 50, 60, 80]
+  return {
+    title: {
+      text: '(年份)',
+      textStyle: {
+        color: fontColor,
+        fontSize: 14
+      }
+    },
+    tooltip: {
+      trigger: 'axis',
+      axisPointer: {
+        type: 'shadow'
+      },
+      formatter: params => {
+        const { axisValueLabel, value } = params[0]
+        return `<span style="display: inline-block;
+        width: 12px;
+        height: 12px;
+        border-radius: 50%;
+        background: rgba(0, 255, 253, 1)"></span> <span>${axisValueLabel}</span> <span>${value}</span>`
+      }
+    },
+    legend: {
+      show: false
+    },
+    grid: {
+      left: '3%',
+      right: '4%',
+      bottom: '3%',
+      top: '4%',
+      containLabel: true
+    },
+    xAxis: {
+      type: 'value',
+      show: false
+    },
+    yAxis: {
+      axisLine: { show: false },
+      splitLine: { show: false },
+      axisTick: { show: false },
+      axisLabel: {
+        color: fontColor
+      },
+      data: [2016, 2017, 2018, 2019]
+    },
+    series: [
+      {
+        name: '2011',
+        type: 'bar',
+        zlevel: 10,
+        barWidth: 8,
+        itemStyle: {
+          borderRadius: 10,
+          color: new graphic.LinearGradient(0, 0, 1, 0, [
+            { offset: 0, color: 'rgba(1, 85, 255, 0)' },
+            { offset: 0.5, color: '#005ea0' },
+            { offset: 1, color: 'rgba(0, 193, 255, 1)' }
+          ])
+        },
+        data: seriesData
+      },
+      {
+        name: '2012',
+        type: 'bar',
+        barGap: '-100%',
+        barWidth: 8,
+        itemStyle: {
+          color: '#000911',
+          borderRadius: 10
+        },
+        label: {
+          show: true,
+          position: 'right',
+          formatter: params => {
+            const { dataIndex } = params
+            return `${seriesData[dataIndex]}`
+          }
+        },
+        data: [100, 100, 100, 100]
+      }
+    ]
+  }
+}
+
+/** 带有滚动条的柱形图 */
+export const BarScrollOptions = (): EChartsOption => {
+  const fontColor = '#000'
+  const seriesData = [30, 50, 60, 80, 22, 44, 22, 11]
+  const bgSeriesData = Array(8).fill(100)
+  return {
+    title: {
+      text: '(年份)',
+      textStyle: {
+        color: fontColor,
+        fontSize: 14
+      }
+    },
+    tooltip: {
+      trigger: 'axis',
+      axisPointer: {
+        type: 'shadow'
+      },
+      formatter: params => {
+        const { axisValueLabel, value } = params[0]
+        return `<span style="display: inline-block;
+        width: 12px;
+        height: 12px;
+        border-radius: 50%;
+        background: rgba(0, 255, 253, 1)"></span> <span>${axisValueLabel}</span> <span>${value}</span>`
+      }
+    },
+    legend: {
+      show: false
+    },
+    grid: {
+      left: '3%',
+      right: '4%',
+      bottom: '3%',
+      top: '4%',
+      containLabel: true
+    },
+    xAxis: {
+      type: 'value',
+      show: false
+    },
+    yAxis: {
+      axisLine: { show: false },
+      splitLine: { show: false },
+      axisTick: { show: false },
+      axisLabel: {
+        color: fontColor
+      },
+      data: [2016, 2017, 2018, 2019, 2020, 2021, 2022, 2023]
+    },
+    series: [
+      {
+        type: 'bar',
+        zlevel: 10,
+        barWidth: 8,
+        itemStyle: {
+          borderRadius: 10,
+          color: new graphic.LinearGradient(0, 0, 1, 0, [
+            { offset: 0, color: 'rgba(1, 85, 255, 0)' },
+            { offset: 0.5, color: '#005ea0' },
+            { offset: 1, color: 'rgba(0, 193, 255, 1)' }
+          ])
+        },
+        data: seriesData
+      },
+      {
+        type: 'bar',
+        barGap: '-100%',
+        barWidth: 8,
+        itemStyle: {
+          color: '#000911',
+          borderRadius: 10
+        },
+        label: {
+          show: true,
+          position: 'right',
+          formatter: params => {
+            const { dataIndex } = params
+            return `${seriesData[dataIndex]}`
+          }
+        },
+        data: bgSeriesData
+      }
+    ]
+  }
 }
