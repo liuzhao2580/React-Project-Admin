@@ -28,7 +28,7 @@ import { tranSpecifyType } from '@/utils'
 import { ResultCodeEnum } from '@/typescript/shared/enum'
 
 import SelectBoxCom from './components/Select-box'
-import { ListRequestModel } from '@/typescript/shared/model'
+import { BaseQueryModel } from '@/typescript/shared/model'
 
 const ArticleList: React.FC<any> = () => {
   // 表格的数据
@@ -46,7 +46,7 @@ const ArticleList: React.FC<any> = () => {
     ;(async function () {
       setTableLoading(true)
       /** 页码 */
-      const params: ListRequestModel = {
+      const params: BaseQueryModel = {
         pageNum,
         pageSize
       }

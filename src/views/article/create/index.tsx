@@ -7,7 +7,7 @@ import 'highlight.js/styles/monokai-sublime.css'
 import './index.scss'
 import PreviewModalCom from './components/Preview-Modal'
 
-import { getArticleCategoryApi } from '@/api/modules/article'
+import { getArticleCategoryListApi } from '@/api/modules/article'
 import { IArticleCategory } from '@/typescript/article/interface'
 import { ResultCodeEnum } from '@/typescript/shared/enum'
 
@@ -27,13 +27,13 @@ const ArticleCreate = () => {
 
   // 初始化 编辑器 、 获取文章分类数据
   useEffect(() => {
-    ;(async function () {
-      const data = await getArticleCategoryApi({ level: 2 })
-      console.log(data)
-      if (data.code === ResultCodeEnum.SUCCESS) {
-        setArticleCate(data.data)
-      } else setArticleCate([])
-    })()
+    // ;(async function () {
+    //   const data = await getArticleCategoryListApi({ level: 2 })
+    //   console.log(data)
+    //   if (data.code === ResultCodeEnum.SUCCESS) {
+    //     setArticleCate(data.data)
+    //   } else setArticleCate([])
+    // })()
 
     setEditor(new E('#content'))
   }, [])

@@ -73,7 +73,7 @@ const PreviewModalCom = (props: IPreviewModal) => {
       item => item.id === articleCateValue
     )
     let category_name: string = ''
-    if (getFindCategory) category_name = getFindCategory.category
+    if (getFindCategory) category_name = getFindCategory.categoryName
     const params = {
       user_id: getUserIdStorage(),
       article_title: articleTitle,
@@ -119,7 +119,7 @@ const PreviewModalCom = (props: IPreviewModal) => {
           <Radio.Group onChange={changeArticleCate} value={articleCateValue}>
             {articleCateList.map((item, index) => (
               <Radio value={item.id} key={item.id}>
-                {item.category}
+                {item.categoryName}
               </Radio>
             ))}
           </Radio.Group>

@@ -31,7 +31,9 @@ export interface IArticleCategory {
   /** 分类id */
   id: string
   /** 分类名称 */
-  category: string
+  categoryName: string
+  /** 分类的级别 */
+  level: number,
   /** 二级分类中,一级分类的id */
   parent_id: string
 }

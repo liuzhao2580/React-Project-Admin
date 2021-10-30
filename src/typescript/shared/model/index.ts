@@ -21,17 +21,39 @@ export class ResultModel<T> {
 }
 
 /**
- * 2.列表请求的参数
+ * 2.表格请求的参数
  */
-export class ListRequestModel {
+export class BaseQueryModel {
   /** 当前页 */
   pageNum: number = 1
   /** 每页条数 */
   pageSize: number = 10
-  /** 关键字 */
-  keyWord?: string
-  constructor(pageNum?, pageSize?) {
-    this.pageNum = pageNum
-    this.pageSize = pageSize
+}
+
+/**
+ * 3.表格中分页器的数据
+ */
+export class PageModel {
+  /** 当前页 */
+  current: number
+  /** 一页的数据 */
+  size: number
+  /** 总页数 */
+  total: number
+  /** 总页数 */
+  pages: number
+  constructor(current: number = 1,size: number = 10,total: number = 0,pages: number = 1 ) {
+    this.current = current
+    this.size = size
+    this.total = total
+    this.pages = pages
   }
+}
+
+/**
+ * 4.表格统一的返回参数格式
+ */
+export class TableListResultModel<T> extends PageModel {
+  /** 数据存放 */
+  records: Array<T> = []
 }

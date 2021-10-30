@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react'
 import { Input, Row, Col, Cascader, DatePicker, Button, Select } from 'antd'
-import { getArticleCategoryApi } from '@/api/modules/article'
+// import { getArticleCategoryApi } from '@/api/modules/article'
 import { ResultCodeEnum } from '@/typescript/shared/enum'
 import { EArticleStatus } from '@/typescript/article/enum'
 import { deepCype } from '@/utils'
@@ -32,21 +32,21 @@ const SelectBoxCom = () => {
   }, [])
   /** 获取文章分类的数据 */
   const initData = async () => {
-    const params = {
-      level: 1,
-      id: undefined
-    }
-    const data = await getArticleCategoryApi(params)
-    if (data.code === ResultCodeEnum.SUCCESS) {
-      const getOptionList = data.data.map(item => {
-        return {
-          value: item.id,
-          label: item.category,
-          isLeaf: false
-        }
-      })
-      setCategoryList(getOptionList)
-    }
+    // const params = {
+    //   level: 1,
+    //   id: undefined
+    // }
+    // const data = await getArticleCategoryApi(params)
+    // if (data.code === ResultCodeEnum.SUCCESS) {
+    //   const getOptionList = data.data.map(item => {
+    //     return {
+    //       value: item.id,
+    //       label: item.category,
+    //       isLeaf: false
+    //     }
+    //   })
+    //   setCategoryList(getOptionList)
+    // }
   }
   /** 动态获取文章分类的数据 */
   const loadArticleData = async selectedOptions => {
@@ -56,20 +56,20 @@ const SelectBoxCom = () => {
       level: 2,
       id: targetOption.value
     }
-    const data = await getArticleCategoryApi(params)
-    if (data.code === ResultCodeEnum.SUCCESS) {
-      if (data.data.length) {
-        targetOption.children = data.data.map(item => {
-          return {
-            value: item.id,
-            label: item.category,
-            isLeaf: true
-          }
-        })
-      } else {
-        targetOption.isLeaf = true
-      }
-    }
+    // const data = await getArticleCategoryApi(params)
+    // if (data.code === ResultCodeEnum.SUCCESS) {
+    //   if (data.data.length) {
+    //     targetOption.children = data.data.map(item => {
+    //       return {
+    //         value: item.id,
+    //         label: item.category,
+    //         isLeaf: true
+    //       }
+    //     })
+    //   } else {
+    //     targetOption.isLeaf = true
+    //   }
+    // }
     targetOption.loading = false
     setCategoryList([...articleCategroyList])
     console.log(targetOption)

@@ -1,21 +1,19 @@
 import axios from '../axiosConfig'
-import { ListRequestModel, ResultModel } from '@/typescript/shared/model'
+import { BaseQueryModel, ResultModel, TableListResultModel } from '@/typescript/shared/model'
 import {
   IArticleBasic,
   IArticleCategory,
   IArticleInsert
 } from '@/typescript/article/interface'
+import { ArticleCategoryModel } from '@/typescript/article/model'
 /** 获取文章列表数据 */
 export const articleListApi = (
-  params: ListRequestModel
+  params: BaseQueryModel
 ): Promise<ResultModel<IArticleBasic[]>> => axios.post('/article/list', params)
 
-/** 获取 文章的分类数据 */
-export const getArticleCategoryApi = (params: {
-  level: number
-  id?: string
-}): Promise<ResultModel<IArticleCategory[]>> =>
-  axios.post(`/article/category`, params)
+/** 获取 文章的分类数据-按照表格类型 */
+export const getArticleCategoryListApi = (params: ArticleCategoryModel): Promise<ResultModel<TableListResultModel<IArticleCategory>>> =>
+  axios.post(`/article-category/list`, params)
 
 /** 文章新增 */
 export const articleInsertApi = (

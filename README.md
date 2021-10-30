@@ -17,7 +17,7 @@
       a: 100,
       b: 200
   }
-
+  
   let obj1 = produce(obj, draft => {
       draft.a = 200
   })
@@ -215,7 +215,7 @@ module.exports = {
 
 # 对于`TS`的使用配置
 
-## `useRef`（在给`useRef`声明类型的时候，`html`标签是什么就声明该类型）
+## 1. `useRef`（在给`useRef`声明类型的时候，`html`标签是什么就声明该类型）
 
 ```tsx
 import React, { useRef } from 'react'
@@ -232,6 +232,32 @@ export default () => {
   )
 }
 ```
+
+
+
+## 2. `TS`定义函数返回元组的时候,代码出现`Line 0: Parsing error: Cannot read property 'map' of undefined`报错
+
+[解决地址参考(需要挂载VPN)]([reactjs - Line 0: Parsing error: Cannot read property 'map' of undefined - Stack Overflow](https://stackoverflow.com/questions/62079477/line-0-parsing-error-cannot-read-property-map-of-undefined))
+
+报错原因是因为安装的`typescript`版本过高导致`eslint`出现问题
+
+直接安装`typescript@^4.3.2   ` `@typescript-eslint/eslint-plugin@^4.25.0` `@typescript-eslint/parser@^4.25.0`三个指定版本的依赖包
+
+如果还是出现问题,试着清空`node_modules`文件夹,重新安装下载,可以试试使用`npm`安装依赖包
+
+```bash
+yarn add typescript@^4.3.2 @typescript-eslint/eslint-plugin@^4.25.0 @typescript-eslint/parser@^4.25.0 -D
+```
+
+
+
+
+
+
+
+
+
+
 
 ```js
 永远跟党走，心中有党，事业理想。
