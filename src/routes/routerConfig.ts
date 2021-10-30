@@ -12,6 +12,7 @@ import { IRouterList } from '@/typescript/router/interface'
 import Dashboard from '@/views/dashboard'
 import Personal from '@/views/personal'
 import Document from '@/views/document'
+import ArticleCategory from '@/views/article/category'
 import ArticleList from '@/views/article/list'
 import ArticleCreate from '@/views/article/create'
 import FirstMenu from '@/views/multilevel-menu/first-menu'
@@ -42,6 +43,11 @@ export const constRoutes: Array<IRouterList> = [
     redirect: '/article/list',
     meta: { icon: DatabaseOutlined, exact: true, title: '文章' },
     children: [
+      {
+        path: '/article/category',
+        meta: { icon: DiffOutlined, title: '文章分类' },
+        component: ArticleCategory
+      },
       {
         path: '/article/list',
         meta: { icon: DiffOutlined, title: '文章列表' },
