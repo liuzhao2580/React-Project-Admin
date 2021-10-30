@@ -1,12 +1,12 @@
-import React, { useState, useEffect } from 'react'
+import React, { useState } from 'react'
 import { Table, Pagination } from 'antd'
 import './index.scss'
 
 import { getArticleCategoryListApi } from '@/api/modules/article'
 import { ArticleCategoryModel } from '@/typescript/article/model'
-import { ResultCodeEnum } from '@/typescript/shared/enum'
 import { IArticleCategory } from '@/typescript/article/interface'
-import { PageModel } from '@/typescript/shared/model'
+
+import {useTableHooks} from '@/utils/hooks'
 
 /** 文章分类列表组件 */
 const CategoryCom = () => {
@@ -14,22 +14,8 @@ const CategoryCom = () => {
     () => new ArticleCategoryModel()
   )
 
-  const [tableList, setTableList] = useState<Array<IArticleCategory>>(() => [])
+  const [tableList,pageParams] =  useTableHooks<IArticleCategory, ArticleCategoryModel>(getArticleCategoryListApi, params)
 
-  const [pageParams, setPageParams] = useState<PageModel>(() => new PageModel())
-
-  // 获取文章数据
-  const getTableList = async () => {
-    const data = await getArticleCategoryListApi(params)
-    if (data.code === ResultCodeEnum.SUCCESS) {
-      setTableList(data.data.records)
-      setPageParams(data.data)
-    }
-  }
-
-  useEffect(() => {
-    getTableList()
-  }, [params])
 
   // 页码改变事件
   const pageChange = (page: number, pageSize)=> {
