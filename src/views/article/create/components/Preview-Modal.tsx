@@ -1,5 +1,5 @@
 import React, { useState } from 'react'
-import { Modal, Radio, Button, message } from 'antd'
+import { Modal, Button, message } from 'antd'
 import { connect } from 'react-redux'
 
 import { IArticleCategory } from '@/typescript/article/interface'
@@ -8,6 +8,7 @@ import { EArticleSaveType } from '@/typescript/article/enum'
 import { articleInsertApi } from '@/api/modules/article'
 import { getUserIdStorage } from '@/utils/modules/commonSave'
 import { ResultCodeEnum } from '@/typescript/shared/enum'
+import CategoryCheckoutCom from './CategoryCheckout'
 
 interface IPreviewModal {
   isModalVisible: boolean
@@ -75,10 +76,10 @@ const PreviewModalCom = (props: IPreviewModal) => {
     let category_name: string = ''
     if (getFindCategory) category_name = getFindCategory.categoryName
     const params = {
-      user_id: getUserIdStorage(),
-      article_title: articleTitle,
-      article_content: articleContent.toString(),
-      article_categoryId: articleCateValue,
+      userId: getUserIdStorage(),
+      title: articleTitle,
+      content: articleContent.toString(),
+      categoryId: articleCateValue,
       category_name,
       status: type
     }
@@ -116,13 +117,7 @@ const PreviewModalCom = (props: IPreviewModal) => {
         ></div>
         {/* 文章分类选择 */}
         <div className="article-categroy">
-          <Radio.Group onChange={changeArticleCate} value={articleCateValue}>
-            {articleCateList.map((item, index) => (
-              <Radio value={item.id} key={item.id}>
-                {item.categoryName}
-              </Radio>
-            ))}
-          </Radio.Group>
+          <CategoryCheckoutCom articleCateList={articleCateList}/>
         </div>
       </Modal>
     </div>

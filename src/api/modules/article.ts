@@ -15,6 +15,10 @@ export const articleListApi = (
 export const getArticleCategoryListApi = (params: ArticleCategoryModel): Promise<ResultModel<TableListResultModel<IArticleCategory>>> =>
   axios.post(`/article-category/list`, params)
 
+/** 获取 查询文章分类数据-按照level */ 
+export const getArticleCategoryByLevelApi = (level: number): Promise<ResultModel<Array<IArticleCategory>>> =>
+  axios.get(`/article-category/${level}`)
+
 /** 文章新增 */
 export const articleInsertApi = (
   params: IArticleInsert
