@@ -1,12 +1,12 @@
 import React, { useState } from 'react'
-import { Table, Pagination } from 'antd'
+import { Table, Pagination, Spin } from 'antd'
 import './index.scss'
 
 import { getArticleCategoryListApi } from '@/api/modules/article'
 import { ArticleCategoryModel } from '@/typescript/article/model'
 import { IArticleCategory } from '@/typescript/article/interface'
 
-import {useTableHooks} from '@/utils/hooks'
+import { useTableHooks } from '@/utils/hooks'
 
 /** 文章分类列表组件 */
 const CategoryCom = () => {
@@ -14,13 +14,14 @@ const CategoryCom = () => {
     () => new ArticleCategoryModel()
   )
 
-  const [tableList,pageParams] =  useTableHooks<IArticleCategory, ArticleCategoryModel>(getArticleCategoryListApi, params)
-
+  const [tableList, pageParams, tableLoading] = useTableHooks<
+    IArticleCategory,
+    ArticleCategoryModel
+  >(getArticleCategoryListApi, params)
 
   // 页码改变事件
-  const pageChange = (page: number, pageSize)=> {
-    console.log(page, pageSize, '222')
-    const params:ArticleCategoryModel = {
+  const pageChange = (page: number, pageSize) => {
+    const params: ArticleCategoryModel = {
       pageNum: page,
       pageSize: pageSize
     }
@@ -61,12 +62,14 @@ const CategoryCom = () => {
       <div className="article-category-com-header"></div>
       {/* 列表 */}
       <div className="article-category-com-table">
-        <Table
-          pagination={false}
-          rowKey="id"
-          columns={columns}
-          dataSource={tableList}
-        />
+        <Spin spinning={tableLoading} delay={300}>
+          <Table
+            pagination={false}
+            rowKey="id"
+            columns={columns}
+            dataSource={tableList}
+          />
+        </Spin>
       </div>
       {/* 分页数据 */}
       <div className="article-category-com-page">
