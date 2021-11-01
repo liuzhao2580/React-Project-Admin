@@ -1,4 +1,4 @@
-import React, { useState, useEffect, useCallback } from 'react'
+import React, { useState, useCallback } from 'react'
 import {
   Table,
   Tag,
@@ -28,38 +28,19 @@ import { tranSpecifyType } from '@/utils'
 import { ResultCodeEnum } from '@/typescript/shared/enum'
 
 import SelectBoxCom from './components/Select-box'
-import { BaseQueryModel } from '@/typescript/shared/model'
+import { useTableHooks } from '@/utils/hooks'
+import { ArticleListParamsModel } from '@/typescript/article/model'
 
 const ArticleList: React.FC<any> = () => {
-  // 表格的数据
-  const [tableData, setTableData] = useState<IArticleBasic[]>([])
-  // 表格加载中
-  const [tableLoading, setTableLoading] = useState(false)
-  // 数据总数
-  const [total, setTotal] = useState(0)
-  // 每页条数
-  const [pageSize, setPageSize] = useState(10)
-  // 当前页
-  const [pageNum, setPageNum] = useState(1)
-  /** 获取文章数据列表 */
-  const initArticleList = useCallback(() => {
-    ;(async function () {
-      setTableLoading(true)
-      /** 页码 */
-      const params: BaseQueryModel = {
-        pageNum,
-        pageSize
-      }
-      const data = await articleListApi(params)
-      setTableData(data.data)
-      setTotal(data.total)
-      setTableLoading(false)
-    })()
-  }, [pageNum, pageSize])
+  const [params, setParams] = useState<ArticleListParamsModel>(
+    () => new ArticleListParamsModel()
+  )
 
-  useEffect(() => {
-    initArticleList()
-  }, [initArticleList])
+  // 表格的数据
+  const [tableData, pageParams, tableLoading, setReloadFlag] = useTableHooks<
+    IArticleBasic,
+    ArticleListParamsModel
+  >(articleListApi, params)
 
   // 设置文章状态的 tag样式
   function statusTran(value: EArticleStatus) {
@@ -98,6 +79,7 @@ const ArticleList: React.FC<any> = () => {
       </Tag>
     )
   }
+
   /** 文章删除 */
   const deteleClick = useCallback(
     async (text, record: IArticleBasic, index) => {
@@ -105,10 +87,10 @@ const ArticleList: React.FC<any> = () => {
       const data = await articleDeleteApi(id)
       if (data.code === ResultCodeEnum.SUCCESS) {
         message.success('删除成功')
-        initArticleList()
+        setReloadFlag(true)
       }
     },
-    [initArticleList]
+    [setReloadFlag]
   )
 
   const columns = [
@@ -116,29 +98,29 @@ const ArticleList: React.FC<any> = () => {
       title: '序号',
       detaIndex: 'index',
       render: (text, record, index) => {
-        return pageSize * (pageNum - 1) + index + 1
+        return (pageParams.current - 1) * pageParams.size + index + 1
       }
     },
     {
       title: '文章标题',
-      dataIndex: 'article_title'
+      dataIndex: 'title'
     },
     {
       title: '一级分类',
-      dataIndex: 'category_parentName'
+      dataIndex: 'categoryParentName'
     },
     {
       title: '二级分类',
-      dataIndex: 'category_name'
+      dataIndex: 'categoryName'
     },
     {
       title: '创建时间',
-      dataIndex: 'article_time',
+      dataIndex: 'createTime',
       render: text => <span>{formateNormalTime(text, ITimeType.NYRSFM)}</span>
     },
     {
       title: '更新时间',
-      dataIndex: 'article_update_time',
+      dataIndex: 'updateTime',
       render: text => <span>{formateNormalTime(text, ITimeType.NYRSFM)}</span>
     },
     {
@@ -178,11 +160,9 @@ const ArticleList: React.FC<any> = () => {
       )
     }
   ]
+
   /** 页码或 pageSize 改变的回调*/
-  const onPageChange = useCallback((page, pageSize) => {
-    setPageNum(page)
-    setPageSize(pageSize)
-  }, [])
+  const onPageChange = () => setParams(params)
 
   return (
     <div className="article-list-box">
@@ -192,7 +172,7 @@ const ArticleList: React.FC<any> = () => {
       </div>
       {/* 表格 */}
       <Table
-        rowKey="_id"
+        rowKey="id"
         bordered
         loading={tableLoading}
         columns={columns}
@@ -202,9 +182,9 @@ const ArticleList: React.FC<any> = () => {
       {/* 分页 */}
       <div className="page-box">
         <Pagination
-          total={total}
-          pageSize={pageSize}
-          current={pageNum}
+          total={pageParams.total}
+          pageSize={pageParams.size}
+          current={pageParams.current}
           onChange={onPageChange}
           showSizeChanger
           showQuickJumper

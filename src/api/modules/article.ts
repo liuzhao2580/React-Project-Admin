@@ -9,7 +9,7 @@ import { ArticleCategoryModel } from '@/typescript/article/model'
 /** 获取文章列表数据 */
 export const articleListApi = (
   params: BaseQueryModel
-): Promise<ResultModel<IArticleBasic[]>> => axios.post('/article/list', params)
+): Promise<ResultModel<TableListResultModel<IArticleBasic>>> => axios.post('/article/list', params)
 
 /** 获取 文章的分类数据-按照表格类型 */
 export const getArticleCategoryListApi = (params: ArticleCategoryModel): Promise<ResultModel<TableListResultModel<IArticleCategory>>> =>
@@ -26,4 +26,4 @@ export const articleInsertApi = (
 
 /** 文章删除 */
 export const articleDeleteApi = (id: string): Promise<ResultModel<any>> =>
-  axios.delete(`/article/delete/${id}`)
+  axios.delete(`/article/${id}`)
