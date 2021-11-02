@@ -1,5 +1,6 @@
 import ACTIONS_TYPE from './actions-type'
-export default {
+
+const actions = {
   /** 获取用户的基本信息 */
   getUserInfo(data: any) {
     return {
@@ -8,3 +9,5 @@ export default {
     }
   }
 }
+
+export default actions

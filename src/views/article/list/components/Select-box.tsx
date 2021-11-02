@@ -1,4 +1,10 @@
-import React, { useState, useEffect, useCallback } from 'react'
+import React, {
+  useState,
+  useEffect,
+  useCallback,
+  Dispatch,
+  SetStateAction
+} from 'react'
 import { Input, Row, Col, Cascader, DatePicker, Button, Select } from 'antd'
 import { getArticleCategoryByLazyApi } from '@/api/modules/article'
 import { ResultCodeEnum } from '@/typescript/shared/enum'
@@ -13,12 +19,15 @@ const { RangePicker } = DatePicker
 
 interface ICom {
   params: ArticleListParamsModel
+  setParams: Dispatch<SetStateAction<ArticleListParamsModel>>
   // 传递 参数
   selectBtnParams: () => void
+  // 重置
+  resetBtn: () => void
 }
 /** 筛选条件 */
 const SelectBoxCom = (props: ICom) => {
-  const { params, selectBtnParams } = props
+  const { params, setParams, selectBtnParams, resetBtn } = props
   // 分类数据传递的参数
   let cascaderParams: IArticleCategoryByLazy = {
     level: 1,
@@ -87,22 +96,32 @@ const SelectBoxCom = (props: ICom) => {
   }
 
   /** 关键字查询 */
-  const inputChange = e => {
-    params.title = e.target.value
-  }
+  const inputChange = useCallback(e => {
+    setParams((prev)=> {
+      return {...prev, ...{title: e.target.value}}
+    })
+  // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [])
   // 文章状态
   const statusChange = useCallback(value => {
-    params.status = +value
+    setParams((prev)=> {
+      return {...prev, ...{status: value}}
+    })
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [])
   /** 文章分类选择器 */
-  const categoryChange = (value) => {
-    params.categoryId = value[value.length - 1]
+  const categoryChange = value => {
+    setParams((prev)=> {
+      return {...prev, ...{categoryId: value[value.length - 1]}}
+    })
   }
 
   /** 时间选择器改变事件 */
-  const timeChange = (value) => {
-    if(!value) return
-    params.time = value.map(item => moment(item).format("YYYY-MM-DD"))
+  const timeChange = value => {
+    if (!value) return
+    setParams((prev)=> {
+      return {...prev, ...{time: value.map(item => moment(item).format('YYYY-MM-DD'))}}
+    })
   }
 
   return (
@@ -118,6 +137,7 @@ const SelectBoxCom = (props: ICom) => {
       <Col xs={12} md={6} lg={6} xl={4}>
         <Select
           options={articleStatusList}
+          value={params.status}
           placeholder="请选择文章状态"
           onChange={statusChange}
           style={{ width: '100%' }}
@@ -147,7 +167,9 @@ const SelectBoxCom = (props: ICom) => {
         >
           查询
         </Button>
-        <Button type="primary">重置</Button>
+        <Button type="primary" onClick={resetBtn}>
+          重置
+        </Button>
       </Col>
     </Row>
   )

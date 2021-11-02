@@ -12,12 +12,6 @@ export class ResultModel<T> {
   public msg!: string
   /** 返回的数据 T 可能是数组、对象 */
   public data!: T
-  /** 如果是列表 返回有分页页码 */
-  public pageNum?: number
-  /** 如果是列表 返回有分页每页条数 */
-  public pageSize!: number
-  /** 如果是列表 返回有数据总条数 */
-  public total!: number
 }
 
 /**
@@ -28,6 +22,11 @@ export class BaseQueryModel {
   pageNum: number = 1
   /** 每页条数 */
   pageSize: number = 10
+
+  constructor(pageNum: number = 1, pageSize: number = 10 ) {
+    this.pageNum = pageNum
+    this.pageSize = pageSize
+  }
 }
 
 /**
@@ -57,3 +56,4 @@ export class TableListResultModel<T> extends PageModel {
   /** 数据存放 */
   records: Array<T> = []
 }
+

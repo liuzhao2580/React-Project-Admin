@@ -1,6 +1,6 @@
 import ACTIONS_TYPE from './actions-type'
 
-export default {
+const actions = {
   /** 新增 todolist */
   insertTodoList(data) {
     return {
@@ -9,3 +9,5 @@ export default {
     }
   }
 }
+
+export default actions

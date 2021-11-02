@@ -5,7 +5,8 @@ import {
   Redirect
 } from 'react-router-dom'
 import { constRoutes } from './routerConfig'
-export default () => {
+
+const Routes = () => {
   const routesFunc = (Routes = constRoutes) => {
     return Routes.map(router => {
       if (!router.children) {
@@ -35,3 +36,6 @@ export default () => {
   )
   return <Switch>{getRoutes}</Switch>
 }
+
+
+export default Routes

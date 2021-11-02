@@ -1,8 +1,19 @@
 /** 公用的hooks */
-import { useState, useRef, useEffect, Dispatch, SetStateAction } from 'react'
+import {
+  useState,
+  useRef,
+  useEffect,
+  Dispatch,
+  SetStateAction,
+  useCallback
+} from 'react'
 
 import { ResultCodeEnum } from '@/typescript/shared/enum'
-import { ResultModel, TableListResultModel } from '@/typescript/shared/model'
+import {
+  BaseQueryModel,
+  ResultModel,
+  TableListResultModel
+} from '@/typescript/shared/model'
 import { PageModel } from '@/typescript/shared/model'
 
 /** 自定义设置 useState */
@@ -37,7 +48,7 @@ type ToupleTable<T> = [
 ]
 
 /** 用来统一处理表格的 自定义 hooks */
-export const useTableHooks = <T, E>(
+export const useTableHooks = <T, E extends BaseQueryModel>(
   callback: (params: E) => Promise<ResultModel<TableListResultModel<T>>>,
   params: E
 ): ToupleTable<T> => {
@@ -50,7 +61,7 @@ export const useTableHooks = <T, E>(
   // 表格是否需要重新加载
   const [reloadFlag, setReloadFlag] = useState<boolean>(() => false)
 
-  const getTableList = async function () {
+  const getTableList = useCallback(async function () {
     setLoading(() => true)
     try {
       const data = await callback(params)
@@ -62,19 +73,21 @@ export const useTableHooks = <T, E>(
       console.log(error, '')
     } finally {
       setLoading(() => false)
-      setReloadFlag(()=> false)
+      setReloadFlag(() => false)
     }
-  }
-
-  // 用来监听查询参数的变化,用来调取数据
-  useEffect(() => {
-    getTableList()
+    // 当 传递的参数变化的时候,需要更新 useCallback
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [params])
 
+  // 用来监听页码和页数的改变,用来调取数据
+  useEffect(() => {
+    getTableList()
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [params.pageNum, params.pageSize])
+
   // 用来监听是否需要重新获取数据---手动
   useEffect(() => {
-    if(reloadFlag) {
+    if (reloadFlag) {
       getTableList()
     }
     // eslint-disable-next-line react-hooks/exhaustive-deps

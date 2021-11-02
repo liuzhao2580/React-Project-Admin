@@ -1,5 +1,6 @@
 import ACTIONS_TYPE from './actions-type'
-export default {
+
+const actions = {
   /** 修改侧边栏状态 */
   changeSiderStatus(data: boolean) {
     return {
@@ -22,3 +23,5 @@ export default {
     }
   }
 }
+
+export default actions

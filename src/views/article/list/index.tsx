@@ -162,19 +162,43 @@ const ArticleList: React.FC<any> = () => {
   ]
 
   /** 页码或 pageSize 改变的回调*/
-  const onPageChange = () => setParams(params)
-
+  const onPageChange = useCallback((page: number, pageSize?: number) => {
+    setParams(prev => {
+      return { ...prev, ...{ pageNum: page, pageSize: pageSize as number } }
+    })
+  }, [])
 
   /** 查询按钮 */
-  const selectBtnParams = ():void => {
-    setReloadFlag(true)
+  const selectBtnParams = (): void => {
+    console.log(params, 'params')
+    setReloadFlag(()=>true)
   }
+
+  /** 重置按钮 */
+  const resetBtn = useCallback(() => {
+    setParams(() => {
+      return {
+        title: '',
+        pageNum: 1,
+        pageSize: 10,
+        time: undefined,
+        status: undefined
+      }
+    })
+    setReloadFlag(true)
+  // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [])
 
   return (
     <div className="article-list-box">
       {/* 筛选按钮 */}
       <div className="select-box">
-        <SelectBoxCom params={params} selectBtnParams={selectBtnParams}/>
+        <SelectBoxCom
+          params={params}
+          setParams={setParams}
+          selectBtnParams={selectBtnParams}
+          resetBtn={resetBtn}
+        />
       </div>
       {/* 表格 */}
       <Table

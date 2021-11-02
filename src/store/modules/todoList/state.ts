@@ -1,4 +1,5 @@
-export default {
+
+const state = {
   inputValue: 'hello world',
   list: [
     {
@@ -15,3 +16,4 @@ export default {
     }
   ]
 }
+export default state

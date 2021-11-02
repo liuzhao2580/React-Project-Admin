@@ -1,5 +1,4 @@
-import React, { useState } from 'react'
-import {  useHistory } from 'react-router-dom'
+import { useState } from 'react'
 import { Modal, Button, message, RadioChangeEvent } from 'antd'
 import { connect } from 'react-redux'
 
@@ -30,7 +29,6 @@ const PreviewModalCom = (props: IPreviewModal) => {
   const { isModalVisible, articleCateList, articleContent, articleTitle } =
     props
 
-  const history = useHistory()
 
   /** 文章分类改变事件 */
   const changeArticleCate = (e: RadioChangeEvent): void => {
