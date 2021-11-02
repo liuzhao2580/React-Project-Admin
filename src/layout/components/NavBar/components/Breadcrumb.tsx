@@ -16,7 +16,6 @@ const BreadcrumbDom = () => {
   // 每次路由切换的时候 面包屑变换
   const breadcrumbChange = (pathname: string) => {
     function findBreadcrumb(routePATH) {
-      console.log(pathname.indexOf(routePATH), routePATH, 'routePATH')
       if (pathname.indexOf(routePATH) === -1) return false
       else return true
     }
@@ -30,7 +29,7 @@ const BreadcrumbDom = () => {
         if (!item.children) {
           // 说明该路由显示在面包屑上
           if (item.meta?.breadcrumbShowFlag !== false) {
-            if (findBreadcrumb(item.path)) getRouters.push(item)
+            if (findBreadcrumb(item.path) || item.meta?.detailPageFlag) getRouters.push(item)
           }
         } else {
           if (
@@ -46,7 +45,6 @@ const BreadcrumbDom = () => {
     routerLoop()
     setBreadcrumbArr([...getRouters])
   }
-  console.log(breadcrumbArr, 'breadcrumbArr')
   return (
     <Breadcrumb className="breadcrumb-box">
       <Breadcrumb.Item>

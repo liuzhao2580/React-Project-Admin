@@ -2,7 +2,6 @@ import React, { useState, useCallback } from 'react'
 import { useHistory } from 'react-router-dom'
 import {
   Table,
-  Tag,
   Space,
   Button,
   Popconfirm,
@@ -12,11 +11,6 @@ import {
 import {
   CloseOutlined,
   EditOutlined,
-  ClockCircleOutlined,
-  CloseCircleOutlined,
-  CheckCircleOutlined,
-  MinusCircleOutlined,
-  InboxOutlined,
   EyeOutlined
 } from '@ant-design/icons'
 import './index.scss'
@@ -26,12 +20,12 @@ import { IArticleBasic } from '@/typescript/article/interface'
 import { EArticleStatus } from '@/typescript/article/enum'
 
 import { ITimeType, formateNormalTime } from '@/utils/modules/time-utils'
-import { tranSpecifyType } from '@/utils'
 import { ResultCodeEnum } from '@/typescript/shared/enum'
 
 import SelectBoxCom from './components/Select-box'
 import { useTableHooks } from '@/utils/hooks'
 import { ArticleListParamsModel } from '@/typescript/article/model'
+import ArticleStatusCom from '../components/ArticleStatus'
 
 const ArticleList: React.FC<any> = () => {
 
@@ -46,44 +40,6 @@ const ArticleList: React.FC<any> = () => {
     IArticleBasic,
     ArticleListParamsModel
   >(articleListApi, params)
-
-  // 设置文章状态的 tag样式
-  function statusTran(value: EArticleStatus) {
-    let tagColor = '#2db7f5'
-    let tagIcon = <ClockCircleOutlined />
-    switch (value) {
-      // 已删除
-      case EArticleStatus.已删除:
-        tagColor = 'error'
-        tagIcon = <CloseCircleOutlined />
-        break
-      // 待审核
-      case EArticleStatus.待审核:
-        tagColor = 'default'
-        tagIcon = <ClockCircleOutlined />
-        break
-      // 草稿箱
-      case EArticleStatus.草稿箱:
-        tagColor = '#4e72b8'
-        tagIcon = <InboxOutlined />
-        break
-      // 被驳回
-      case EArticleStatus.被驳回:
-        tagColor = '#ed1941'
-        tagIcon = <MinusCircleOutlined />
-        break
-      // 已发布
-      case EArticleStatus.已发布:
-        tagColor = 'success'
-        tagIcon = <CheckCircleOutlined />
-        break
-    }
-    return (
-      <Tag color={tagColor} icon={tagIcon}>
-        {tranSpecifyType(value, EArticleStatus)}
-      </Tag>
-    )
-  }
 
   /** 文章删除 */
   const deteleClick = useCallback(
@@ -139,7 +95,7 @@ const ArticleList: React.FC<any> = () => {
       title: '文章状态',
       dataIndex: 'status',
       width: 100,
-      render: (text: EArticleStatus) => <>{statusTran(text)}</>
+      render: (text: EArticleStatus) => <ArticleStatusCom status={text}/>
     },
     {
       title: '操作',
