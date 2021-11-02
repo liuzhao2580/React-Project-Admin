@@ -1,15 +1,33 @@
-import React, { useState, useEffect } from 'react'
+import React, { useState, useEffect, useCallback } from 'react'
 import { Input, Row, Col, Cascader, DatePicker, Button, Select } from 'antd'
-// import { getArticleCategoryApi } from '@/api/modules/article'
+import { getArticleCategoryByLazyApi } from '@/api/modules/article'
 import { ResultCodeEnum } from '@/typescript/shared/enum'
 import { EArticleStatus } from '@/typescript/article/enum'
 import { deepCype } from '@/utils'
+import { ArticleListParamsModel } from '@/typescript/article/model'
+import { IArticleCategoryByLazy } from '@/typescript/article/interface'
+import { CascaderOptionType } from 'antd/lib/cascader'
+import moment from 'moment'
 
 const { RangePicker } = DatePicker
+
+interface ICom {
+  params: ArticleListParamsModel
+  // 传递 参数
+  selectBtnParams: () => void
+}
 /** 筛选条件 */
-const SelectBoxCom = () => {
+const SelectBoxCom = (props: ICom) => {
+  const { params, selectBtnParams } = props
+  // 分类数据传递的参数
+  let cascaderParams: IArticleCategoryByLazy = {
+    level: 1,
+    parentId: ''
+  }
   // 获取分类数据
-  const [articleCategroyList, setCategoryList] = useState<any[]>([])
+  const [articleCategroyList, setCategoryList] = useState<CascaderOptionType[]>(
+    () => []
+  )
   // 获取文章状态
   const [articleStatusList] = useState<any[]>(() => {
     const getEnum = deepCype(EArticleStatus)
@@ -28,66 +46,80 @@ const SelectBoxCom = () => {
     return arr
   })
   useEffect(() => {
-    initData()
+    loadArticleData()
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [])
-  /** 获取文章分类的数据 */
-  const initData = async () => {
-    // const params = {
-    //   level: 1,
-    //   id: undefined
-    // }
-    // const data = await getArticleCategoryApi(params)
-    // if (data.code === ResultCodeEnum.SUCCESS) {
-    //   const getOptionList = data.data.map(item => {
-    //     return {
-    //       value: item.id,
-    //       label: item.category,
-    //       isLeaf: false
-    //     }
-    //   })
-    //   setCategoryList(getOptionList)
-    // }
-  }
   /** 动态获取文章分类的数据 */
-  const loadArticleData = async selectedOptions => {
-    const targetOption = selectedOptions[selectedOptions.length - 1]
-    targetOption.loading = true
-    const params = {
-      level: 2,
-      id: targetOption.value
+  const loadArticleData = async (selectedOptions?: CascaderOptionType[]) => {
+    let targetOption: CascaderOptionType = {}
+    if (selectedOptions) {
+      cascaderParams = {
+        level: cascaderParams.level + 1,
+        parentId: selectedOptions[0].value as string
+      }
+      targetOption = selectedOptions[selectedOptions.length - 1]
     }
-    // const data = await getArticleCategoryApi(params)
-    // if (data.code === ResultCodeEnum.SUCCESS) {
-    //   if (data.data.length) {
-    //     targetOption.children = data.data.map(item => {
-    //       return {
-    //         value: item.id,
-    //         label: item.category,
-    //         isLeaf: true
-    //       }
-    //     })
-    //   } else {
-    //     targetOption.isLeaf = true
-    //   }
-    // }
-    targetOption.loading = false
-    setCategoryList([...articleCategroyList])
-    console.log(targetOption)
+    targetOption.loading = true
+    const data = await getArticleCategoryByLazyApi(cascaderParams)
+    if (data.code === ResultCodeEnum.SUCCESS) {
+      if (cascaderParams.level === 1) {
+        setCategoryList(() => {
+          return data.data.map(item => {
+            return {
+              label: item.categoryName,
+              value: item.id,
+              isLeaf: false
+            }
+          })
+        })
+      } else {
+        targetOption.children = data.data.map(item => {
+          return {
+            label: item.categoryName,
+            value: item.id,
+            isLeaf: true
+          }
+        })
+        targetOption.loading = false
+        setCategoryList([...articleCategroyList])
+      }
+    }
   }
-  function onChange(value) {
-    console.log(value)
+
+  /** 关键字查询 */
+  const inputChange = e => {
+    params.title = e.target.value
   }
+  // 文章状态
+  const statusChange = useCallback(value => {
+    params.status = +value
+  }, [])
+  /** 文章分类选择器 */
+  const categoryChange = (value) => {
+    params.categoryId = value[value.length - 1]
+  }
+
+  /** 时间选择器改变事件 */
+  const timeChange = (value) => {
+    if(!value) return
+    params.time = value.map(item => moment(item).format("YYYY-MM-DD"))
+  }
+
   return (
     <Row gutter={12}>
       <Col xs={12} md={6} lg={6} xl={4}>
-        <Input placeholder="请输入关键字" />
+        <Input
+          placeholder="请输入文章标题"
+          value={params.title}
+          onChange={inputChange}
+        />
       </Col>
       {/* 文章状态 */}
       <Col xs={12} md={6} lg={6} xl={4}>
         <Select
           options={articleStatusList}
           placeholder="请选择文章状态"
-          onChange={onChange}
+          onChange={statusChange}
           style={{ width: '100%' }}
         ></Select>
       </Col>
@@ -97,18 +129,22 @@ const SelectBoxCom = () => {
           options={articleCategroyList}
           placeholder="请选择文章分类"
           loadData={loadArticleData}
-          onChange={onChange}
+          onChange={categoryChange}
           changeOnSelect
           style={{ width: '100%' }}
         />
       </Col>
       {/* 时间选择器 */}
       <Col xs={12} md={6} lg={6} xl={6}>
-        <RangePicker style={{ width: '100%' }} />
+        <RangePicker style={{ width: '100%' }} onChange={timeChange} />
       </Col>
       {/* 按钮 */}
       <Col xs={12} md={6} lg={6} xl={4}>
-        <Button type="primary" style={{ marginRight: '10px' }}>
+        <Button
+          type="primary"
+          style={{ marginRight: '10px' }}
+          onClick={selectBtnParams}
+        >
           查询
         </Button>
         <Button type="primary">重置</Button>

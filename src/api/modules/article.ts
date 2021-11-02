@@ -1,14 +1,15 @@
 import axios from '../axiosConfig'
-import { BaseQueryModel, ResultModel, TableListResultModel } from '@/typescript/shared/model'
+import { ResultModel, TableListResultModel } from '@/typescript/shared/model'
 import {
   IArticleBasic,
   IArticleCategory,
+  IArticleCategoryByLazy,
   IArticleInsert
 } from '@/typescript/article/interface'
-import { ArticleCategoryModel } from '@/typescript/article/model'
+import { ArticleCategoryModel, ArticleListParamsModel } from '@/typescript/article/model'
 /** 获取文章列表数据 */
 export const articleListApi = (
-  params: BaseQueryModel
+  params: ArticleListParamsModel
 ): Promise<ResultModel<TableListResultModel<IArticleBasic>>> => axios.post('/article/list', params)
 
 /** 获取 文章的分类数据-按照表格类型 */
@@ -18,6 +19,9 @@ export const getArticleCategoryListApi = (params: ArticleCategoryModel): Promise
 /** 获取 查询文章分类数据-按照level */ 
 export const getArticleCategoryByLevelApi = (level: number): Promise<ResultModel<Array<IArticleCategory>>> =>
   axios.get(`/article-category/${level}`)
+
+/** 懒加载的形式   获取文章的数据 */
+export const getArticleCategoryByLazyApi = (params: IArticleCategoryByLazy):Promise<ResultModel<IArticleCategory[]>> => axios.post('/article-category/lazy-tree', params)
 
 /** 文章新增 */
 export const articleInsertApi = (

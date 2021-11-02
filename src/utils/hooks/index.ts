@@ -48,7 +48,7 @@ export const useTableHooks = <T, E>(
   // 表格的加载状态
   const [loading, setLoading] = useState<boolean>(() => false)
   // 表格是否需要重新加载
-  const [reloadFlag, setReloadFlag] = useState<boolean>(() => true)
+  const [reloadFlag, setReloadFlag] = useState<boolean>(() => false)
 
   const getTableList = async function () {
     setLoading(() => true)

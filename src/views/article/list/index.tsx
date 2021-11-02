@@ -164,11 +164,17 @@ const ArticleList: React.FC<any> = () => {
   /** 页码或 pageSize 改变的回调*/
   const onPageChange = () => setParams(params)
 
+
+  /** 查询按钮 */
+  const selectBtnParams = ():void => {
+    setReloadFlag(true)
+  }
+
   return (
     <div className="article-list-box">
       {/* 筛选按钮 */}
       <div className="select-box">
-        <SelectBoxCom />
+        <SelectBoxCom params={params} selectBtnParams={selectBtnParams}/>
       </div>
       {/* 表格 */}
       <Table

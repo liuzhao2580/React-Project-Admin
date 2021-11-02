@@ -1,5 +1,6 @@
 import React, { useState } from 'react'
-import { Modal, Button, message } from 'antd'
+import {  useHistory } from 'react-router-dom'
+import { Modal, Button, message, RadioChangeEvent } from 'antd'
 import { connect } from 'react-redux'
 
 import { IArticleCategory } from '@/typescript/article/interface'
@@ -8,7 +9,7 @@ import { EArticleSaveType } from '@/typescript/article/enum'
 import { articleInsertApi } from '@/api/modules/article'
 import { getUserIdStorage } from '@/utils/modules/commonSave'
 import { ResultCodeEnum } from '@/typescript/shared/enum'
-import CategoryCheckoutCom from './CategoryCheckout'
+import CategoryCheckoutCom from './CategoryRadio'
 
 interface IPreviewModal {
   isModalVisible: boolean
@@ -29,8 +30,10 @@ const PreviewModalCom = (props: IPreviewModal) => {
   const { isModalVisible, articleCateList, articleContent, articleTitle } =
     props
 
+  const history = useHistory()
+
   /** 文章分类改变事件 */
-  const changeArticleCate = e => {
+  const changeArticleCate = (e: RadioChangeEvent): void => {
     setArticleConfirmDisabled(false)
     setArticleCateValue(e.target.value)
   }
@@ -69,18 +72,11 @@ const PreviewModalCom = (props: IPreviewModal) => {
 
   /** 保存为草稿 或者 提交 */
   const handleConfirm = async (type: EArticleSaveType) => {
-    // 用来获取 分类的中文名称
-    const getFindCategory = articleCateList.find(
-      item => item.id === articleCateValue
-    )
-    let category_name: string = ''
-    if (getFindCategory) category_name = getFindCategory.categoryName
     const params = {
       userId: getUserIdStorage(),
       title: articleTitle,
       content: articleContent.toString(),
       categoryId: articleCateValue,
-      category_name,
       status: type
     }
     setArticleLoading(true)
@@ -117,7 +113,10 @@ const PreviewModalCom = (props: IPreviewModal) => {
         ></div>
         {/* 文章分类选择 */}
         <div className="article-categroy">
-          <CategoryCheckoutCom articleCateList={articleCateList}/>
+          <CategoryCheckoutCom
+            articleCateList={articleCateList}
+            changeArticleCate={changeArticleCate}
+          />
         </div>
       </Modal>
     </div>
