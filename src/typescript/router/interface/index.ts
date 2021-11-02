@@ -21,6 +21,8 @@ export interface IMeta {
   breadcrumbShowFlag?: boolean
   /** 面包屑是否可被点击 默认true 可以被点击 false 不可被点击 */
   breadcrumbClickFlag?: boolean
+  /** 是否是详情页面 形式是 :id  显示在面包屑 */
+  detailPageFlag?: boolean
   /** 是否固定 */
   exact?: boolean
   /** 侧边栏的名称 */

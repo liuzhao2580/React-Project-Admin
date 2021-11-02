@@ -14,6 +14,7 @@ import Personal from '@/views/personal'
 import Document from '@/views/document'
 import ArticleCategory from '@/views/article/category'
 import ArticleList from '@/views/article/list'
+import ArticleDetails from '@/views/article/details'
 import ArticleCreate from '@/views/article/create'
 import FirstMenu from '@/views/multilevel-menu/first-menu'
 import SecondMenu from '@/views/multilevel-menu/second-menu'
@@ -52,6 +53,11 @@ export const constRoutes: Array<IRouterList> = [
         path: '/article/list',
         meta: { icon: DiffOutlined, title: '文章列表' },
         component: ArticleList
+      },
+      {
+        path: '/article/:id',
+        meta: { hidden: true,detailPageFlag:true, title: '文章预览' },
+        component: ArticleDetails
       },
       {
         path: '/article/create',

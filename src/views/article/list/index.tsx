@@ -1,4 +1,5 @@
 import React, { useState, useCallback } from 'react'
+import { useHistory } from 'react-router-dom'
 import {
   Table,
   Tag,
@@ -15,7 +16,8 @@ import {
   CloseCircleOutlined,
   CheckCircleOutlined,
   MinusCircleOutlined,
-  InboxOutlined
+  InboxOutlined,
+  EyeOutlined
 } from '@ant-design/icons'
 import './index.scss'
 
@@ -32,6 +34,9 @@ import { useTableHooks } from '@/utils/hooks'
 import { ArticleListParamsModel } from '@/typescript/article/model'
 
 const ArticleList: React.FC<any> = () => {
+
+  const history = useHistory()
+
   const [params, setParams] = useState<ArticleListParamsModel>(
     () => new ArticleListParamsModel()
   )
@@ -93,6 +98,13 @@ const ArticleList: React.FC<any> = () => {
     [setReloadFlag]
   )
 
+  /** 文章预览 */
+  const previewClick = useCallback((record: IArticleBasic)=> {
+    const { id } = record
+    history.push(`/article/${id}`)
+  // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [])
+
   const columns = [
     {
       title: '序号',
@@ -135,6 +147,14 @@ const ArticleList: React.FC<any> = () => {
       width: 100,
       render: (text, record, index) => (
         <Space size="small">
+          <Button
+            title="预览"
+            shape="circle"
+            size="small"
+            type="primary"
+            icon={<EyeOutlined />}
+            onClick={()=>previewClick(record)}
+          ></Button>
           <Button
             title="编辑"
             shape="circle"
