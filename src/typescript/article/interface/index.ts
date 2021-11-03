@@ -18,6 +18,8 @@ export interface IArticleBasic {
   categoryParentName: string
   /** 创建者 id */
   userId: string
+  /** 创建者 名称 */
+  nickName: string
   /** 创建时间 */
   createTime: Date
   /** 文章的状态 */
