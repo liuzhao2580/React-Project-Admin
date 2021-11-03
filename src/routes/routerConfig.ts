@@ -55,15 +55,15 @@ export const constRoutes: Array<IRouterList> = [
         component: ArticleList
       },
       {
-        path: '/article/create',
-        meta: { icon: FileAddOutlined, title: '文章创建' },
-        component: ArticleCreate
-      },
-      {
-        path: '/article/:id',
+        path: '/article/:id(\\d+)',
         meta: { hidden: true,detailPageFlag:true, title: '文章预览' },
         component: ArticleDetails
       },
+      {
+        path: '/article/create',
+        meta: { icon: FileAddOutlined, title: '文章创建' },
+        component: ArticleCreate
+      }
     ]
   },
   // 多级菜单
