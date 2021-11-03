@@ -38,7 +38,14 @@
       &-right {
         display: flex;
         align-items: center;
+        &-edit {
+          cursor: pointer;
+          color: $color;
+        }
       }
     }
+  }
+  &-container {
+    padding: 10px;
   }
 }
