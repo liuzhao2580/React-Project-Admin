@@ -1,5 +1,5 @@
-import { useEffect, useState } from 'react'
-import { useParams } from 'react-router-dom'
+import { useEffect, useState,useCallback } from 'react'
+import { useParams, useHistory } from 'react-router-dom'
 
 import './index.scss'
 
@@ -10,6 +10,7 @@ import ArticleStatusCom from '../components/ArticleStatus'
 
 const ArticleDetails = props => {
   const urlParams = useParams<{ id: string }>()
+  const history = useHistory()
 
   const [articleDetails, setArticleDetails] = useState<IArticleBasic>()
 
@@ -22,6 +23,13 @@ const ArticleDetails = props => {
     })()
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [])
+
+
+  /** 编辑按钮 */
+  const editArticle = useCallback(()=> {
+    history.push(`/article/create/${articleDetails?.id}`)
+  }, [articleDetails?.id])
+
   return (
     <>
       {articleDetails && (
@@ -63,7 +71,7 @@ const ArticleDetails = props => {
                 <div className="article-details-com-header-main-right-status">
                   <ArticleStatusCom status={articleDetails.status} />
                 </div>
-                <div className="article-details-com-header-main-right-edit">
+                <div className="article-details-com-header-main-right-edit" onClick={editArticle}>
                   编辑
                 </div>
               </div>
