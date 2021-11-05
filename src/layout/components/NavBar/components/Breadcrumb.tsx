@@ -29,7 +29,7 @@ const BreadcrumbDom = () => {
         if (!item.children) {
           // 说明该路由显示在面包屑上
           if (item.meta?.breadcrumbShowFlag !== false) {
-            if (findBreadcrumb(item.path) || item.meta?.detailPageFlag) getRouters.push(item)
+            if (findBreadcrumb(item.path)) getRouters.push(item)
           }
         } else {
           if (

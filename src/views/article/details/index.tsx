@@ -1,5 +1,5 @@
 import { useEffect, useState,useCallback } from 'react'
-import { useParams, useHistory } from 'react-router-dom'
+import { useHistory } from 'react-router-dom'
 
 import './index.scss'
 
@@ -9,14 +9,14 @@ import { ResultCodeEnum } from '@/typescript/shared/enum'
 import ArticleStatusCom from '../components/ArticleStatus'
 
 const ArticleDetails = props => {
-  const urlParams = useParams<{ id: string }>()
   const history = useHistory()
 
   const [articleDetails, setArticleDetails] = useState<IArticleBasic>()
 
   useEffect(() => {
     ;(async function () {
-      const data = await getArticleDetailsByIdApi(urlParams.id)
+      const id = history.location.state
+      const data = await getArticleDetailsByIdApi(id as string)
       if (data.code === ResultCodeEnum.SUCCESS) {
         setArticleDetails(data.data)
       }
@@ -27,7 +27,10 @@ const ArticleDetails = props => {
 
   /** 编辑按钮 */
   const editArticle = useCallback(()=> {
-    history.push(`/article/create/${articleDetails?.id}`)
+    history.push({
+      pathname: `/article/create`,
+      state: articleDetails?.id
+    })
   }, [articleDetails?.id])
 
   return (

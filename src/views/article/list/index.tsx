@@ -57,7 +57,10 @@ const ArticleList: React.FC<any> = () => {
   /** 文章预览 */
   const previewClick = useCallback((record: IArticleBasic)=> {
     const { id } = record
-    history.push(`/article/${id}`)
+    history.push({
+      pathname: `/article/details`,
+      state: id
+    })
   // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [])
 

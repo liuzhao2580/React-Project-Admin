@@ -4,7 +4,7 @@ import {
   DatabaseOutlined,
   DiffOutlined,
   FileAddOutlined,
-  GroupOutlined,
+  GroupOutlined
 } from '@ant-design/icons'
 
 import { IRouterList } from '@/typescript/router/interface'
@@ -55,8 +55,8 @@ export const constRoutes: Array<IRouterList> = [
         component: ArticleList
       },
       {
-        path: '/article/:id(\\d+)',
-        meta: { hidden: true,detailPageFlag:true, title: '文章预览' },
+        path: '/article/details',
+        meta: { hidden: true, title: '文章预览' },
         component: ArticleDetails
       },
       {

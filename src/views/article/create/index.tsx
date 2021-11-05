@@ -1,4 +1,5 @@
-import React, { useState, useEffect, useCallback } from 'react'
+import { useState, useEffect, useCallback, useReducer } from 'react'
+import { useHistory } from 'react-router-dom'
 import { Input, Button, message } from 'antd'
 import E from 'wangeditor'
 import hljs from 'highlight.js'
@@ -7,23 +8,64 @@ import 'highlight.js/styles/monokai-sublime.css'
 import './index.scss'
 import PreviewModalCom from './components/Preview-Modal'
 
-import { getArticleCategoryByLevelApi } from '@/api/modules/article'
+import {
+  getArticleCategoryByLevelApi,
+  getArticleDetailsByIdApi
+} from '@/api/modules/article'
 import { IArticleCategory } from '@/typescript/article/interface'
 import { ResultCodeEnum } from '@/typescript/shared/enum'
 
+const ACTIONS_TYPE = {
+  /** 编辑器 */
+  EDITOR: 'editor',
+  /** 用来设置 modal 的显示隐藏 */
+  PREVIEWMODEL: 'previewModal',
+  /** 监听预览按钮的状态 */
+  REVIEWDISABLED: 'reviewDisabled'
+}
+
+class InitialState {
+  /** 编辑器 */
+  editor: null = null
+  /** 用来设置 modal 的显示隐藏 */
+  isPreviewModal: boolean = false
+  /** 监听预览按钮的状态 */
+  reviewBtnDisabled: boolean = false
+}
+
+function reducers(
+  state: InitialState,
+  action: { type: string; data: any }
+): any {
+  switch (action.type) {
+    case ACTIONS_TYPE.EDITOR:
+      return {
+        ...state,
+        editor: action.data
+      }
+    case ACTIONS_TYPE.PREVIEWMODEL:
+      return {
+        ...state,
+        isPreviewModal: action.data
+      }
+    case ACTIONS_TYPE.REVIEWDISABLED:
+      return {
+        ...state,
+        reviewBtnDisabled: action.data
+      }
+  }
+}
+
 const ArticleCreate = () => {
-  // 实例化 编辑器
-  const [editor, setEditor] = useState<any>()
-  // 用来设置 modal 的显示隐藏
-  const [isPreviewModal, setPreviewModal] = useState<boolean>(false)
+  const history = useHistory()
+
+  const [state, dispatch] = useReducer(reducers, new InitialState())
   // 获取 文章分类的数据
   const [articleCate, setArticleCate] = useState<IArticleCategory[]>([])
-  // 监听预览按钮的状态
-  const [reviewBtnDisabled, setReviewBtnDisabled] = useState<boolean>(true)
   // 文章标题输入框的内容
-  const [titleInputValue, setTitleInputValue] = useState<any>(null)
+  const [titleInputValue, setTitleInputValue] = useState<string>('')
   // 文章的内容
-  const [articleContent, setArticleContent] = useState(null)
+  const [articleContent, setArticleContent] = useState<string>('')
 
   // 初始化 编辑器 、 获取文章分类数据
   useEffect(() => {
@@ -34,10 +76,12 @@ const ArticleCreate = () => {
       } else setArticleCate([])
     })()
 
-    setEditor(new E('#content'))
+    // setEditor(new E('#content'))
+    dispatch({ type: ACTIONS_TYPE.EDITOR, data: new E('#content') })
   }, [])
   // 初始化编辑器的配置
   useEffect(() => {
+    const { editor } = state
     if (!editor) return
     // 配置 zindex
     editor.config.zIndex = 500
@@ -49,25 +93,41 @@ const ArticleCreate = () => {
     editor.highlight = hljs
     editor.create()
 
+    // 初始化 用来获取 url 地址栏的数据
+    const getId = history.location.state
+    // 说明 是编辑
+    if (getId) {
+      ;(async function () {
+        const data = await getArticleDetailsByIdApi(getId as string)
+        if (data.code === ResultCodeEnum.SUCCESS) {
+          console.log(data)
+          setTitleInputValue(data.data.title)
+          editor?.txt.html(data.data.content)
+        }
+      })()
+    }
+
     return () => {
       editor && editor.destroy()
     }
-  }, [editor])
+  }, [state.editor])
+
   /** 预览按钮 */
   const previewBtn = useCallback(() => {
-    if (!editor.txt.text()) {
+    if (!state.editor.txt.text()) {
       return message.warning('请输入正确的内容', 1)
     }
-    setArticleContent(editor.txt.html())
-    setPreviewModal(true)
-  }, [editor])
+    setArticleContent(state.editor.txt.html())
+    dispatch({ type: ACTIONS_TYPE.PREVIEWMODEL, data: true })
+  }, [state.editor])
 
   // 预览按钮 是否可以点击
   useEffect(() => {
     if (titleInputValue) {
-      setReviewBtnDisabled(false)
-    } else setReviewBtnDisabled(true)
+      dispatch({ type: ACTIONS_TYPE.REVIEWDISABLED, data: false })
+    } else dispatch({ type: ACTIONS_TYPE.REVIEWDISABLED, data: true })
   }, [titleInputValue])
+
   return (
     <div className="article-create-box">
       <div className="header-box">
@@ -81,7 +141,7 @@ const ArticleCreate = () => {
           <Button
             type="primary"
             onClick={previewBtn}
-            disabled={reviewBtnDisabled}
+            disabled={state.reviewBtnDisabled}
           >
             预览
           </Button>
@@ -91,11 +151,13 @@ const ArticleCreate = () => {
       <div id="content"></div>
       {/* 预览 */}
       <PreviewModalCom
-        isModalVisible={isPreviewModal}
+        isModalVisible={state.isPreviewModal}
         articleCateList={articleCate}
         articleContent={articleContent}
         articleTitle={titleInputValue}
-        closeModal={() => setPreviewModal(false)}
+        closeModal={() =>
+          dispatch({ type: ACTIONS_TYPE.PREVIEWMODEL, data: false })
+        }
       ></PreviewModalCom>
     </div>
   )
