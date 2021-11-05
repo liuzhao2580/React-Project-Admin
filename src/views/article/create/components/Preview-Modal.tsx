@@ -1,34 +1,41 @@
 import { useState } from 'react'
-import { Modal, Button, message, RadioChangeEvent } from 'antd'
+import { Modal, Button, Radio, Row, Col, RadioChangeEvent, Spin } from 'antd'
 import { connect } from 'react-redux'
 
 import { IArticleCategory } from '@/typescript/article/interface'
 import { EArticleSaveType } from '@/typescript/article/enum'
 
-import { articleInsertApi } from '@/api/modules/article'
-import { getUserIdStorage } from '@/utils/modules/commonSave'
-import { ResultCodeEnum } from '@/typescript/shared/enum'
-import CategoryCheckoutCom from './CategoryRadio'
+import { ArticleInsertOrEditModel } from '@/typescript/article/model'
 
 interface IPreviewModal {
+  /** 弹出框的 visible */
   isModalVisible: boolean
+  /** 文章分类list */
   articleCateList: IArticleCategory[]
-  articleContent: any
-  articleTitle: string
-  closeModal: Function
+  /** 文章的参数 */
+  articleParams: ArticleInsertOrEditModel
+  /** 弹出框页面加载状态 */
+  modalLoading: boolean
+  /** 关闭 弹出框 */
+  closeModal: () => void
+  /** 保存为草稿 或者 提交 */
+  handleConfirm: (type: EArticleSaveType) => void
+  /** 文章分类改变事件 */
+  setArticleCateValue: (type: string) => void
 }
 
 /** 编辑文章的预览 */
 const PreviewModalCom = (props: IPreviewModal) => {
-  // 当前选中的 分类
-  const [articleCateValue, setArticleCateValue] = useState<string>('')
-  // 页面加载状态
-  const [articleLoading, setArticleLoading] = useState(false)
   // 提交按钮的禁用状态
   const [articleConfirmDisabled, setArticleConfirmDisabled] = useState(true)
-  const { isModalVisible, articleCateList, articleContent, articleTitle } =
-    props
-
+  const {
+    isModalVisible,
+    articleCateList,
+    articleParams,
+    modalLoading,
+    handleConfirm,
+    setArticleCateValue
+  } = props
 
   /** 文章分类改变事件 */
   const changeArticleCate = (e: RadioChangeEvent): void => {
@@ -36,59 +43,10 @@ const PreviewModalCom = (props: IPreviewModal) => {
     setArticleCateValue(e.target.value)
   }
 
-  /** 自定义 modal 的按钮 */
-  const customModalFooter = () => {
-    return [
-      <Button key="back" onClick={handleCancel}>
-        取消
-      </Button>,
-      <Button
-        key="draft"
-        type="primary"
-        loading={articleLoading}
-        disabled={articleConfirmDisabled}
-        onClick={() => handleConfirm(EArticleSaveType.draft)}
-      >
-        保存为草稿
-      </Button>,
-      <Button
-        key="comfirm"
-        type="primary"
-        loading={articleLoading}
-        disabled={articleConfirmDisabled}
-        onClick={() => handleConfirm(EArticleSaveType.comfirm)}
-      >
-        提交
-      </Button>
-    ]
-  }
-
   /** 关闭 modal 弹出框 */
   const handleCancel = () => {
     props.closeModal()
   }
-
-  /** 保存为草稿 或者 提交 */
-  const handleConfirm = async (type: EArticleSaveType) => {
-    const params = {
-      userId: getUserIdStorage(),
-      title: articleTitle,
-      content: articleContent.toString(),
-      categoryId: articleCateValue,
-      status: type
-    }
-    setArticleLoading(true)
-    try {
-      const data = await articleInsertApi(params)
-      if (data.code === ResultCodeEnum.SUCCESS) {
-        message.success('新增成功')
-        handleCancel()
-      }
-    } finally {
-      setArticleLoading(false)
-    }
-  }
-
   return (
     <div className="preview-modal-box">
       <Modal
@@ -100,21 +58,54 @@ const PreviewModalCom = (props: IPreviewModal) => {
         getContainer={() =>
           document.querySelector('.preview-modal-box') as HTMLElement
         }
-        footer={customModalFooter()}
+        footer={null}
       >
         {/* 标题 */}
-        <div className="article-title">{articleTitle}</div>
+        <div className="article-title">{articleParams.title}</div>
         {/* 文章内容显示 */}
         <div
           className="article-content"
-          dangerouslySetInnerHTML={{ __html: articleContent }}
+          dangerouslySetInnerHTML={{ __html: articleParams.content }}
         ></div>
         {/* 文章分类选择 */}
         <div className="article-categroy">
-          <CategoryCheckoutCom
-            articleCateList={articleCateList}
-            changeArticleCate={changeArticleCate}
-          />
+          <Radio.Group
+            style={{ width: '100%' }}
+            onChange={changeArticleCate}
+            value={articleParams.categoryId}
+          >
+            <Row>
+              {articleCateList.map(item => {
+                return (
+                  <Col span={4} key={item.id}>
+                    <Radio value={item.id}>{item.categoryName}</Radio>
+                  </Col>
+                )
+              })}
+            </Row>
+          </Radio.Group>
+        </div>
+        {/* 按钮 */}
+        <div className="preview-modal-box-button-box">
+          <Button key="back" onClick={handleCancel}>
+            取消
+          </Button>
+          <Button
+            key="draft"
+            type="primary"
+            disabled={articleConfirmDisabled}
+            onClick={() => handleConfirm(EArticleSaveType.draft)}
+          >
+            保存为草稿
+          </Button>
+          <Button
+            key="comfirm"
+            type="primary"
+            disabled={articleConfirmDisabled}
+            onClick={() => handleConfirm(EArticleSaveType.comfirm)}
+          >
+            提交
+          </Button>
         </div>
       </Modal>
     </div>

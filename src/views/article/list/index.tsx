@@ -61,7 +61,15 @@ const ArticleList: React.FC<any> = () => {
       pathname: `/article/details`,
       state: id
     })
-  // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [])
+
+  /** 文章编辑 */
+  const editClick = useCallback((record: IArticleBasic)=> {
+    const { id } = record
+    history.push({
+      pathname: `/article/create`,
+      state: id
+    })
   }, [])
 
   const columns = [
@@ -120,6 +128,7 @@ const ArticleList: React.FC<any> = () => {
             size="small"
             type="primary"
             icon={<EditOutlined />}
+            onClick={()=>editClick(record)}
           ></Button>
           <Popconfirm
             title="确定删除该文章吗？"

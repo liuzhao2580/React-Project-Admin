@@ -14,6 +14,8 @@ import {
 } from '@/api/modules/article'
 import { IArticleCategory } from '@/typescript/article/interface'
 import { ResultCodeEnum } from '@/typescript/shared/enum'
+import { ArticleInsertOrEditModel } from '@/typescript/article/model'
+import { EArticleSaveType } from '@/typescript/article/enum'
 
 const ACTIONS_TYPE = {
   /** 编辑器 */
@@ -21,7 +23,9 @@ const ACTIONS_TYPE = {
   /** 用来设置 modal 的显示隐藏 */
   PREVIEWMODEL: 'previewModal',
   /** 监听预览按钮的状态 */
-  REVIEWDISABLED: 'reviewDisabled'
+  REVIEWDISABLED: 'reviewDisabled',
+  /** 弹出框页面加载状态 */
+  MODAL_LOADING: 'modalLoading'
 }
 
 class InitialState {
@@ -31,6 +35,8 @@ class InitialState {
   isPreviewModal: boolean = false
   /** 监听预览按钮的状态 */
   reviewBtnDisabled: boolean = false
+  /** 弹出框页面加载状态 */
+  modalLoading: boolean = true
 }
 
 function reducers(
@@ -53,6 +59,11 @@ function reducers(
         ...state,
         reviewBtnDisabled: action.data
       }
+    case ACTIONS_TYPE.MODAL_LOADING:
+      return {
+        ...state,
+        modalLoading: action.data
+      }
   }
 }
 
@@ -62,10 +73,11 @@ const ArticleCreate = () => {
   const [state, dispatch] = useReducer(reducers, new InitialState())
   // 获取 文章分类的数据
   const [articleCate, setArticleCate] = useState<IArticleCategory[]>([])
-  // 文章标题输入框的内容
-  const [titleInputValue, setTitleInputValue] = useState<string>('')
-  // 文章的内容
-  const [articleContent, setArticleContent] = useState<string>('')
+
+  /** 新增 和编辑 数据 实例化 */
+  const [articleParams, setArticleParams] = useState<ArticleInsertOrEditModel>(
+    () => new ArticleInsertOrEditModel()
+  )
 
   // 初始化 编辑器 、 获取文章分类数据
   useEffect(() => {
@@ -79,6 +91,7 @@ const ArticleCreate = () => {
     // setEditor(new E('#content'))
     dispatch({ type: ACTIONS_TYPE.EDITOR, data: new E('#content') })
   }, [])
+
   // 初始化编辑器的配置
   useEffect(() => {
     const { editor } = state
@@ -101,7 +114,12 @@ const ArticleCreate = () => {
         const data = await getArticleDetailsByIdApi(getId as string)
         if (data.code === ResultCodeEnum.SUCCESS) {
           console.log(data)
-          setTitleInputValue(data.data.title)
+          setArticleParams(prev => {
+            return {
+              ...prev,
+              title: data.data.title
+            }
+          })
           editor?.txt.html(data.data.content)
         }
       })()
@@ -117,25 +135,58 @@ const ArticleCreate = () => {
     if (!state.editor.txt.text()) {
       return message.warning('请输入正确的内容', 1)
     }
-    setArticleContent(state.editor.txt.html())
+    setArticleParams(prev => {
+      return {
+        ...prev,
+        content: state.editor.txt.html()
+      }
+    })
     dispatch({ type: ACTIONS_TYPE.PREVIEWMODEL, data: true })
   }, [state.editor])
 
   // 预览按钮 是否可以点击
   useEffect(() => {
-    if (titleInputValue) {
+    if (articleParams.title) {
       dispatch({ type: ACTIONS_TYPE.REVIEWDISABLED, data: false })
     } else dispatch({ type: ACTIONS_TYPE.REVIEWDISABLED, data: true })
-  }, [titleInputValue])
+  }, [articleParams.title])
+
+  /** 保存为草稿 或者 提交 */
+  const handleConfirm = async (type: EArticleSaveType) => {
+    setArticleParams((prev)=> {
+      return {
+        ...prev,
+        status: type
+      }
+    })
+    console.log(articleParams, 'articleParams')
+    // setArticleLoading(true)
+    // try {
+    //   const data = await articleInsertApi(params)
+    //   if (data.code === ResultCodeEnum.SUCCESS) {
+    //     message.success('新增成功')
+    //     handleCancel()
+    //   }
+    // } finally {
+    //   setArticleLoading(false)
+    // }
+  }
 
   return (
     <div className="article-create-box">
       <div className="header-box">
         <Input
           placeholder="请输入文章标题"
-          onChange={e => setTitleInputValue(e.target.value)}
+          onChange={e =>
+            setArticleParams(prev => {
+              return {
+                ...prev,
+                title: e.target.value
+              }
+            })
+          }
           className="title-input"
-          value={titleInputValue}
+          value={articleParams.title}
         />
         <div className="btn-box">
           <Button
@@ -152,12 +203,21 @@ const ArticleCreate = () => {
       {/* 预览 */}
       <PreviewModalCom
         isModalVisible={state.isPreviewModal}
+        articleParams={articleParams}
         articleCateList={articleCate}
-        articleContent={articleContent}
-        articleTitle={titleInputValue}
+        modalLoading={state.modalLoading}
         closeModal={() =>
           dispatch({ type: ACTIONS_TYPE.PREVIEWMODEL, data: false })
         }
+        handleConfirm={handleConfirm}
+        setArticleCateValue={(type)=> {
+          setArticleParams((prev)=> {
+            return {
+              ...prev,
+              categoryId: type
+            }
+          })
+        }}
       ></PreviewModalCom>
     </div>
   )

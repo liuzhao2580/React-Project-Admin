@@ -6,11 +6,11 @@ import {
 import {
   IArticleBasic,
   IArticleCategory,
-  IArticleCategoryByLazy,
-  IArticleInsert
+  IArticleCategoryByLazy
 } from '@/typescript/article/interface'
 import {
   ArticleCategoryModel,
+  ArticleInsertOrEditModel,
   ArticleListParamsModel
 } from '@/typescript/article/model'
 /** 获取文章列表数据 */
@@ -39,7 +39,7 @@ export const getArticleCategoryByLazyApi = (
 
 /** 文章新增 */
 export const articleInsertApi = (
-  params: IArticleInsert
+  params: ArticleInsertOrEditModel
 ): Promise<ResultModel<any>> => axios.post(`/article/insert`, params)
 
 /** 文章删除 */

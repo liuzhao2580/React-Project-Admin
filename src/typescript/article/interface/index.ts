@@ -1,4 +1,4 @@
-import { EArticleSaveType, EArticleStatus } from '../enum'
+import { EArticleStatus } from '../enum'
 
 /** 存储在数据库中的 文章的基本格式 */
 export interface IArticleBasic {
@@ -46,20 +46,4 @@ export interface IArticleCategoryByLazy {
   level: number,
   /** 二级分类中,一级分类的id */
   parentId: string
-}
-
-/** 用户新增需要传递的数据 */
-export interface IArticleInsert {
-  /** 文章id */
-  id?: number
-  /** 用户id */
-  userId: IArticleBasic['userId']
-  /** 文章标题 */
-  title: IArticleBasic['title']
-  /** 文章内容 */
-  content: IArticleBasic['content']
-  /** 文章类别 id */
-  categoryId: IArticleBasic['categoryId']
-  /** 文章状态 新增的时候只有两种状态,草稿和审核 */
-  status: EArticleSaveType
 }

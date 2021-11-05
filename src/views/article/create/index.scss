@@ -33,5 +33,11 @@
       .article-category-radio-com {
       }
     }
+    &-button-box {
+      text-align: right;
+      button {
+        margin-right: 10px;
+      }
+    }
   }
 }
