@@ -9,8 +9,7 @@ import './index.scss'
 import PreviewModalCom from './components/PreviewModal'
 
 import {
-  articleEditApi,
-  articleInsertApi,
+  articleSaveOrUpdateApi,
   getArticleCategoryByLevelApi,
   getArticleDetailsByIdApi
 } from '@/api/modules/article'
@@ -166,19 +165,10 @@ const ArticleCreate = () => {
       setArticleParams(resultObj)
       dispatch({ type: ACTIONS_TYPE.MODAL_LOADING, data: true })
       try {
-        // 说明是编辑
-        if (articleParams.id) {
-          const data = await articleEditApi(articleParams)
-          if (data.code === ResultCodeEnum.SUCCESS) {
-            message.success('编辑成功')
-          }
-        }
-        // 说明是新增
-        else {
-          const data = await articleInsertApi(articleParams)
-          if (data.code === ResultCodeEnum.SUCCESS) {
-            message.success('新增成功')
-          }
+        const data = await articleSaveOrUpdateApi(articleParams)
+        if (data.code === ResultCodeEnum.SUCCESS) {
+          message.success(data.msg)
+          setArticleParams(data.data)
         }
         dispatch({ type: ACTIONS_TYPE.PREVIEWMODEL, data: false })
       } finally {

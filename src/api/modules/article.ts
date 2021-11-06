@@ -37,16 +37,10 @@ export const getArticleCategoryByLazyApi = (
 ): Promise<ResultModel<IArticleCategory[]>> =>
   axios.post('/article-category/lazy-tree', params)
 
-/** 文章新增 */
-export const articleInsertApi = (
+/** 文章新增\编辑 */
+export const articleSaveOrUpdateApi = (
   params: ArticleInsertOrEditModel
-): Promise<ResultModel<any>> => axios.post(`/article/insert`, params)
-
-
-/** 文章编辑 */
-export const articleEditApi = (
-  params: ArticleInsertOrEditModel
-): Promise<ResultModel<any>> => axios.post(`/article/update`, params)
+): Promise<ResultModel<any>> => axios.post(`/article/saveOrUpdate`, params)
 
 /** 文章删除 */
 export const articleDeleteApi = (id: string): Promise<ResultModel<any>> =>

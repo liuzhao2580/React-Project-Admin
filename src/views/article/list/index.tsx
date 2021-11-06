@@ -1,18 +1,7 @@
 import React, { useState, useCallback } from 'react'
 import { useHistory } from 'react-router-dom'
-import {
-  Table,
-  Space,
-  Button,
-  Popconfirm,
-  message,
-  Pagination
-} from 'antd'
-import {
-  CloseOutlined,
-  EditOutlined,
-  EyeOutlined
-} from '@ant-design/icons'
+import { Table, Space, Button, Popconfirm, message, Pagination } from 'antd'
+import { CloseOutlined, EditOutlined, EyeOutlined } from '@ant-design/icons'
 import './index.scss'
 
 import { articleListApi, articleDeleteApi } from '@/api/modules/article'
@@ -22,13 +11,12 @@ import { EArticleStatus } from '@/typescript/article/enum'
 import { ITimeType, formateNormalTime } from '@/utils/modules/time-utils'
 import { ResultCodeEnum } from '@/typescript/shared/enum'
 
-import SelectBoxCom from './components/Select-box'
+import SelectBoxCom from './components/SelectBox'
 import { useTableHooks } from '@/utils/hooks'
 import { ArticleListParamsModel } from '@/typescript/article/model'
 import ArticleStatusCom from '../components/ArticleStatus'
 
 const ArticleList: React.FC<any> = () => {
-
   const history = useHistory()
 
   const [params, setParams] = useState<ArticleListParamsModel>(
@@ -55,7 +43,7 @@ const ArticleList: React.FC<any> = () => {
   )
 
   /** 文章预览 */
-  const previewClick = useCallback((record: IArticleBasic)=> {
+  const previewClick = useCallback((record: IArticleBasic) => {
     const { id } = record
     history.push({
       pathname: `/article/details`,
@@ -64,7 +52,7 @@ const ArticleList: React.FC<any> = () => {
   }, [])
 
   /** 文章编辑 */
-  const editClick = useCallback((record: IArticleBasic)=> {
+  const editClick = useCallback((record: IArticleBasic) => {
     const { id } = record
     history.push({
       pathname: `/article/create`,
@@ -106,7 +94,7 @@ const ArticleList: React.FC<any> = () => {
       title: '文章状态',
       dataIndex: 'status',
       width: 100,
-      render: (text: EArticleStatus) => <ArticleStatusCom status={text}/>
+      render: (text: EArticleStatus) => <ArticleStatusCom status={text} />
     },
     {
       title: '操作',
@@ -120,7 +108,7 @@ const ArticleList: React.FC<any> = () => {
             size="small"
             type="primary"
             icon={<EyeOutlined />}
-            onClick={()=>previewClick(record)}
+            onClick={() => previewClick(record)}
           ></Button>
           <Button
             title="编辑"
@@ -128,7 +116,7 @@ const ArticleList: React.FC<any> = () => {
             size="small"
             type="primary"
             icon={<EditOutlined />}
-            onClick={()=>editClick(record)}
+            onClick={() => editClick(record)}
           ></Button>
           <Popconfirm
             title="确定删除该文章吗？"
@@ -159,22 +147,13 @@ const ArticleList: React.FC<any> = () => {
   /** 查询按钮 */
   const selectBtnParams = (): void => {
     console.log(params, 'params')
-    setReloadFlag(()=>true)
+    setReloadFlag(() => true)
   }
 
   /** 重置按钮 */
   const resetBtn = useCallback(() => {
-    setParams(() => {
-      return {
-        title: '',
-        pageNum: 1,
-        pageSize: 10,
-        time: undefined,
-        status: undefined
-      }
-    })
+    setParams(() => new ArticleListParamsModel())
     setReloadFlag(true)
-  // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [])
 
   return (

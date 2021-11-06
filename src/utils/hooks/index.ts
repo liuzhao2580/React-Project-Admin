@@ -76,13 +76,11 @@ export const useTableHooks = <T, E extends BaseQueryModel>(
       setReloadFlag(() => false)
     }
     // 当 传递的参数变化的时候,需要更新 useCallback
-    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [params])
 
   // 用来监听页码和页数的改变,用来调取数据
   useEffect(() => {
     getTableList()
-    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [params.pageNum, params.pageSize])
 
   // 用来监听是否需要重新获取数据---手动
