@@ -9,7 +9,7 @@ import {
 } from '@ant-design/icons'
 
 import { EArticleStatus } from '@/typescript/article/enum'
-import { tranSpecifyType } from '@/utils'
+import CustomConst from '@/utils/modules/CustomConst'
 
 interface ICom {
   status: EArticleStatus
@@ -22,6 +22,7 @@ class IParams {
 
 /** 文章状态 */
 const ArticleStatusCom = (props: ICom) => {
+  const customConst = new CustomConst()
   const { status } = props
 
   const [params, setParams] = useState<IParams>(() => new IParams())
@@ -29,7 +30,7 @@ const ArticleStatusCom = (props: ICom) => {
   useEffect(() => {
     switch (status) {
       // 已删除
-      case EArticleStatus.已删除:
+      case EArticleStatus.DELETED:
         setParams(()=> {
           return {
             tagColor : 'error',
@@ -38,7 +39,7 @@ const ArticleStatusCom = (props: ICom) => {
         })
         break
       // 待审核
-      case EArticleStatus.待审核:
+      case EArticleStatus.REVIEWED:
         setParams(()=> {
           return {
             tagColor : 'default',
@@ -47,7 +48,7 @@ const ArticleStatusCom = (props: ICom) => {
         })
         break
       // 草稿箱
-      case EArticleStatus.草稿箱:
+      case EArticleStatus.DRAFT:
         setParams(()=> {
           return {
             tagColor : '#4e72b8',
@@ -56,7 +57,7 @@ const ArticleStatusCom = (props: ICom) => {
         })
         break
       // 被驳回
-      case EArticleStatus.被驳回:
+      case EArticleStatus.REJECT:
         setParams(()=> {
           return {
             tagColor : '#ed1941',
@@ -65,7 +66,7 @@ const ArticleStatusCom = (props: ICom) => {
         })
         break
       // 已发布
-      case EArticleStatus.已发布:
+      case EArticleStatus.PUBLISHED:
         setParams(()=> {
           return {
             tagColor : 'success',
@@ -77,7 +78,7 @@ const ArticleStatusCom = (props: ICom) => {
   }, [status])
   return (
     <Tag color={params.tagColor} icon={params.tagIcon}>
-      {tranSpecifyType(status, EArticleStatus)}
+      {customConst.ArticleConst.get(status)}
     </Tag>
   )
 }
