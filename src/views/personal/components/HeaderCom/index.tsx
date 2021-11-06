@@ -1,5 +1,5 @@
 import { IUserBaseInfo } from '@/typescript/user/interface'
-import CustomConst from '@/utils/modules/CustomConst'
+import CustomMapToText from '@/utils/modules/CustomMapToText'
 import ChangeAvatarCom from './ChangeAvatarCom'
 interface ICom {
   userInfo: IUserBaseInfo
@@ -15,7 +15,7 @@ const PersonalHeader = (props: ICom) => {
           <ChangeAvatarCom userInfo={userInfo}/>
         </div>
         <p className="nick-name">{userInfo.nickName}</p>
-        <span className="personal-header-box-role">{new CustomConst().UserConst.get(userInfo.roleId)}</span>
+        <span className="personal-header-box-role">{new CustomMapToText().UserConst.get(userInfo.roleId)}</span>
       </header>
     </>
   )

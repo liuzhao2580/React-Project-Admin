@@ -1,5 +1,5 @@
-/** 定义常用常量 */
-class CustomConst {
+/** 定义常用 map 对象,处理键值对转换为 文字 */
+class CustomMapToText {
   /** 用户相关 */
   UserConst = new Map<number, string>([
     [1, '超级管理员'],
@@ -15,4 +15,4 @@ class CustomConst {
     [3, '已发布'],
   ])
 }
-export default CustomConst
+export default CustomMapToText

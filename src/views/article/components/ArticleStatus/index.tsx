@@ -9,7 +9,7 @@ import {
 } from '@ant-design/icons'
 
 import { EArticleStatus } from '@/typescript/article/enum'
-import CustomConst from '@/utils/modules/CustomConst'
+import CustomMapToText from '@/utils/modules/CustomMapToText'
 
 interface ICom {
   status: EArticleStatus
@@ -22,7 +22,7 @@ class IParams {
 
 /** 文章状态 */
 const ArticleStatusCom = (props: ICom) => {
-  const customConst = new CustomConst()
+  const customMapToText = new CustomMapToText()
   const { status } = props
 
   const [params, setParams] = useState<IParams>(() => new IParams())
@@ -78,7 +78,7 @@ const ArticleStatusCom = (props: ICom) => {
   }, [status])
   return (
     <Tag color={params.tagColor} icon={params.tagIcon}>
-      {customConst.ArticleConst.get(status)}
+      {customMapToText.ArticleConst.get(status)}
     </Tag>
   )
 }
