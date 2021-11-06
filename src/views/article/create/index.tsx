@@ -96,13 +96,14 @@ const ArticleCreate = () => {
   // 初始化编辑器的配置
   useEffect(() => {
     const { editor } = state
-    if (!editor) return
+    if(editor === null) return
+    console.log(editor, '2134')
     // 配置 zindex
     editor.config.zIndex = 500
     // 图片上传的格式为 base64
     editor.config.uploadImgShowBase64 = true
     // 设置编辑区域高度为 500px
-    editor.config.height = 500
+    editor.config.height = 800
     // 配置代码高亮
     editor.highlight = hljs
     editor.create()
