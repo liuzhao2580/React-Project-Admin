@@ -42,6 +42,12 @@ export const articleInsertApi = (
   params: ArticleInsertOrEditModel
 ): Promise<ResultModel<any>> => axios.post(`/article/insert`, params)
 
+
+/** 文章编辑 */
+export const articleEditApi = (
+  params: ArticleInsertOrEditModel
+): Promise<ResultModel<any>> => axios.post(`/article/update`, params)
+
 /** 文章删除 */
 export const articleDeleteApi = (id: string): Promise<ResultModel<any>> =>
   axios.delete(`/article/${id}`)

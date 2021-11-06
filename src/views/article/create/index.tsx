@@ -6,9 +6,11 @@ import hljs from 'highlight.js'
 import 'highlight.js/styles/monokai-sublime.css'
 
 import './index.scss'
-import PreviewModalCom from './components/Preview-Modal'
+import PreviewModalCom from './components/PreviewModal'
 
 import {
+  articleEditApi,
+  articleInsertApi,
   getArticleCategoryByLevelApi,
   getArticleDetailsByIdApi
 } from '@/api/modules/article'
@@ -36,7 +38,7 @@ class InitialState {
   /** 监听预览按钮的状态 */
   reviewBtnDisabled: boolean = false
   /** 弹出框页面加载状态 */
-  modalLoading: boolean = true
+  modalLoading: boolean = false
 }
 
 function reducers(
@@ -113,13 +115,18 @@ const ArticleCreate = () => {
       ;(async function () {
         const data = await getArticleDetailsByIdApi(getId as string)
         if (data.code === ResultCodeEnum.SUCCESS) {
-          console.log(data)
-          setArticleParams(prev => {
-            return {
-              ...prev,
-              title: data.data.title
+          const getData = data.data
+          for (const key in articleParams) {
+            if (Object.prototype.hasOwnProperty.call(articleParams, key)) {
+              const element = getData[key]
+              setArticleParams(prev => {
+                return {
+                  ...prev,
+                  [key]: element
+                }
+              })
             }
-          })
+          }
           editor?.txt.html(data.data.content)
         }
       })()
@@ -152,25 +159,34 @@ const ArticleCreate = () => {
   }, [articleParams.title])
 
   /** 保存为草稿 或者 提交 */
-  const handleConfirm = async (type: EArticleSaveType) => {
-    setArticleParams((prev)=> {
-      return {
-        ...prev,
-        status: type
+  const handleConfirm = useCallback(
+    async (type: EArticleSaveType) => {
+      const resultObj = articleParams
+      resultObj.status = type
+      setArticleParams(resultObj)
+      dispatch({ type: ACTIONS_TYPE.MODAL_LOADING, data: true })
+      try {
+        // 说明是编辑
+        if (articleParams.id) {
+          const data = await articleEditApi(articleParams)
+          if (data.code === ResultCodeEnum.SUCCESS) {
+            message.success('编辑成功')
+          }
+        }
+        // 说明是新增
+        else {
+          const data = await articleInsertApi(articleParams)
+          if (data.code === ResultCodeEnum.SUCCESS) {
+            message.success('新增成功')
+          }
+        }
+        dispatch({ type: ACTIONS_TYPE.PREVIEWMODEL, data: false })
+      } finally {
+        dispatch({ type: ACTIONS_TYPE.MODAL_LOADING, data: false })
       }
-    })
-    console.log(articleParams, 'articleParams')
-    // setArticleLoading(true)
-    // try {
-    //   const data = await articleInsertApi(params)
-    //   if (data.code === ResultCodeEnum.SUCCESS) {
-    //     message.success('新增成功')
-    //     handleCancel()
-    //   }
-    // } finally {
-    //   setArticleLoading(false)
-    // }
-  }
+    },
+    [articleParams]
+  )
 
   return (
     <div className="article-create-box">
@@ -210,8 +226,8 @@ const ArticleCreate = () => {
           dispatch({ type: ACTIONS_TYPE.PREVIEWMODEL, data: false })
         }
         handleConfirm={handleConfirm}
-        setArticleCateValue={(type)=> {
-          setArticleParams((prev)=> {
+        setArticleCateValue={type => {
+          setArticleParams(prev => {
             return {
               ...prev,
               categoryId: type
