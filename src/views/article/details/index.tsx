@@ -7,6 +7,7 @@ import { getArticleDetailsByIdApi } from '@/api/modules/article'
 import { IArticleBasic } from '@/typescript/article/interface'
 import { ResultCodeEnum } from '@/typescript/shared/enum'
 import ArticleStatusCom from '../components/ArticleStatus'
+import ROUTE_PATH from '@/routes/routePath'
 
 const ArticleDetails = props => {
   const history = useHistory()
@@ -28,7 +29,7 @@ const ArticleDetails = props => {
   /** 编辑按钮 */
   const editArticle = useCallback(()=> {
     history.push({
-      pathname: `/article/create`,
+      pathname: ROUTE_PATH.ARTICLE_EDIT,
       state: articleDetails?.id
     })
   }, [articleDetails?.id])

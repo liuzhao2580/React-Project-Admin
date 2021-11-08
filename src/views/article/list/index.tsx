@@ -3,6 +3,7 @@ import { useHistory } from 'react-router-dom'
 import { Table, Space, Button, Popconfirm, message, Pagination } from 'antd'
 import { CloseOutlined, EditOutlined, EyeOutlined } from '@ant-design/icons'
 import './index.scss'
+import ROUTE_PATH from '@/routes/routePath'
 
 import { articleListApi, articleDeleteApi } from '@/api/modules/article'
 import { IArticleBasic } from '@/typescript/article/interface'
@@ -15,6 +16,15 @@ import SelectBoxCom from './components/SelectBox'
 import { useTableHooks } from '@/utils/hooks'
 import { ArticleListParamsModel } from '@/typescript/article/model'
 import ArticleStatusCom from '../components/ArticleStatus'
+
+const articleOperation = {
+  /** 审核 */
+  review: ROUTE_PATH.ARTICLE_REVIEW,
+  /** 预览 */
+  preview: ROUTE_PATH.ARTICLE_DETAILS,
+  /** 编辑 */
+  edit: ROUTE_PATH.ARTICLE_EDIT
+}
 
 const ArticleList: React.FC<any> = () => {
   const history = useHistory()
@@ -42,20 +52,11 @@ const ArticleList: React.FC<any> = () => {
     [setReloadFlag]
   )
 
-  /** 文章预览 */
-  const previewClick = useCallback((record: IArticleBasic) => {
+  /** 按钮点击 跳转页面 */
+  const clickLink = useCallback((record: IArticleBasic, pathname: string) => {
     const { id } = record
     history.push({
-      pathname: `/article/details`,
-      state: id
-    })
-  }, [])
-
-  /** 文章编辑 */
-  const editClick = useCallback((record: IArticleBasic) => {
-    const { id } = record
-    history.push({
-      pathname: `/article/create`,
+      pathname,
       state: id
     })
   }, [])
@@ -103,12 +104,19 @@ const ArticleList: React.FC<any> = () => {
       render: (text, record, index) => (
         <Space size="small">
           <Button
+            title="审核"
+            shape="circle"
+            size="small"
+            icon={<i className="iconfont icon-zhinengshenheshenchashenhe"></i>}
+            onClick={() => clickLink(record, articleOperation.review)}
+          ></Button>
+          <Button
             title="预览"
             shape="circle"
             size="small"
             type="primary"
             icon={<EyeOutlined />}
-            onClick={() => previewClick(record)}
+            onClick={() => clickLink(record, articleOperation.preview)}
           ></Button>
           <Button
             title="编辑"
@@ -116,7 +124,7 @@ const ArticleList: React.FC<any> = () => {
             size="small"
             type="primary"
             icon={<EditOutlined />}
-            onClick={() => editClick(record)}
+            onClick={() => clickLink(record, articleOperation.edit)}
           ></Button>
           <Popconfirm
             title="确定删除该文章吗？"
