@@ -1,4 +1,4 @@
-import { useEffect, useState,useCallback } from 'react'
+import { useEffect, useState, useCallback } from 'react'
 import { useHistory } from 'react-router-dom'
 
 import './index.scss'
@@ -24,9 +24,8 @@ const ArticleDetails = props => {
     })()
   }, [])
 
-
   /** 编辑按钮 */
-  const editArticle = useCallback(()=> {
+  const editArticle = useCallback(() => {
     history.push({
       pathname: ROUTE_PATH.ARTICLE_EDIT,
       state: articleDetails?.id
@@ -34,56 +33,68 @@ const ArticleDetails = props => {
   }, [articleDetails?.id])
 
   return (
-    <>
-      {articleDetails && (
-        <div className="article-details-com">
-          <div className="article-details-com-header">
-            <div className="article-details-com-header-title">
-              {articleDetails.title}
-            </div>
-            <div className="article-details-com-header-main">
-              <div className="article-details-com-header-main-left">
-                <div className="article-details-com-header-main-left-top">
-                  <div className="article-details-com-header-main-left-top-nickName mr10">
-                    {articleDetails.nickName}
-                  </div>
-                  <div className="article-details-com-header-main-left-top-update-time">
-                    {articleDetails.updateTime}
-                  </div>
-                </div>
-                <div className="article-details-com-header-main-left-bottom mt10">
-                  <div className="article-details-com-header-main-left-bottom-category mr10">
-                    <span className="article-details-com-header-main-left-bottom-category-title mr10">
-                      一级分类:
-                    </span>
-                    <span className="article-details-com-header-main-left-bottom-category-name">
-                      {articleDetails.categoryParentName}
-                    </span>
-                  </div>
-                  <div className="article-details-com-header-main-left-bottom-category">
-                    <span className="article-details-com-header-main-left-bottom-category-title mr10">
-                      二级分类:
-                    </span>
-                    <span className="article-details-com-header-main-left-bottom-category-name">
-                      {articleDetails.categoryName}
-                    </span>
-                  </div>
-                </div>
+    <div className="article-details-com">
+      <div className="article-details-com-header">
+        <div className="article-details-com-header-title">
+          {articleDetails?.title}
+        </div>
+        <div className="article-details-com-header-main">
+          <div className="article-details-com-header-main-left">
+            <div className="article-details-com-header-main-left-top">
+              <div className="article-details-com-header-main-left-top-nickName mr10">
+                {articleDetails?.nickName}
               </div>
-              <div className="article-details-com-header-main-right">
-                <div className="article-details-com-header-main-right-status">
-                  <ArticleStatusCom status={articleDetails.status} />
-                </div>
-                <div className="article-details-com-header-main-right-edit" onClick={editArticle}>
-                  编辑
-                </div>
+              <div className="article-details-com-header-main-left-top-update-time">
+                {articleDetails?.updateTime}
+              </div>
+            </div>
+            <div className="article-details-com-header-main-left-bottom mt10">
+              <div className="article-details-com-header-main-left-bottom-category mr10">
+                <span className="article-details-com-header-main-left-bottom-category-title mr10">
+                  一级分类:
+                </span>
+                <span className="article-details-com-header-main-left-bottom-category-name">
+                  {articleDetails?.categoryParentName}
+                </span>
+              </div>
+              <div className="article-details-com-header-main-left-bottom-category">
+                <span className="article-details-com-header-main-left-bottom-category-title mr10">
+                  二级分类:
+                </span>
+                <span className="article-details-com-header-main-left-bottom-category-name">
+                  {articleDetails?.categoryName}
+                </span>
               </div>
             </div>
           </div>
-          <div className="article-details-com-container" dangerouslySetInnerHTML={{__html: articleDetails.content}}></div>
+          <div className="article-details-com-header-main-right">
+            <div className="article-details-com-header-main-right-status">
+              {articleDetails && (
+                <ArticleStatusCom status={articleDetails?.status} />
+              )}
+            </div>
+            <div
+              className="article-details-com-header-main-right-edit iconfont icon-bianji"
+              onClick={editArticle}
+              title="编辑"
+            >
+            </div>
+            <div
+              className="article-details-com-header-main-right-review iconfont icon-zhinengshenheshenchashenhe"
+              title="审核"
+            ></div>
+          </div>
         </div>
-      )}
-    </>
+      </div>
+      <div
+        className="article-details-com-container"
+        dangerouslySetInnerHTML={
+          articleDetails && { __html: articleDetails.content }
+        }
+      ></div>
+      {/* 审核 */}
+      <div className="article-details-com-review">审核</div>
+    </div>
   )
 }
 

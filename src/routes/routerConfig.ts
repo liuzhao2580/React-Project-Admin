@@ -16,7 +16,6 @@ import ArticleCategory from '@/views/article/category'
 import ArticleList from '@/views/article/list'
 import ArticleDetails from '@/views/article/details'
 import ArticleCreate from '@/views/article/create'
-import ArticleRevice from '@/views/article/review'
 import FirstMenu from '@/views/multilevel-menu/first-menu'
 import SecondMenu from '@/views/multilevel-menu/second-menu'
 import ThirdMenu from '@/views/multilevel-menu/third-menu'
@@ -69,11 +68,6 @@ export const constRoutes: Array<IRouterList> = [
         path: ROUTE_PATH.ARTICLE_DETAILS,
         meta: { hidden: true, title: '文章预览' },
         component: ArticleDetails
-      },
-      {
-        path: ROUTE_PATH.ARTICLE_REVIEW,
-        meta: { hidden: true, title: '文章审核' },
-        component: ArticleRevice
       }
     ]
   },

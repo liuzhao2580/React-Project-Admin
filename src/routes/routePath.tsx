@@ -17,8 +17,6 @@ const ROUTE_PATH = {
   ARTICLE_EDIT: '/article/edit',
   /** 文章预览 */
   ARTICLE_DETAILS: '/article/details',
-  /** 文章审核 */
-  ARTICLE_REVIEW: '/article/review',
   /** 多级菜单 */
   MULTILEVEL: '/multilevel-menu',
   /** 一级菜单 */

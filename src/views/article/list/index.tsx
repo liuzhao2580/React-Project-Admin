@@ -18,8 +18,6 @@ import { ArticleListParamsModel } from '@/typescript/article/model'
 import ArticleStatusCom from '../components/ArticleStatus'
 
 const articleOperation = {
-  /** 审核 */
-  review: ROUTE_PATH.ARTICLE_REVIEW,
   /** 预览 */
   preview: ROUTE_PATH.ARTICLE_DETAILS,
   /** 编辑 */
@@ -103,13 +101,6 @@ const ArticleList: React.FC<any> = () => {
       width: 100,
       render: (text, record, index) => (
         <Space size="small">
-          <Button
-            title="审核"
-            shape="circle"
-            size="small"
-            icon={<i className="iconfont icon-zhinengshenheshenchashenhe"></i>}
-            onClick={() => clickLink(record, articleOperation.review)}
-          ></Button>
           <Button
             title="预览"
             shape="circle"
