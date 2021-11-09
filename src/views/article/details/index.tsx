@@ -48,6 +48,11 @@ const ArticleDetails = props => {
     childrenRef.current?.openModal()
   }
 
+  /** 传递文章状态 */
+  const updateArticle = (reason: string) => {
+    console.log(reason, '1235')
+  }
+
   return (
     <div className="article-details-com">
       <div className="article-details-com-header">
@@ -123,7 +128,7 @@ const ArticleDetails = props => {
           articleDetails && { __html: articleDetails.content }
         }
       ></div>
-      <RejectReasonCom ref={childrenRef} />
+      <RejectReasonCom ref={childrenRef} tranReason={updateArticle} />
     </div>
   )
 }
