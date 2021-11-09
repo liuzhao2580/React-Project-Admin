@@ -1,5 +1,6 @@
-import { useEffect, useState, useCallback } from 'react'
+import { useEffect, useState, useCallback, useRef } from 'react'
 import { useHistory } from 'react-router-dom'
+import { Popconfirm } from 'antd'
 
 import './index.scss'
 
@@ -8,9 +9,13 @@ import { IArticleBasic } from '@/typescript/article/interface'
 import { ResultCodeEnum } from '@/typescript/shared/enum'
 import ArticleStatusCom from '../components/ArticleStatus'
 import ROUTE_PATH from '@/routes/routePath'
+import Permission from '@/components/Permission'
+import { UserRolesEnum } from '@/typescript/user/enum'
+import RejectReasonCom from './components/RejectReasonCom'
 
 const ArticleDetails = props => {
   const history = useHistory()
+  const childrenRef = useRef<any>(null)
 
   const [articleDetails, setArticleDetails] = useState<IArticleBasic>()
 
@@ -31,6 +36,17 @@ const ArticleDetails = props => {
       state: articleDetails?.id
     })
   }, [articleDetails?.id])
+
+  /** 文章审核按钮 */
+  const articleReview = () => {}
+
+  /** 文章通过审核 */
+  const articleConfirm = () => {}
+
+  /** 拒绝审核 */
+  const articleReject = () => {
+    childrenRef.current?.openModal()
+  }
 
   return (
     <div className="article-details-com">
@@ -68,21 +84,36 @@ const ArticleDetails = props => {
             </div>
           </div>
           <div className="article-details-com-header-main-right">
-            <div className="article-details-com-header-main-right-status">
-              {articleDetails && (
-                <ArticleStatusCom status={articleDetails?.status} />
-              )}
-            </div>
-            <div
-              className="article-details-com-header-main-right-edit iconfont icon-bianji"
-              onClick={editArticle}
-              title="编辑"
+            <Permission roleId={UserRolesEnum.user}>
+              <div className="article-details-com-header-main-right-status">
+                {articleDetails && (
+                  <ArticleStatusCom status={articleDetails?.status} />
+                )}
+              </div>
+              <div
+                className="article-details-com-header-main-right-edit iconfont icon-bianji"
+                onClick={editArticle}
+                title="编辑"
+              ></div>
+            </Permission>
+            <Permission
+              roleId={[UserRolesEnum.admin, UserRolesEnum.superAdmin]}
             >
-            </div>
-            <div
-              className="article-details-com-header-main-right-review iconfont icon-zhinengshenheshenchashenhe"
-              title="审核"
-            ></div>
+              <Popconfirm
+                placement="rightTop"
+                title="该文章是否通过审核?"
+                onConfirm={articleConfirm}
+                onCancel={articleReject}
+                okText="通过"
+                cancelText="拒绝"
+              >
+                <div
+                  className="article-details-com-header-main-right-review iconfont icon-zhinengshenheshenchashenhe"
+                  title="审核"
+                  onClick={articleReview}
+                ></div>
+              </Popconfirm>
+            </Permission>
           </div>
         </div>
       </div>
@@ -92,8 +123,7 @@ const ArticleDetails = props => {
           articleDetails && { __html: articleDetails.content }
         }
       ></div>
-      {/* 审核 */}
-      <div className="article-details-com-review">审核</div>
+      <RejectReasonCom ref={childrenRef} />
     </div>
   )
 }

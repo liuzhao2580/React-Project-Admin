@@ -1,3 +1,4 @@
+import { UserRolesEnum } from "../enum"
 import {IUserBaseInfo} from "../interface/index"
 
 export class MUserInfo implements IUserBaseInfo  {
@@ -8,7 +9,7 @@ export class MUserInfo implements IUserBaseInfo  {
   /** 昵称 */
   nickName
   /** 用户的权限 */
-  roleId
+  roleId = UserRolesEnum.user
   /** 头像 */
   avatar
   /** 性别 true代表 男  false代表女 */

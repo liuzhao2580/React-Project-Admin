@@ -2,11 +2,6 @@ import { createHashHistory } from 'history'
 import { removeToken,removeUserId } from './modules/commonSave'
 /** 一些常用的 工具类 */
 
-/** 将枚举转换为 指定的格式 */
-export const tranSpecifyType = (value, typeEnum): any => {
-  return typeEnum[value]
-}
-
 /**
  * token 过期，用户需要重新登录，并且清除掉部分数据
  */
@@ -16,6 +11,7 @@ export const tokenExpired = () => {
   const history = createHashHistory()
   history.replace('/login')
 }
+
 
 /** 深拷贝 */
 export const deepCype = (obj: Object) => {
