@@ -16,6 +16,8 @@ import SelectBoxCom from './components/SelectBox'
 import { useTableHooks } from '@/utils/hooks'
 import { ArticleListParamsModel } from '@/typescript/article/model'
 import ArticleStatusCom from '../components/ArticleStatus'
+import Permission from '@/components/Permission'
+import { UserRolesEnum } from '@/typescript/user/enum'
 
 const articleOperation = {
   /** 预览 */
@@ -99,7 +101,7 @@ const ArticleList: React.FC<any> = () => {
       title: '操作',
       key: 'action',
       width: 100,
-      render: (text, record, index) => (
+      render: (text, record:IArticleBasic, index) => (
         <Space size="small">
           <Button
             title="预览"
@@ -109,14 +111,16 @@ const ArticleList: React.FC<any> = () => {
             icon={<EyeOutlined />}
             onClick={() => clickLink(record, articleOperation.preview)}
           ></Button>
-          <Button
-            title="编辑"
-            shape="circle"
-            size="small"
-            type="primary"
-            icon={<EditOutlined />}
-            onClick={() => clickLink(record, articleOperation.edit)}
-          ></Button>
+          <Permission roleId={UserRolesEnum.user}>
+            <Button
+              title="编辑"
+              shape="circle"
+              size="small"
+              type="primary"
+              icon={<EditOutlined />}
+              onClick={() => clickLink(record, articleOperation.edit)}
+            ></Button>
+          </Permission>
           <Popconfirm
             title="确定删除该文章吗？"
             onConfirm={() => deteleClick(text, record, index)}
