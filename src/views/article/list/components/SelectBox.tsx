@@ -8,12 +8,11 @@ import React, {
 import { Input, Row, Col, Cascader, DatePicker, Button, Select } from 'antd'
 import { getArticleCategoryByLazyApi } from '@/api/modules/article'
 import { ResultCodeEnum } from '@/typescript/shared/enum'
-import { EArticleStatus } from '@/typescript/article/enum'
-import { deepCype } from '@/utils'
 import { ArticleListParamsModel } from '@/typescript/article/model'
 import { IArticleCategoryByLazy } from '@/typescript/article/interface'
 import { CascaderOptionType, CascaderValueType } from 'antd/lib/cascader'
 import moment from 'moment'
+import CustomMapToText from '@/utils/modules/CustomMapToText'
 
 const { RangePicker } = DatePicker
 
@@ -39,19 +38,14 @@ const SelectBoxCom = (props: ICom) => {
   )
   // 获取文章状态
   const [articleStatusList] = useState<any[]>(() => {
-    const getEnum = deepCype(EArticleStatus)
-    let arr: any[] = []
-    for (const key in getEnum) {
-      if (Object.prototype.hasOwnProperty.call(getEnum, key)) {
-        const element = getEnum[key]
-        if (typeof element === 'string') {
-          arr.push({
-            value: key,
-            label: element
-          })
-        }
-      }
-    }
+    const getStatus = new CustomMapToText().ArticleConst
+    let arr: Array<{value: number, label: string}> = []
+    getStatus.forEach((item, key) => {
+      arr.push({
+        value: key,
+        label: item
+      })
+    })
     return arr
   })
 
