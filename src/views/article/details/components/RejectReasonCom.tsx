@@ -1,9 +1,10 @@
 import { useReducer, useImperativeHandle, forwardRef } from 'react'
-import { Modal, Input } from 'antd'
+import { Modal, Input, message } from 'antd'
+import { EArticleStatus } from '@/typescript/article/enum'
 
 interface ICom {
   // ref:any
-  tranReason: (reason: string) => void
+  tranReason: (status: EArticleStatus,reason: string) => void
 }
 
 interface IState {
@@ -61,8 +62,11 @@ const RejectReasonCom = (props: ICom, ref) => {
   }
   /** 弹出框点击确定 */
   const modelOk = () => {
+    if(!state.reason) {
+      return message.warning("驳回理由必填")
+    }
     modelCancel()
-    tranReason(state.reason)
+    tranReason(EArticleStatus.REJECT,state.reason)
   }
   return (
     <Modal

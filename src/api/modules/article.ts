@@ -39,7 +39,7 @@ export const getArticleCategoryByLazyApi = (
 
 /** 文章新增\编辑 */
 export const articleSaveOrUpdateApi = (
-  params: ArticleInsertOrEditModel
+  params: ArticleInsertOrEditModel | IArticleBasic
 ): Promise<ResultModel<any>> => axios.post(`/article/saveOrUpdate`, params)
 
 /** 文章删除 */

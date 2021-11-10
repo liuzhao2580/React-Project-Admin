@@ -24,6 +24,8 @@ export interface IArticleBasic {
   createTime: Date
   /** 文章的状态 */
   status: EArticleStatus
+  /** 文章的拒绝原因 */
+  rejectReason: string;
   /** 更新时间 */
   updateTime: Date
 }
