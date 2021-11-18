@@ -16,8 +16,13 @@ const axiosConfig = axios.create({
 
 // 发送请求之前的拦截
 axiosConfig.interceptors.request.use(config => {
-  config.headers.Authorization = getToken()
-  config.url = '/api/' + config.url
+  if(config.url) {
+    // 说明是 http开头 不需要拼接
+    if(/^(\/)?http/.test(config.url) === false) {
+      config.url = '/api/' + config.url
+      config.headers.Authorization = getToken()
+    }
+  }
   return config
 })
 

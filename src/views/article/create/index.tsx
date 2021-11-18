@@ -225,6 +225,16 @@ const ArticleCreate = () => {
             }
           })
         }}
+        setArticleCoverImage={
+          coverImages => {
+            setArticleParams(prev => {
+              return {
+                ...prev,
+                coverImages
+              }
+            })
+          }
+        }
       ></PreviewModalCom>
     </div>
   )

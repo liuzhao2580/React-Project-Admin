@@ -1,11 +1,23 @@
-import { useState,useCallback,useMemo } from 'react'
-import { Modal, Button, Radio, Row, Col, RadioChangeEvent, Spin } from 'antd'
+import { useState, useCallback, useMemo, useEffect } from 'react'
+import {
+  Modal,
+  Button,
+  Radio,
+  Row,
+  Col,
+  RadioChangeEvent,
+  Spin,
+  Upload
+} from 'antd'
+import { PlusOutlined } from '@ant-design/icons'
 import { connect } from 'react-redux'
 
-import { IArticleCategory } from '@/typescript/article/interface'
+import { IArticleCategory, IArticleCover } from '@/typescript/article/interface'
 import { EArticleSaveType } from '@/typescript/article/enum'
 
 import { ArticleInsertOrEditModel } from '@/typescript/article/model'
+import { companyUploadPictureApi } from '@/api/modules/common'
+import { ResultCodeEnum } from '@/typescript/shared/enum'
 
 interface IPreviewModal {
   /** 弹出框的 visible */
@@ -20,6 +32,8 @@ interface IPreviewModal {
   closeModal: () => void
   /** 保存为草稿 或者 提交 */
   handleConfirm: (type: EArticleSaveType) => void
+  /** 文章封面的改变事件 */
+  setArticleCoverImage: (type: IArticleCover) => void
   /** 文章分类改变事件 */
   setArticleCateValue: (type: string) => void
 }
@@ -28,14 +42,63 @@ interface IPreviewModal {
 const PreviewModalCom = (props: IPreviewModal) => {
   // 提交按钮的禁用状态
   const [articleConfirmDisabled, setArticleConfirmDisabled] = useState(true)
+  // 上传图片的 list
+  const [coverImagesList, setCoverImagesList] = useState<any>(() => [{}])
   const {
     isModalVisible,
     articleCateList,
     articleParams,
     modalLoading,
     handleConfirm,
-    setArticleCateValue
+    setArticleCateValue,
+    setArticleCoverImage
   } = props
+
+  /** 监听 封面图的 radio 改变事件 */
+  useEffect(() => {
+    // setCoverImagesList(() => [{}, {}, {}])
+  }, [articleParams.coverImages.size])
+
+  /** 文章封面的 radio 的改变事件 */
+  const onCoverChange = ({ target }) => {
+    setArticleCoverImage({
+      size: target.value,
+      images: articleParams.coverImages.images
+    })
+  }
+
+  /** 图片上传改变事件 */
+  const coverImagesUploadChange = file => {
+    console.log(file)
+  }
+
+  /** 图片上传 */
+  const coverImagesRequest = async ({ file }, index) => {
+    console.log(file, index)
+    // return
+    try {
+      const params = new FormData()
+      params.append('file', file)
+      params.append('path', 'application')
+      const data = await companyUploadPictureApi(params)
+      console.log(data)
+      if (data.code === ResultCodeEnum.SUCCESS) {
+        const url = `http://114.67.66.231:9900${data.data}`
+        console.log(url)
+        const getImagesList = JSON.parse(
+          JSON.stringify(articleParams.coverImages.images)
+        )
+        const coverImagesList: IArticleCover = {
+          size: articleParams.coverImages.size,
+          images: getImagesList
+        }
+        coverImagesList.images[index] = url
+        setArticleCoverImage(coverImagesList)
+      }
+    } catch (error) {
+      console.log(error)
+    }
+  }
 
   /** 文章分类改变事件 */
   const changeArticleCate = useCallback(
@@ -44,9 +107,9 @@ const PreviewModalCom = (props: IPreviewModal) => {
     },
     [articleParams.categoryId]
   )
-  
+
   // 用来处理编辑的时候,弹出框按钮的状态
-  useMemo(()=> {
+  useMemo(() => {
     articleParams.categoryId && setArticleConfirmDisabled(false)
   }, [articleParams.categoryId])
 
@@ -75,6 +138,87 @@ const PreviewModalCom = (props: IPreviewModal) => {
             className="article-content"
             dangerouslySetInnerHTML={{ __html: articleParams.content }}
           ></div>
+          {/* 封面图 */}
+          <div className="cover-images-box">
+            <div className="left-title">封面图</div>
+            <div className="right-box">
+              <div className="right-box-radio">
+                <Radio.Group
+                  onChange={onCoverChange}
+                  value={articleParams.coverImages.size}
+                >
+                  <Radio value={0}>无封面</Radio>
+                  <Radio value={1}>单封面</Radio>
+                  <Radio value={3}>三封面</Radio>
+                </Radio.Group>
+              </div>
+              {/* 图片上传 */}
+              {articleParams.coverImages.size !== 0 && (
+                <div
+                  className="right-box-images-upload"
+                  style={{
+                    display:
+                      articleParams.coverImages.size !== 0 ? 'block' : 'none'
+                  }}
+                >
+                  {/* 说明是单图片上传 */}
+                  {articleParams.coverImages.size === 1 && (
+                    <Upload
+                      action=""
+                      listType="picture-card"
+                      showUploadList={false}
+                      customRequest={file => coverImagesRequest(file, 0)}
+                      onChange={coverImagesUploadChange}
+                    >
+                      <div>
+                        {articleParams.coverImages.images[0] ? (
+                          <img
+                            src={articleParams.coverImages.images[0]}
+                            alt="avatar"
+                            style={{ width: '100%' }}
+                          />
+                        ) : (
+                          <div>
+                            <PlusOutlined />
+                          </div>
+                        )}
+                      </div>
+                    </Upload>
+                  )}
+                  {/* 说明是 三图片上传 */}
+                  {articleParams.coverImages.size === 3 &&
+                    [1, 2, 3].map((item, index) => {
+                      return (
+                        <Upload
+                          action=""
+                          listType="picture-card"
+                          showUploadList={false}
+                          customRequest={file =>
+                            coverImagesRequest(file, index)
+                          }
+                          onChange={coverImagesUploadChange}
+                          key={index}
+                        >
+                          <div>
+                            {item ? (
+                              <img
+                                src={articleParams.coverImages.images[index]}
+                                alt="avatar"
+                                style={{ width: '100%', height: '100px' }}
+                              />
+                            ) : (
+                              <div>
+                                <PlusOutlined />
+                              </div>
+                            )}
+                          </div>
+                        </Upload>
+                      )
+                    })}
+                </div>
+              )}
+            </div>
+          </div>
           {/* 文章分类选择 */}
           <div className="article-categroy">
             <Radio.Group

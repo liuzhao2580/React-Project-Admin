@@ -29,6 +29,30 @@
         border-radius: 5px;
         overflow: auto;
       }
+      // 封面图
+      .cover-images-box {
+        display: flex;
+        .left-title {
+          width: 10%;
+          font-weight: 700;
+          font-size: 20px;
+          margin-right: 10px;
+        }
+        .right-box {
+          flex: 1;
+          display: flex;
+          flex-direction: column;
+          &-radio {
+            margin-bottom: 10px;
+          }
+          &-images-upload {
+            height: 150px;
+            .ant-upload-picture-card-wrapper {
+              width: 150px;
+            }
+          }
+        }
+      }
     }
     &-button-box {
       text-align: right;

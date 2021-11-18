@@ -33,6 +33,11 @@ export class ArticleInsertOrEditModel {
   content: IArticleBasic['content'] = ''
   /** 文章类别 id */
   categoryId: IArticleBasic['categoryId'] = ''
+  /** 文章封面 */
+  coverImages: IArticleBasic['coverImages'] ={
+    size: 0,
+    images: ['']
+  }
   /** 文章状态 新增的时候只有两种状态,草稿和审核 */
   status: EArticleSaveType = EArticleSaveType.comfirm
 }

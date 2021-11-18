@@ -22,12 +22,20 @@ export interface IArticleBasic {
   nickName: string
   /** 创建时间 */
   createTime: Date
+  /** 文章封面 */
+  coverImages: IArticleCover
   /** 文章的状态 */
   status: EArticleStatus
   /** 文章的拒绝原因 */
   rejectReason: string;
   /** 更新时间 */
   updateTime: Date
+}
+
+/** 文章封面 */
+export interface IArticleCover {
+  size: number
+  images: string[]
 }
 
 /** 文章分类 */
