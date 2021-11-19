@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react'
+import { useEffect } from 'react'
 import { Route, Redirect } from 'react-router-dom'
 import { connect } from 'react-redux'
 import { Dispatch } from 'redux'
@@ -20,6 +20,7 @@ const PrivateRoute = ({
       getUserInfoDispatch()
     }
   }, [getUserInfoDispatch, isNeedUserInfo])
+
   return (
     <Route
       {...rest}

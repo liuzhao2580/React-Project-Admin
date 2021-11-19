@@ -163,13 +163,20 @@ const ArticleCreate = () => {
     async (type: EArticleSaveType) => {
       const resultObj = articleParams
       resultObj.status = type
-      setArticleParams(resultObj)
+      console.log(resultObj, 'resultObj')
+      setArticleParams(()=> resultObj)
       dispatch({ type: ACTIONS_TYPE.MODAL_LOADING, data: true })
       try {
         const data = await articleSaveOrUpdateApi(articleParams)
         if (data.code === ResultCodeEnum.SUCCESS) {
           message.success(data.msg)
-          setArticleParams(data.data)
+          setArticleParams((prev)=> {
+            return {
+              ...prev,
+              id: data.data.id,
+              status: data.data.status
+            }
+          })
         }
         dispatch({ type: ACTIONS_TYPE.PREVIEWMODEL, data: false })
       } finally {

@@ -23,14 +23,14 @@ export const removeToken = () => removeStorage(TOKEN)
 
 
 /** 设置用户 id */
-export const setUserIdStorage = (userId: number) => {
+export const setUserIdStorage = (userId: string) => {
   setStorage(USER_ID, userId, '1D')
 }
 /** 获取用户 id */
 export const getUserIdStorage = (): string => {
   const getResult = getStorage(USER_ID)
   if(getResult !== 'undefined') {
-    return JSON.parse(getStorage(USER_ID))
+    return getStorage(USER_ID)
   }
   else return ""
 }

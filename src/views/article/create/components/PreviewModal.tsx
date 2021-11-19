@@ -54,11 +54,6 @@ const PreviewModalCom = (props: IPreviewModal) => {
     setArticleCoverImage
   } = props
 
-  /** 监听 封面图的 radio 改变事件 */
-  useEffect(() => {
-    // setCoverImagesList(() => [{}, {}, {}])
-  }, [articleParams.coverImages.size])
-
   /** 文章封面的 radio 的改变事件 */
   const onCoverChange = ({ target }) => {
     setArticleCoverImage({

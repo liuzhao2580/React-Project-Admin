@@ -1,7 +1,7 @@
 /** 1. 用户基本信息的接口 */
 export interface IUserBaseInfo {
   /** 用户 id */
-  id: number
+  id: string
   /** 用户名 */
   userName: string
   /** 昵称 */
