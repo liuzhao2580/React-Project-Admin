@@ -1,4 +1,6 @@
 const ROUTE_PATH = {
+  /** 登录页面 */
+  LOGIN: '/login',
   /** 首页 */
   DASHBOARD: '/dashboard',
   /** 个人中心 */
