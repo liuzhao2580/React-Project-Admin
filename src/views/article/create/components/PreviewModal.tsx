@@ -1,4 +1,4 @@
-import { useState, useCallback, useMemo, useEffect } from 'react'
+import { useState, useCallback, useMemo } from 'react'
 import {
   Modal,
   Button,
@@ -42,8 +42,6 @@ interface IPreviewModal {
 const PreviewModalCom = (props: IPreviewModal) => {
   // 提交按钮的禁用状态
   const [articleConfirmDisabled, setArticleConfirmDisabled] = useState(true)
-  // 上传图片的 list
-  const [coverImagesList, setCoverImagesList] = useState<any>(() => [{}])
   const {
     isModalVisible,
     articleCateList,
