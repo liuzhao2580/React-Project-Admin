@@ -180,22 +180,20 @@ const PreviewModalCom = (props: IPreviewModal) => {
                   )}
                   {/* 说明是 三图片上传 */}
                   {articleParams.coverImages.size === 3 &&
-                    [1, 2, 3].map((item, index) => {
+                    [0, 1, 2].map(item => {
                       return (
                         <Upload
                           action=""
                           listType="picture-card"
                           showUploadList={false}
-                          customRequest={file =>
-                            coverImagesRequest(file, index)
-                          }
+                          customRequest={file => coverImagesRequest(file, item)}
                           onChange={coverImagesUploadChange}
-                          key={index}
+                          key={item}
                         >
                           <div>
-                            {item ? (
+                            {articleParams.coverImages.images[item] ? (
                               <img
-                                src={articleParams.coverImages.images[index]}
+                                src={articleParams.coverImages.images[item]}
                                 alt="avatar"
                                 style={{ width: '100%', height: '100px' }}
                               />

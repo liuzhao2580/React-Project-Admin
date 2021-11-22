@@ -162,8 +162,22 @@ const ArticleCreate = () => {
   const handleConfirm = useCallback(
     async (type: EArticleSaveType) => {
       const resultObj = articleParams
+      // 未提交封面
+      if(articleParams.coverImages.size === 0) {
+        resultObj.coverImages.images = []
+      }
+      // 提交单封面
+      else if(articleParams.coverImages.size === 1) {
+        resultObj.coverImages.images = [articleParams.coverImages.images[0]]
+      }
+      // 提交三封面
+      else if(articleParams.coverImages.size === 3) {
+        if(articleParams.coverImages.images.length !== 3) return message.warning('必须上传三张封面')
+      }
+
       resultObj.status = type
       console.log(resultObj, 'resultObj')
+      // return
       setArticleParams(()=> resultObj)
       dispatch({ type: ACTIONS_TYPE.MODAL_LOADING, data: true })
       try {
