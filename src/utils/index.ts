@@ -1,4 +1,4 @@
-import { createHashHistory } from 'history'
+import { createBrowserHistory } from 'history'
 import { removeToken,removeUserId } from './modules/commonSave'
 /** 一些常用的 工具类 */
 
@@ -8,7 +8,7 @@ import { removeToken,removeUserId } from './modules/commonSave'
 export const tokenExpired = () => {
   removeToken()
   removeUserId()
-  const history = createHashHistory()
+  const history = createBrowserHistory()
   history.replace('/login')
 }
 

@@ -2,9 +2,10 @@ import { useEffect } from 'react'
 import { Route, Redirect } from 'react-router-dom'
 import { connect } from 'react-redux'
 import { Dispatch } from 'redux'
-import { getToken } from '@/utils/modules/commonSave'
+import { getToken, getUserIdStorage } from '@/utils/modules/commonSave'
 import userActions from '@/store/modules/user/actions'
 import IStoreState from '@/typescript/store'
+import { tokenExpired } from '@/utils'
 
 /** 用来处理路由拦截 */
 const PrivateRoute = ({
@@ -15,7 +16,8 @@ const PrivateRoute = ({
 }) => {
   useEffect(() => {
     if (isNeedUserInfo === true) {
-      getUserInfoDispatch()
+      if(getUserIdStorage()) getUserInfoDispatch()
+      else tokenExpired()
     }
   }, [getUserInfoDispatch, isNeedUserInfo])
 

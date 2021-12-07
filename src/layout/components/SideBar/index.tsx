@@ -1,4 +1,4 @@
-import React, { useState, useMemo, FC } from 'react'
+import { useState, useMemo, FC } from 'react'
 import { useHistory, withRouter, RouteComponentProps } from 'react-router-dom'
 import { connect } from 'react-redux'
 import { Layout, Menu } from 'antd'
