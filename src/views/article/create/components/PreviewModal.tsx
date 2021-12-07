@@ -163,12 +163,11 @@ const PreviewModalCom = (props: IPreviewModal) => {
                       customRequest={file => coverImagesRequest(file, 0)}
                       onChange={coverImagesUploadChange}
                     >
-                      <div>
+                      <div className="picture-card-div-img">
                         {articleParams.coverImages.images[0] ? (
                           <img
                             src={articleParams.coverImages.images[0]}
                             alt="avatar"
-                            style={{ width: '100%' }}
                           />
                         ) : (
                           <div>
@@ -190,12 +189,11 @@ const PreviewModalCom = (props: IPreviewModal) => {
                           onChange={coverImagesUploadChange}
                           key={item}
                         >
-                          <div>
+                          <div className="picture-card-div-img">
                             {articleParams.coverImages.images[item] ? (
                               <img
                                 src={articleParams.coverImages.images[item]}
                                 alt="avatar"
-                                style={{ width: '100%', height: '100px' }}
                               />
                             ) : (
                               <div>
