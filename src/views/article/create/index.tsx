@@ -168,6 +168,7 @@ const ArticleCreate = () => {
       }
       // 提交单封面
       else if(articleParams.coverImages.size === 1) {
+        if(!articleParams.coverImages.images[0]) return message.warning('必须上传一张封面')
         resultObj.coverImages.images = [articleParams.coverImages.images[0]]
       }
       // 提交三封面
