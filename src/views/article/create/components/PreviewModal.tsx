@@ -7,16 +7,18 @@ import {
   Col,
   RadioChangeEvent,
   Spin,
-  Upload
+  Upload,
+  message
 } from 'antd'
 import { PlusOutlined } from '@ant-design/icons'
 import { connect } from 'react-redux'
+import { getUserIdStorage } from '@/utils/modules/commonSave'
 
 import { IArticleCategory, IArticleCover } from '@/typescript/article/interface'
 import { EArticleSaveType } from '@/typescript/article/enum'
 
 import { ArticleInsertOrEditModel } from '@/typescript/article/model'
-import { companyUploadPictureApi } from '@/api/modules/common'
+import { uploadPictureApi } from '@/api/modules/common'
 import { ResultCodeEnum } from '@/typescript/shared/enum'
 
 interface IPreviewModal {
@@ -72,11 +74,11 @@ const PreviewModalCom = (props: IPreviewModal) => {
     try {
       const params = new FormData()
       params.append('file', file)
-      params.append('path', 'application')
-      const data = await companyUploadPictureApi(params)
-      console.log(data)
+      params.append('uploadByUserId', getUserIdStorage())
+      const data = await uploadPictureApi(params)
       if (data.code === ResultCodeEnum.SUCCESS) {
-        const url = `http://114.67.66.231:9900${data.data}`
+        message.success('上传成功')
+        const url = data.data
         console.log(url)
         const getImagesList = JSON.parse(
           JSON.stringify(articleParams.coverImages.images)

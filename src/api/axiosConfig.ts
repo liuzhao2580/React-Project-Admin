@@ -5,10 +5,9 @@ import { ResultCodeEnum } from '@/typescript/shared/enum'
 import { ResultModel } from '@/typescript/shared/model'
 import { tokenExpired } from '@/utils'
 /** 使用 unicloud 的 请求地址 */
-// const baseURL = 'https://50f2e90e-f860-4396-bbc7-b912e93fa987.bspapp.com'
 const axiosConfig = axios.create({
   // baseURL,
-  timeout: 20000,
+  timeout: 60000,
   headers: {
     'X-Custom-Header': 'foobar'
   }

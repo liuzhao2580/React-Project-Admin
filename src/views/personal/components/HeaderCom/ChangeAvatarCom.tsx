@@ -6,7 +6,7 @@ import ImgCrop from 'antd-img-crop'
 import './avatar-upload.scss'
 
 import { IUserBaseInfo } from '@/typescript/user/interface'
-import { uploadPictureApi } from '@/api/modules/common'
+import { uploadUserAvatarApi } from '@/api/modules/common'
 import { uploadUserInfoApi } from '@/api/modules/user'
 
 import { ResultCodeEnum } from '@/typescript/shared/enum'
@@ -28,7 +28,7 @@ const ChangeAvatarCom: FC<ICom> = ({ userInfo, isNeedUserInfo }) => {
     formData.append('file', file.file)
     formData.append('uploadByUserId', id.toString())
 
-    const urlData = await uploadPictureApi(formData)
+    const urlData = await uploadUserAvatarApi(formData)
     if(urlData.code === ResultCodeEnum.SUCCESS) {
       const uploadUser = new MUploadUserInfo()
       uploadUser.avatar = urlData.data.url
