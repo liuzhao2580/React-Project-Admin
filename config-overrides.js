@@ -1,14 +1,29 @@
+
 const {
   override,
   fixBabelImports,
   addWebpackAlias,
   overrideDevServer,
   addWebpackResolve,
-  adjustStyleLoaders
+  adjustStyleLoaders,
+  setWebpackPublicPath
 } = require('customize-cra')
 const path = require('path')
+const baseSetting = require(__dirname + '/src/setting')
+
+/** 处理打包的环境 */
+function handleBuild () {
+  let handle = []
+  if(process.env.NODE_ENV !== 'development') {
+    handle.push(setWebpackPublicPath(baseSetting.basePath))
+  }
+  return handle
+}
+
 module.exports = {
   webpack: override(
+    // 设置打包后的文件路径
+    ...handleBuild(),
     // 配置antd 按需引入
     fixBabelImports('import', {
       libraryName: 'antd',

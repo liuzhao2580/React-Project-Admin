@@ -71,7 +71,8 @@ const ArticleList: React.FC<any> = () => {
     },
     {
       title: '文章标题',
-      dataIndex: 'title'
+      dataIndex: 'title',
+      width: 200
     },
     {
       title: '一级分类',
@@ -101,7 +102,7 @@ const ArticleList: React.FC<any> = () => {
       title: '操作',
       key: 'action',
       width: 100,
-      render: (text, record:IArticleBasic, index) => (
+      render: (text, record: IArticleBasic, index) => (
         <Space size="small">
           <Button
             title="预览"
@@ -178,6 +179,7 @@ const ArticleList: React.FC<any> = () => {
         columns={columns}
         dataSource={tableData}
         pagination={false}
+        scroll={{ x: true }}
       />
       {/* 分页 */}
       <div className="page-box">
