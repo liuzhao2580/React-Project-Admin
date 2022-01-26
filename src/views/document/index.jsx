@@ -1,6 +1,8 @@
-import React, { useState } from 'react'
+import { useState } from 'react'
+import funnyPng from '@/assets/images/funny.png'
 import { List, Card } from 'antd'
 const { Meta } = Card
+
 
 const Document = () => {
   const [documentList] = useState(() => [
@@ -13,6 +15,11 @@ const Document = () => {
       url: 'https://ant-design.gitee.io/components/overview-cn/',
       img: 'https://gw.alipayobjects.com/zos/rmsportal/KDpgvguMpGfqaHPjicRK.svg',
       title: 'Ant Design'
+    },
+    {
+      url: 'https://blog.csdn.net/weixin_43972992?type=blog',
+      img: funnyPng,
+      title: 'CSND博客地址'
     }
   ])
   return (
