@@ -9,7 +9,7 @@ export const tokenExpired = () => {
   removeToken()
   removeUserId()
   const history = createBrowserHistory()
-  history.replace('/login')
+  history.replace('login')
 }
 
 
