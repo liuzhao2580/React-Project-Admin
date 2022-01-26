@@ -1,5 +1,6 @@
 import { useState } from 'react'
 import funnyPng from '@/assets/images/funny.png'
+import ReactSvg from '@/assets/svg/React.svg'
 import giteeSvg from '@/assets/svg/Gitee.svg'
 import githubSvg from '@/assets/svg/Github.svg'
 import "./index.scss"
@@ -10,7 +11,7 @@ const Document = () => {
   const [documentList] = useState(() => [
     {
       url: 'https://react.docschina.org/docs/getting-started.html',
-      img: 'https://react.docschina.org/favicon.ico',
+      img: ReactSvg,
       title: 'React'
     },
     {
