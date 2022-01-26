@@ -1,8 +1,10 @@
 import { useState } from 'react'
 import funnyPng from '@/assets/images/funny.png'
+import giteeSvg from '@/assets/svg/Gitee.svg'
+import githubSvg from '@/assets/svg/Github.svg'
+import "./index.scss"
 import { List, Card } from 'antd'
 const { Meta } = Card
-
 
 const Document = () => {
   const [documentList] = useState(() => [
@@ -20,6 +22,16 @@ const Document = () => {
       url: 'https://blog.csdn.net/weixin_43972992?type=blog',
       img: funnyPng,
       title: 'CSND博客地址'
+    },
+    {
+      url: 'https://gitee.com/liuzhao2580',
+      img: giteeSvg,
+      title: '码云'
+    },
+    {
+      url: 'https://github.com/liuzhao2580',
+      img: githubSvg,
+      title: 'Github'
     }
   ])
   return (
