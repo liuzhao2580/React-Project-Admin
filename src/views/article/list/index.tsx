@@ -18,6 +18,7 @@ import { ArticleListParamsModel } from '@/typescript/article/model'
 import ArticleStatusCom from '../components/ArticleStatus'
 import Permission from '@/components/Permission'
 import { UserRolesEnum } from '@/typescript/user/enum'
+import { ColumnType } from 'antd/lib/table/interface'
 
 const articleOperation = {
   /** 预览 */
@@ -61,10 +62,10 @@ const ArticleList: React.FC<any> = () => {
     })
   }, [])
 
-  const columns = [
+  const columns: ColumnType<IArticleBasic>[] = [
     {
       title: '序号',
-      detaIndex: 'index',
+      dataIndex: 'index',
       render: (text, record, index) => {
         return (pageParams.current - 1) * pageParams.size + index + 1
       }
@@ -81,6 +82,10 @@ const ArticleList: React.FC<any> = () => {
     {
       title: '二级分类',
       dataIndex: 'categoryName'
+    },
+    {
+      title: '创建人',
+      dataIndex: 'nickName'
     },
     {
       title: '创建时间',
