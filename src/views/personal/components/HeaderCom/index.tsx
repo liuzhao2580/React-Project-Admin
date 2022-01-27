@@ -1,3 +1,4 @@
+import React  from 'react'
 import { IUserBaseInfo } from '@/typescript/user/interface'
 import CustomMapToText from '@/utils/modules/CustomMapToText'
 import ChangeAvatarCom from './ChangeAvatarCom'

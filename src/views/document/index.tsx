@@ -1,4 +1,4 @@
-import { useState } from 'react'
+import React, { useState } from 'react'
 import funnyPng from '@/assets/images/funny.png'
 import ReactSvg from '@/assets/svg/React.svg'
 import giteeSvg from '@/assets/svg/Gitee.svg'
@@ -69,7 +69,7 @@ const Document = () => {
           </Card>
         </List.Item>
       )}
-    />
+    ></List>
   )
 }
 

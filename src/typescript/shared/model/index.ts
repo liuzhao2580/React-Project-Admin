@@ -19,11 +19,11 @@ export class ResultModel<T> {
  */
 export class BaseQueryModel {
   /** 当前页 */
-  pageNum: number = 1
+  pageNum = 1
   /** 每页条数 */
-  pageSize: number = 10
+  pageSize = 10
 
-  constructor(pageNum: number = 1, pageSize: number = 10 ) {
+  constructor(pageNum = 1, pageSize = 10 ) {
     this.pageNum = pageNum
     this.pageSize = pageSize
   }
@@ -41,7 +41,7 @@ export class PageModel {
   total: number
   /** 总页数 */
   pages: number
-  constructor(current: number = 1,size: number = 10,total: number = 0,pages: number = 1 ) {
+  constructor(current = 1,size = 10,total = 0,pages = 1 ) {
     this.current = current
     this.size = size
     this.total = total

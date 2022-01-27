@@ -1,4 +1,4 @@
-import { useState } from 'react'
+import React, { useState } from 'react'
 import { connect } from 'react-redux'
 import { useHistory } from 'react-router-dom'
 import { Dispatch } from 'redux'
@@ -11,10 +11,15 @@ import { loginApi } from '@/api/modules/user'
 import { setUserIdStorage, setToken } from '@/utils/modules/commonSave'
 import { ILoginParams } from '@/typescript/user/interface'
 import userActions from '@/store/modules/user/actions'
-const LoginDom = ({ userInfoFetch }) => {
+
+interface IProps {
+  userInfoFetch: () => Promise<void>
+}
+
+const LoginDom = ({ userInfoFetch }: IProps) => {
   const history = useHistory()
-  let [loginForm] = useState({ userName: 'liuzhao', password: 123456 })
-  let [loading, setLoading] = useState(false)
+  const [loginForm] = useState({ userName: 'liuzhao', password: 123456 })
+  const [loading, setLoading] = useState(false)
 
   /** 登录请求 */
   const onFinish = async values => {

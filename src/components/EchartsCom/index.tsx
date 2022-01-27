@@ -12,9 +12,9 @@ const EchartsCom: FC<ICom> = ({ options, height }) => {
     'echartId-' + new Date().getTime() + Math.floor(Math.random() * 10000)
 
   /** 获取 echarts的dom 元素 */
-  let [echartDom, setEchartDom] = useState<HTMLElement | null>()
+  const [echartDom, setEchartDom] = useState<HTMLElement | null>()
   /** 获取 echarts的实例化对象 */
-  let [myChart, setMyChart] = useState<ECharts | null>(null)
+  const [myChart, setMyChart] = useState<ECharts | null>(null)
 
   useLayoutEffect(() => {
     setEchartDom(document.getElementById(`${echartId}`))

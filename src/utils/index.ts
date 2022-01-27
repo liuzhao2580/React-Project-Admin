@@ -14,13 +14,13 @@ export const tokenExpired = () => {
 
 
 /** 深拷贝 */
-export const deepCype = (obj: Object) => {
+export const deepCype = (obj: Record<string, any>) => {
   // 首先 判断该对象是不是数据
-  let result = Array.isArray(obj) ? [] : {}
+  const result = Array.isArray(obj) ? [] : {}
   // 第二步 用于判断 传递的参数 是不是 一个对象
   if (obj && typeof obj === 'object') {
     // 遍历对象
-    for (let key in obj) {
+    for (const key in obj) {
       /**
         hasOwnProperty() 方法会返回一个布尔值，
         指示对象自身属性中是否具有指定的属性（也就是是否有指定的键）

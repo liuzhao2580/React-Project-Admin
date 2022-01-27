@@ -1,4 +1,4 @@
-import { useEffect, useState, useCallback, useRef } from 'react'
+import React, { useEffect, useState, useCallback, useRef } from 'react'
 import { useHistory } from 'react-router-dom'
 import { message, Popconfirm, Spin } from 'antd'
 
@@ -26,7 +26,7 @@ const ArticleDetails = props => {
   const [articleDetails, setArticleDetails] = useState<IArticleBasic>()
 
   useEffect(() => {
-    ;(async function () {
+    (async function () {
       const id = history.location.state
       const data = await getArticleDetailsByIdApi(id as string)
       if (data.code === ResultCodeEnum.SUCCESS) {

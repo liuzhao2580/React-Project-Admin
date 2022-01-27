@@ -1,4 +1,4 @@
-import { useReducer, useImperativeHandle, forwardRef } from 'react'
+import React, { useReducer, useImperativeHandle, forwardRef } from 'react'
 import { Modal, Input, message } from 'antd'
 import { EArticleStatus } from '@/typescript/article/enum'
 
@@ -28,16 +28,16 @@ const ACTIONS_TYPE = {
 
 function reducer(state, action: { type: string; data: any }) {
   switch (action.type) {
-    case ACTIONS_TYPE.VISIBLE:
-      return {
-        ...state,
-        visible: action.data
-      }
-    case ACTIONS_TYPE.REASON:
-      return {
-        ...state,
-        reason: action.data
-      }
+  case ACTIONS_TYPE.VISIBLE:
+    return {
+      ...state,
+      visible: action.data
+    }
+  case ACTIONS_TYPE.REASON:
+    return {
+      ...state,
+      reason: action.data
+    }
   }
 }
 

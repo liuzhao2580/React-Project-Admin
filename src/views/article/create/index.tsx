@@ -1,4 +1,4 @@
-import { useState, useEffect, useCallback, useReducer } from 'react'
+import React, { useState, useEffect, useCallback, useReducer } from 'react'
 import { useHistory } from 'react-router-dom'
 import { Input, Button, message } from 'antd'
 import E from 'wangeditor'
@@ -31,13 +31,13 @@ const ACTIONS_TYPE = {
 
 class InitialState {
   /** 编辑器 */
-  editor: null = null
+  editor = null
   /** 用来设置 modal 的显示隐藏 */
-  isPreviewModal: boolean = false
+  isPreviewModal = false
   /** 监听预览按钮的状态 */
-  reviewBtnDisabled: boolean = false
+  reviewBtnDisabled = false
   /** 弹出框页面加载状态 */
-  modalLoading: boolean = false
+  modalLoading = false
 }
 
 function reducers(
@@ -45,26 +45,26 @@ function reducers(
   action: { type: string; data: any }
 ): any {
   switch (action.type) {
-    case ACTIONS_TYPE.EDITOR:
-      return {
-        ...state,
-        editor: action.data
-      }
-    case ACTIONS_TYPE.PREVIEWMODEL:
-      return {
-        ...state,
-        isPreviewModal: action.data
-      }
-    case ACTIONS_TYPE.REVIEWDISABLED:
-      return {
-        ...state,
-        reviewBtnDisabled: action.data
-      }
-    case ACTIONS_TYPE.MODAL_LOADING:
-      return {
-        ...state,
-        modalLoading: action.data
-      }
+  case ACTIONS_TYPE.EDITOR:
+    return {
+      ...state,
+      editor: action.data
+    }
+  case ACTIONS_TYPE.PREVIEWMODEL:
+    return {
+      ...state,
+      isPreviewModal: action.data
+    }
+  case ACTIONS_TYPE.REVIEWDISABLED:
+    return {
+      ...state,
+      reviewBtnDisabled: action.data
+    }
+  case ACTIONS_TYPE.MODAL_LOADING:
+    return {
+      ...state,
+      modalLoading: action.data
+    }
   }
 }
 
@@ -82,7 +82,7 @@ const ArticleCreate = () => {
 
   // 初始化 编辑器 、 获取文章分类数据
   useEffect(() => {
-    ;(async function () {
+    (async function () {
       const data = await getArticleCategoryByLevelApi(2)
       if (data.code === ResultCodeEnum.SUCCESS) {
         setArticleCate(data.data)
@@ -112,7 +112,7 @@ const ArticleCreate = () => {
     const getId = history.location.state
     // 说明 是编辑
     if (getId) {
-      ;(async function () {
+      (async function () {
         const data = await getArticleDetailsByIdApi(getId as string)
         if (data.code === ResultCodeEnum.SUCCESS) {
           const getData = data.data

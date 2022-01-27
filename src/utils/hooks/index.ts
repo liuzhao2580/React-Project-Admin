@@ -1,5 +1,5 @@
 /** 公用的hooks */
-import {
+import React, {
   useState,
   useRef,
   useEffect,
@@ -19,7 +19,7 @@ import { PageModel } from '@/typescript/shared/model'
 /** 自定义设置 useState */
 export const useStateHooks = <T>(initState) => {
   const [state, setState] = useState<T>(initState)
-  let isUpdate = useRef<any>()
+  const isUpdate = useRef<any>()
   const setUseState = (state, cb) => {
     setState(prev => {
       isUpdate.current = cb

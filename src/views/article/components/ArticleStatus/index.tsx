@@ -1,4 +1,4 @@
-import { useState, useEffect } from 'react'
+import React, { useState, useEffect } from 'react'
 import { Tag } from 'antd'
 import {
   ClockCircleOutlined,
@@ -16,7 +16,7 @@ interface ICom {
 }
 
 class IParams {
-  tagColor: string = ''
+  tagColor = ''
   tagIcon: JSX.Element = <ClockCircleOutlined />
 }
 
@@ -29,51 +29,51 @@ const ArticleStatusCom = (props: ICom) => {
 
   useEffect(() => {
     switch (status) {
-      // 已删除
-      case EArticleStatus.DELETED:
-        setParams(()=> {
-          return {
-            tagColor : 'error',
-            tagIcon : <CloseCircleOutlined />
-          }
-        })
-        break
+    // 已删除
+    case EArticleStatus.DELETED:
+      setParams(()=> {
+        return {
+          tagColor : 'error',
+          tagIcon : <CloseCircleOutlined />
+        }
+      })
+      break
       // 待审核
-      case EArticleStatus.REVIEWED:
-        setParams(()=> {
-          return {
-            tagColor : 'default',
-            tagIcon : <ClockCircleOutlined />
-          }
-        })
-        break
+    case EArticleStatus.REVIEWED:
+      setParams(()=> {
+        return {
+          tagColor : 'default',
+          tagIcon : <ClockCircleOutlined />
+        }
+      })
+      break
       // 草稿箱
-      case EArticleStatus.DRAFT:
-        setParams(()=> {
-          return {
-            tagColor : '#4e72b8',
-            tagIcon : <InboxOutlined />
-          }
-        })
-        break
+    case EArticleStatus.DRAFT:
+      setParams(()=> {
+        return {
+          tagColor : '#4e72b8',
+          tagIcon : <InboxOutlined />
+        }
+      })
+      break
       // 被驳回
-      case EArticleStatus.REJECT:
-        setParams(()=> {
-          return {
-            tagColor : '#ed1941',
-            tagIcon : <MinusCircleOutlined />
-          }
-        })
-        break
+    case EArticleStatus.REJECT:
+      setParams(()=> {
+        return {
+          tagColor : '#ed1941',
+          tagIcon : <MinusCircleOutlined />
+        }
+      })
+      break
       // 已发布
-      case EArticleStatus.PUBLISHED:
-        setParams(()=> {
-          return {
-            tagColor : 'success',
-            tagIcon : <CheckCircleOutlined />
-          }
-        })
-        break
+    case EArticleStatus.PUBLISHED:
+      setParams(()=> {
+        return {
+          tagColor : 'success',
+          tagIcon : <CheckCircleOutlined />
+        }
+      })
+      break
     }
   }, [status])
   return (

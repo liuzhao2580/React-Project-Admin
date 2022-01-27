@@ -6,10 +6,10 @@ const yData = ['Angular', 'React', 'Vue', 'JavaScript']
 /** X轴滚动条-折线图的配置 */
 export const LineOptions = (): EChartsOption => {
   let base = +new Date(2000, 1, 2)
-  let oneDay = 24 * 3600 * 1000
-  let data = [[base, Math.random() * 300]]
+  const oneDay = 24 * 3600 * 1000
+  const data = [[base, Math.random() * 300]]
   for (let i = 1; i < 10000; i++) {
-    let now = new Date((base += oneDay))
+    const now = new Date((base += oneDay))
     data.push([+now, Math.round((Math.random() - 0.5) * 20 + data[i - 1][1])])
   }
   return {

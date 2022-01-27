@@ -7,17 +7,16 @@ const width = 992
 
 const onResize = {
   /** 屏幕变化的方法 */
-  onResize() {
+  onResize(): void {
     const getClient = body.getBoundingClientRect()
-    let mobile = getClient.width > width ? false : true
+    const mobile = getClient.width > width ? false : true
     // 通过 redux-store 改变当前的状态
     store.dispatch(appActions.changeSiderStatus(mobile))
   },
   /** 监听屏幕变化开始 */
-  listenResize() {
+  listenResize(): void {
     window.addEventListener('resize', this.onResize)
   }
 }
-
 
 export default onResize

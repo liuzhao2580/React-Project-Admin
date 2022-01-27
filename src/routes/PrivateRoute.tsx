@@ -1,4 +1,4 @@
-import { useEffect } from 'react'
+import React, { FC, useEffect } from 'react'
 import { Route, Redirect } from 'react-router-dom'
 import { connect } from 'react-redux'
 import { Dispatch } from 'redux'
@@ -9,13 +9,21 @@ import userActions from '@/store/modules/user/actions'
 import IStoreState from '@/typescript/store'
 import { tokenExpired } from '@/utils'
 
+
+interface IProps {
+  component: FC
+  getUserInfoDispatch: ()=> Promise<void>
+  isNeedUserInfo: boolean
+  [propName: string]: any;
+}
+
 /** 用来处理路由拦截 */
 const PrivateRoute = ({
   component: Component,
   getUserInfoDispatch,
   isNeedUserInfo,
   ...rest
-}) => {
+}: IProps) => {
   useEffect(() => {
     if (isNeedUserInfo === true) {
       if(getUserIdStorage()) getUserInfoDispatch()

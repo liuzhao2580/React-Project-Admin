@@ -39,7 +39,7 @@ const SelectBoxCom = (props: ICom) => {
   // 获取文章状态
   const [articleStatusList] = useState<any[]>(() => {
     const getStatus = new CustomMapToText().ArticleConst
-    let arr: Array<{value: number, label: string}> = []
+    const arr: Array<{value: number, label: string}> = []
     getStatus.forEach((item, key) => {
       arr.push({
         value: key,
