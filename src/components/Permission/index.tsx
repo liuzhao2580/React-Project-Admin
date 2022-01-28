@@ -5,24 +5,34 @@ import IStoreState from '@/typescript/store'
 
 interface ICom {
   children: any
-  roleId: UserRolesEnum | Array<UserRolesEnum>
+  /** 传入的用户权限id */
+  roleId?: UserRolesEnum | Array<UserRolesEnum>
+  /** 满足条件即可的权限 */
+  permissionFlag?: boolean
   userRoleId: UserRolesEnum
 }
-const PermissionCom = (props: ICom) => {
-  const { children, roleId, userRoleId } = props
+const PermissionCom = ({
+  children,
+  roleId,
+  permissionFlag,
+  userRoleId
+}: ICom) => {
   const [show, setShow] = useState<boolean>(false)
-  useLayoutEffect(()=> {
-    setShow(()=> false)
-    if(roleId instanceof Array) {
+  useLayoutEffect(() => {
+    setShow(() => false)
+    if (permissionFlag) {
+      setShow(() => true)
+      return
+    }
+    if (roleId instanceof Array) {
       const getFind = roleId.find(value => value === userRoleId)
-      if(getFind) {
-        setShow(()=> true)
+      if (getFind) {
+        setShow(() => true)
       }
+    } else if (typeof roleId === 'number') {
+      roleId === userRoleId && setShow(() => true)
     }
-    else if(typeof roleId === 'number') {
-      roleId === userRoleId && setShow(()=> true)
-    }
-  }, [userRoleId])
+  }, [userRoleId, permissionFlag])
   return <>{show && children}</>
 }
 

@@ -16,12 +16,14 @@ import Permission from '@/components/Permission'
 import { UserRolesEnum } from '@/typescript/user/enum'
 import RejectReasonCom from './components/RejectReasonCom'
 import { EArticleStatus } from '@/typescript/article/enum'
+import { getUserIdStorage } from '@/utils/modules/commonSave'
 
 const ArticleDetails = () => {
   const history = useHistory()
   const childrenRef = useRef<any>(null)
 
   const [loading, setLoading] = useState<boolean>(false)
+
 
   const [articleDetails, setArticleDetails] = useState<IArticleBasic>()
 
@@ -122,7 +124,7 @@ const ArticleDetails = () => {
                   <ArticleStatusCom status={articleDetails?.status} />
                 )}
               </div>
-              <Permission roleId={UserRolesEnum.user}>
+              <Permission permissionFlag={articleDetails?.userId === getUserIdStorage()}>
                 <div
                   className="article-details-com-header-main-right-edit iconfont icon-bianji"
                   onClick={editArticle}

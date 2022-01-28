@@ -17,8 +17,8 @@ import { useTableHooks } from '@/utils/hooks'
 import { ArticleListParamsModel } from '@/typescript/article/model'
 import ArticleStatusCom from '../components/ArticleStatus'
 import Permission from '@/components/Permission'
-import { UserRolesEnum } from '@/typescript/user/enum'
 import { ColumnType } from 'antd/lib/table/interface'
+import { getUserIdStorage } from '@/utils/modules/commonSave'
 
 const articleOperation = {
   /** 预览 */
@@ -117,7 +117,7 @@ const ArticleList: React.FC<any> = () => {
             icon={<EyeOutlined />}
             onClick={() => clickLink(record, articleOperation.preview)}
           ></Button>
-          <Permission roleId={UserRolesEnum.user}>
+          <Permission permissionFlag={record.userId === getUserIdStorage()}>
             <Button
               title="编辑"
               shape="circle"
