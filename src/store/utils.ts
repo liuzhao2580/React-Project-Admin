@@ -3,11 +3,8 @@ import produce from 'immer'
 /**
  * 使用 immer 改造 reducer
  */
-export const customReducer = (state, action) => {
-  
-}
 
-export function createReducer<State, Payload>(
+export function createReducer<State>(
   cases: {
     [key: string]: (s: State, action) => State | any
   } = {},

@@ -42,7 +42,7 @@ const ArticleList: React.FC<any> = () => {
 
   /** 文章删除 */
   const deteleClick = useCallback(
-    async (text, record: IArticleBasic, index) => {
+    async (text, record: IArticleBasic) => {
       const { id } = record
       const data = await articleDeleteApi(id)
       if (data.code === ResultCodeEnum.SUCCESS) {
@@ -107,7 +107,7 @@ const ArticleList: React.FC<any> = () => {
       title: '操作',
       key: 'action',
       width: 100,
-      render: (text, record: IArticleBasic, index) => (
+      render: (text, record: IArticleBasic) => (
         <Space size="small">
           <Button
             title="预览"
@@ -129,7 +129,7 @@ const ArticleList: React.FC<any> = () => {
           </Permission>
           <Popconfirm
             title="确定删除该文章吗？"
-            onConfirm={() => deteleClick(text, record, index)}
+            onConfirm={() => deteleClick(text, record)}
             okText="确定"
             cancelText="取消"
           >

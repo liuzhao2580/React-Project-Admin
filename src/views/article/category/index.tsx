@@ -45,7 +45,7 @@ const CategoryCom = () => {
       title: '编辑',
       dataIndex: 'action',
       key: 'action',
-      render: (text, record) => (
+      render: () => (
         <div className="article-category-com-table-action">
           <span className="article-category-com-table-action-btn">
             查看下级

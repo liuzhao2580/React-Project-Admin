@@ -17,7 +17,7 @@ import { UserRolesEnum } from '@/typescript/user/enum'
 import RejectReasonCom from './components/RejectReasonCom'
 import { EArticleStatus } from '@/typescript/article/enum'
 
-const ArticleDetails = props => {
+const ArticleDetails = () => {
   const history = useHistory()
   const childrenRef = useRef<any>(null)
 

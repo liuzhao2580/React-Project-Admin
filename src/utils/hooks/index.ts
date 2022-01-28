@@ -1,5 +1,5 @@
 /** 公用的hooks */
-import React, {
+import {
   useState,
   useRef,
   useEffect,

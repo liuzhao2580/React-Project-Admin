@@ -32,7 +32,7 @@ axiosConfig.interceptors.response.use(
     const data: ResultModel<any> = response.data
 
     return new Promise((resolve, reject) => {
-      const errorMsg = '请求失败：' + data.msg || '未知错误'
+      const errorMsg = '请求失败: ' + data.msg || '未知错误'
       // 说明是成功的请求
       if (status === 200) {
         if (data.code === ResultCodeEnum.SUCCESS) {
@@ -56,7 +56,7 @@ axiosConfig.interceptors.response.use(
     })
   },
   error => {
-    message.error('请求出错：' + error)
+    message.error('请求出错: ' + error)
     return Promise.reject(error)
   }
 )
