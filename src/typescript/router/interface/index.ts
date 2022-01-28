@@ -28,5 +28,5 @@ export interface IMeta {
   /** 侧边栏的名称 */
   title: string
   /** 侧边栏的图标 */
-  icon?: FC | String
+  icon?: FC | string
 }

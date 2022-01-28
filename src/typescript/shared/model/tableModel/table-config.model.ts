@@ -17,7 +17,7 @@ export class TableConfigModel {
   /** 点击搜索按钮之后 显示搜索栏 */
   showSearch?: boolean = false
   /** 表格的加载状态 */
-  loading: boolean = true
+  loading = true
   /** 表格的列配置 */
   columnConfig!: ColumnConfig[]
   /** 表格的操作 */
@@ -43,7 +43,7 @@ export class ColumnConfig {
   /** 是否固定 默认false 不固定 */
   fixed?: boolean = false
   /** 是否可搜索  */
-  searchable: boolean = true
+  searchable = true
   /** 用于需要搜索的字段 */
   searchKey?: string
   /** 搜索的配置 */
