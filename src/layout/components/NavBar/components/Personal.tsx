@@ -1,6 +1,7 @@
 import React from 'react'
 import { connect } from 'react-redux'
 import { Menu, Dropdown } from 'antd'
+import type { MenuProps } from 'antd'
 import { DownOutlined, UserOutlined, ExportOutlined } from '@ant-design/icons'
 import { useHistory } from 'react-router-dom'
 import { IUserBaseInfo } from '@/typescript/user/interface'
@@ -15,7 +16,7 @@ interface IProps {
 const Personal = ({ userInfo }: IProps) => {
   const history = useHistory()
   // 点击 菜单项
-  const menuClick = e => {
+  const menuClick: MenuProps['onClick'] = e => {
     const { key } = e
     switch (key) {
     // 个人中心
