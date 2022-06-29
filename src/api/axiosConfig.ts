@@ -1,28 +1,14 @@
 import axios from 'axios'
 import { message } from 'antd'
-import { getToken } from '@/utils/modules/commonSave'
 import { ResultCodeEnum } from '@/typescript/shared/enum'
 import { ResultModel } from '@/typescript/shared/model'
 import { tokenExpired } from '@/utils'
-/** 使用 unicloud 的 请求地址 */
 const axiosConfig = axios.create({
-  // baseURL,
+  baseURL: process.env.REACT_APP_BASE_API,
   timeout: 60000,
   headers: {
     'X-Custom-Header': 'foobar'
   }
-})
-
-// 发送请求之前的拦截
-axiosConfig.interceptors.request.use(config => {
-  if(config.url) {
-    // 说明是 http开头 不需要拼接
-    if(/^(\/)?http/.test(config.url) === false) {
-      config.url = '/api/' + config.url
-      config.headers.Authorization = getToken()
-    }
-  }
-  return config
 })
 
 // 接收数据之前的拦截

@@ -8,6 +8,9 @@ import * as serviceWorker from './serviceWorker'
 import { Provider } from 'react-redux'
 import store from './store'
 
+import mockXHR from './mock'
+mockXHR()
+
 // 导入全局样式
 import '@/assets/styles/index.scss'
 // 引入 svg 的字体图标

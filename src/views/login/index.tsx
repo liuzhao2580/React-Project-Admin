@@ -18,7 +18,7 @@ interface IProps {
 
 const LoginDom = ({ userInfoFetch }: IProps) => {
   const history = useHistory()
-  const [loginForm] = useState({ userName: 'liuzhao', password: 123456 })
+  const [loginForm] = useState({ userName: 'liuzhao', password: '123456' })
   const [loading, setLoading] = useState(false)
 
   /** 登录请求 */

@@ -16,3 +16,11 @@ export enum ResultCodeEnum {
   TOKEN_ERROR = 50001
 }
 
+/** 2. 请求的方式 */
+export enum ResultTypeEnum {
+  GET = 'get',
+  POST = 'post',
+  PUT = 'put',
+  DELETE = 'delete',
+  PUTCH = 'putch'
+}
