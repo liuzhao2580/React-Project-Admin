@@ -11,6 +11,7 @@ import { loginApi } from '@/api/modules/user'
 import { setUserIdStorage, setToken } from '@/utils/modules/commonSave'
 import { ILoginParams } from '@/typescript/user/interface'
 import userActions from '@/store/modules/user/actions'
+import ROUTE_PATH from '@/routes/routePath'
 
 interface IProps {
   userInfoFetch: () => Promise<void>
@@ -34,7 +35,7 @@ const LoginDom = ({ userInfoFetch }: IProps) => {
       setUserIdStorage(data.id)
       setToken(`Bearer ${data.token}`)
       userInfoFetch().then(()=> {
-        history.push('/')
+        history.push(ROUTE_PATH.DASHBOARD)
       })
     } finally {
       setLoading(false)

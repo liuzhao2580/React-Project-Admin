@@ -1,12 +1,15 @@
 import React from 'react'
-import {
-  Switch,
-  Route,
-  Redirect
-} from 'react-router-dom'
+import { Switch, Route, Redirect, useHistory, withRouter } from 'react-router-dom'
 import { constRoutes } from './routerConfig'
 
-const Routes = () => {
+import Login from '@/views/login'
+import Layout from '@/layout'
+import ErrorPage404 from '@/views/errorPage/404'
+import PrivateRoute from '@/routes/PrivateRoute'
+import ROUTE_PATH from '@/routes/routePath'
+
+/** 登录之后的路由 */
+export const Routes = () => {
   const routesFunc = (Routes = constRoutes) => {
     return Routes.map(router => {
       if (!router.children) {
@@ -37,5 +40,19 @@ const Routes = () => {
   return <Switch>{getRoutes}</Switch>
 }
 
-
-export default Routes
+/** 登录之前 配置路由
+ * withRouter 可以监听路由的变化
+ */
+export const BaseRouter = withRouter(() => {
+  const history = useHistory()
+  console.log(history, 'his')
+  // 用于设置 浏览器的 title 显示
+  document.title = '1234'
+  return (
+    <Switch>
+      <Route path={ROUTE_PATH.LOGIN} exact component={Login}></Route>
+      <Route path="/404" exact component={ErrorPage404}></Route>
+      <PrivateRoute path="/" component={Layout}></PrivateRoute>
+    </Switch>
+  )
+})
