@@ -8,7 +8,6 @@ import PrivateRoute from '@/routes/PrivateRoute'
 import ROUTE_PATH from '@/routes/routePath'
 import setting from '@/setting'
 const App = () => {
-  console.log(process.env)
   return (
     <div id="App">
       <Router basename={setting.basePath}>
