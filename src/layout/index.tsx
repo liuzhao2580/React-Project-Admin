@@ -6,7 +6,7 @@ import SiderDom from './components/SideBar'
 import NavBarDom from './components/NavBar'
 import ContentDom from './components/Content'
 import resizeMethods from '../utils/modules/onResize'
-
+import IStoreState from '@/typescript/store'
 interface IProps {
   layoutLoading: boolean
 }
@@ -41,7 +41,7 @@ const LayoutDom = ({ layoutLoading }: IProps) => {
   )
 }
 
-const mapUserInfoStateToProps = state => {
+const mapUserInfoStateToProps = (state: IStoreState) => {
   return {
     layoutLoading: state.app.layoutLoading
   }

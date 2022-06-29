@@ -9,12 +9,11 @@ import userActions from '@/store/modules/user/actions'
 import IStoreState from '@/typescript/store'
 import { tokenExpired } from '@/utils'
 
-
 interface IProps {
   component: FC
-  getUserInfoDispatch: ()=> Promise<void>
+  getUserInfoDispatch: () => Promise<void>
   isNeedUserInfo: boolean
-  [propName: string]: any;
+  [propName: string]: any
 }
 
 /** 用来处理路由拦截 */
@@ -26,7 +25,7 @@ const PrivateRoute = ({
 }: IProps) => {
   useEffect(() => {
     if (isNeedUserInfo === true) {
-      if(getUserIdStorage()) getUserInfoDispatch()
+      if (getUserIdStorage()) getUserInfoDispatch()
       else {
         message.info('登录过期')
         tokenExpired()

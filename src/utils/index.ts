@@ -1,5 +1,5 @@
 import { createBrowserHistory } from 'history'
-import { removeToken,removeUserId } from './modules/commonSave'
+import { removeToken, removeUserId } from './modules/commonSave'
 /** 一些常用的 工具类 */
 
 /**
@@ -8,10 +8,14 @@ import { removeToken,removeUserId } from './modules/commonSave'
 export const tokenExpired = () => {
   removeToken()
   removeUserId()
-  const history = createBrowserHistory()
-  history.replace('login')
+  toLoginPage()
 }
 
+/** 跳转到登录页面 */
+export const toLoginPage = () => {
+  const history = createBrowserHistory()
+  history.push('login')
+}
 
 /** 深拷贝 */
 export const deepCype = (obj: Record<string, any>) => {

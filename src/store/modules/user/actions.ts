@@ -3,6 +3,7 @@ import { getUserIdStorage } from '@/utils/modules/commonSave'
 import { Dispatch } from 'redux'
 import ACTIONS_TYPE from './actions-type'
 import appActions from '../app/actions'
+import { tokenExpired } from '@/utils'
 
 const actions = {
   /** 获取用户的基本信息 */
@@ -18,13 +19,19 @@ const actions = {
       return new Promise<void>(async reslove => {
         // 添加当前的全局加载状态
         dispatch(appActions.layoutLoadingStatus(true))
-        const getData = await getUserInfoApi(getUserIdStorage())
-        // 清除全局的加载状态
-        dispatch(appActions.layoutLoadingStatus(false))
-        // 页面的刷新flag 为 false
-        dispatch(appActions.isNeedUserInfo(false))
-        dispatch(this.getUserInfo(getData.data))
-        reslove()
+        try {
+          const getData = await getUserInfoApi(getUserIdStorage())
+          dispatch(this.getUserInfo(getData.data))
+        } catch (error) {
+          console.log(error)
+          tokenExpired()
+        } finally {
+          // 清除全局的加载状态
+          dispatch(appActions.layoutLoadingStatus(false))
+          // 页面的刷新flag 为 false
+          dispatch(appActions.isNeedUserInfo(false))
+          reslove()
+        }
       })
     }
   }
