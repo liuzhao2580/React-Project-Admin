@@ -1,16 +1,11 @@
 import React, { FC } from 'react'
 import { connect } from 'react-redux'
 import { Dispatch } from 'redux'
-import { Upload, message } from 'antd'
+import { Upload } from 'antd'
 import ImgCrop from 'antd-img-crop'
 import './avatar-upload.scss'
 
 import { IUserBaseInfo } from '@/typescript/user/interface'
-import { uploadUserAvatarApi } from '@/api/modules/common'
-import { uploadUserInfoApi } from '@/api/modules/user'
-
-import { ResultCodeEnum } from '@/typescript/shared/enum'
-import { MUploadUserInfo } from '@/typescript/user/modules/uploadUserInfo'
 
 import appActions from '@/store/modules/app/actions'
 interface ICom {
@@ -19,7 +14,7 @@ interface ICom {
 }
 
 /** 用户上传头像组件 */
-const ChangeAvatarCom: FC<ICom> = ({ userInfo, isNeedUserInfo }) => {
+const ChangeAvatarCom: FC<ICom> = ({ userInfo }) => {
   const { avatar, id } = userInfo
 
   /** 自定义上传方法 */
@@ -27,20 +22,6 @@ const ChangeAvatarCom: FC<ICom> = ({ userInfo, isNeedUserInfo }) => {
     const formData = new FormData()
     formData.append('file', file.file)
     formData.append('uploadByUserId', id.toString())
-
-    const urlData = await uploadUserAvatarApi(formData)
-    if(urlData.code === ResultCodeEnum.SUCCESS) {
-      const uploadUser = new MUploadUserInfo()
-      uploadUser.avatar = urlData.data.url
-      const data = await uploadUserInfoApi(id, uploadUser)
-      if (data.code === ResultCodeEnum.SUCCESS) {
-        isNeedUserInfo(true)
-        message.success('更新成功')
-      }
-      else {
-        message.error(data.msg)
-      }
-    }
   }
 
   return (

@@ -1,8 +1,6 @@
 import {
   HomeOutlined,
   FileTextOutlined,
-  DatabaseOutlined,
-  DiffOutlined,
   FileAddOutlined,
   GroupOutlined
 } from '@ant-design/icons'
@@ -12,10 +10,6 @@ import ROUTE_PATH from './routePath'
 import Dashboard from '@/views/dashboard'
 import Personal from '@/views/personal'
 import Document from '@/views/document'
-import ArticleCategory from '@/views/article/category'
-import ArticleList from '@/views/article/list'
-import ArticleDetails from '@/views/article/details'
-import ArticleCreate from '@/views/article/create'
 import FirstMenu from '@/views/multilevel-menu/first-menu'
 import SecondMenu from '@/views/multilevel-menu/second-menu'
 import ThirdMenu from '@/views/multilevel-menu/third-menu'
@@ -37,39 +31,6 @@ export const constRoutes: Array<IRouterList> = [
     path: ROUTE_PATH.DOCUMENT,
     meta: { icon: FileTextOutlined, title: '文档' },
     component: Document
-  },
-  // 文章
-  {
-    path: ROUTE_PATH.ARTICLE,
-    redirect: ROUTE_PATH.ARTICLE_LIST,
-    meta: { icon: DatabaseOutlined, exact: true, title: '文章' },
-    children: [
-      {
-        path: ROUTE_PATH.ARTICLE_CATEGORY,
-        meta: { icon: DiffOutlined, title: '文章分类' },
-        component: ArticleCategory
-      },
-      {
-        path: ROUTE_PATH.ARTICLE_LIST,
-        meta: { icon: DiffOutlined, title: '文章列表' },
-        component: ArticleList
-      },
-      {
-        path: ROUTE_PATH.ARTICLE_CREATE,
-        meta: { icon: FileAddOutlined, title: '文章创建' },
-        component: ArticleCreate
-      },
-      {
-        path: ROUTE_PATH.ARTICLE_EDIT,
-        meta: { hidden: true, title: '文章编辑' },
-        component: ArticleCreate
-      },
-      {
-        path: ROUTE_PATH.ARTICLE_DETAILS,
-        meta: { hidden: true, title: '文章预览' },
-        component: ArticleDetails
-      }
-    ]
   },
   // 多级菜单
   {
