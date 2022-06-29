@@ -4,6 +4,8 @@ import { Menu, Dropdown } from 'antd'
 import { DownOutlined, UserOutlined, ExportOutlined } from '@ant-design/icons'
 import { useHistory } from 'react-router-dom'
 import { IUserBaseInfo } from '@/typescript/user/interface'
+import { clearLoginData } from '@/utils'
+import ROUTE_PATH from '@/routes/routePath'
 
 interface IProps {
   userInfo: IUserBaseInfo
@@ -20,9 +22,10 @@ const Personal = ({ userInfo }: IProps) => {
     case 'personal':
       history.push({pathname: '/personal', state: { test: 'dashboard' }})
       break
-      // 退出登录
+    // 退出登录
     case 'logout':
-      history.replace('/login')
+      clearLoginData()
+      history.push(ROUTE_PATH.LOGIN)
       break
     default:
       break

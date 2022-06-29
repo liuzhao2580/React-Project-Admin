@@ -2,19 +2,24 @@ import { createBrowserHistory } from 'history'
 import { removeToken, removeUserId } from './modules/commonSave'
 /** 一些常用的 工具类 */
 
+/** 退出登录之前, 清除保存的数据 */
+export const clearLoginData = () => {
+  removeToken()
+  removeUserId()
+}
+
 /**
  * token 过期，用户需要重新登录，并且清除掉部分数据
  */
 export const tokenExpired = () => {
-  removeToken()
-  removeUserId()
+  clearLoginData()
   toLoginPage()
 }
 
 /** 跳转到登录页面 */
 export const toLoginPage = () => {
   const history = createBrowserHistory()
-  history.push('login')
+  history.replace('login')
 }
 
 /** 深拷贝 */
