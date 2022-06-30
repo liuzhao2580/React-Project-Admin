@@ -7,6 +7,8 @@ export const ROUTE_PATH = {
   PERSONAL: '/personal',
   /** 文档 */
   DOCUMENT: '/document',
+  /** 权限 */
+  ADMIN_MANAGEMENT: '/admin',
   /** 文章 */
   ARTICLE: '/article',
   /** 文章分类 */
@@ -42,6 +44,8 @@ export const ROUTE_TITLE = {
   PERSONAL: '个人中心',
   /** 文档 */
   DOCUMENT: '文档',
+  /** 权限 */
+  ADMIN_MANAGEMENT: '权限',
   /** 文章 */
   ARTICLE: '文章',
   /** 文章分类 */

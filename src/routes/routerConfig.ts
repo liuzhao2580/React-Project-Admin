@@ -4,7 +4,8 @@ import {
   DatabaseOutlined,
   DiffOutlined,
   FileAddOutlined,
-  GroupOutlined
+  GroupOutlined,
+  UserSwitchOutlined
 } from '@ant-design/icons'
 
 import { IRouterList } from '@/typescript/router/interface'
@@ -19,6 +20,7 @@ import ArticleCreate from '@/views/article/create'
 import FirstMenu from '@/views/multilevel-menu/first-menu'
 import SecondMenu from '@/views/multilevel-menu/second-menu'
 import ThirdMenu from '@/views/multilevel-menu/third-menu'
+import AdminManagement from '@/views/admin'
 /** 路由的保存数组*/
 export const constRoutes: Array<IRouterList> = [
   {
@@ -37,6 +39,12 @@ export const constRoutes: Array<IRouterList> = [
     path: ROUTE_PATH.DOCUMENT,
     meta: { icon: FileTextOutlined, title: ROUTE_TITLE.DOCUMENT},
     component: Document
+  },
+  // 权限页面
+  {
+    path: ROUTE_PATH.ADMIN_MANAGEMENT,
+    meta: { icon: UserSwitchOutlined, title: ROUTE_TITLE.ADMIN_MANAGEMENT},
+    component: AdminManagement
   },
   // 文章
   {

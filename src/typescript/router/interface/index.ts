@@ -1,3 +1,4 @@
+import { UserRolesEnum } from '@/typescript/user/enum'
 import { FC } from 'react'
 /** 路由 */
 export interface IRouterList {
@@ -29,4 +30,8 @@ export interface IMeta {
   title: string
   /** 侧边栏的图标 */
   icon?: FC | string
+  /** 用户的权限
+   * 如果没有设置,则代表所有的权限均可以访问
+   */
+  role?: UserRolesEnum
 }
