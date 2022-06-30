@@ -1,4 +1,4 @@
-import { MUserInfo } from "@/typescript/user/modules/userInfo"
+import { MUserInfo } from "@/typescript/shared/model/user"
 
 
 export default interface IUserState {

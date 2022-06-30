@@ -1,5 +1,5 @@
 import React  from 'react'
-import { IUserBaseInfo } from '@/typescript/user/interface'
+import { IUserBaseInfo } from '@/typescript/shared/interface/user'
 import CustomMapToText from '@/utils/modules/CustomMapToText'
 import ChangeAvatarCom from './ChangeAvatarCom'
 interface ICom {

@@ -3,7 +3,7 @@ import { useHistory, withRouter, Link } from 'react-router-dom'
 import { Breadcrumb } from 'antd'
 
 import { constRoutes } from '@/routes/routerConfig'
-import { IRouterList } from '@/typescript/router/interface'
+import { IRouterList } from '@/typescript/shared/interface/router'
 const BreadcrumbDom = () => {
   const history = useHistory()
   const { pathname } = history.location

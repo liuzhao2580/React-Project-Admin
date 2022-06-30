@@ -13,10 +13,10 @@ import {
   getArticleCategoryByLevelApi,
   getArticleDetailsByIdApi
 } from '@/api/modules/article'
-import { IArticleCategory } from '@/typescript/article/interface'
 import { ResultCodeEnum } from '@/typescript/shared/enum'
-import { ArticleInsertOrEditModel } from '@/typescript/article/model'
-import { EArticleSaveType } from '@/typescript/article/enum'
+import { ArticleInsertOrEditModel } from '@/typescript/shared/model/article'
+import { IArticleCategory } from '@/typescript/shared/interface/article'
+import { EArticleSaveType } from '@/typescript/shared/enum/article'
 
 const ACTIONS_TYPE = {
   /** 编辑器 */

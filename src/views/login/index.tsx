@@ -9,7 +9,7 @@ import { UserOutlined, LockOutlined } from '@ant-design/icons'
 import './login.scss'
 import { loginApi } from '@/api/modules/user'
 import { setUserIdStorage, setToken } from '@/utils/modules/commonSave'
-import { ILoginParams } from '@/typescript/user/interface'
+import { ILoginParams } from '@/typescript/shared/interface/user'
 import userActions from '@/store/modules/user/actions'
 import { ROUTE_PATH } from '@/routes/RouteConst'
 

@@ -8,7 +8,7 @@ import {
   UserSwitchOutlined
 } from '@ant-design/icons'
 
-import { IRouterList } from '@/typescript/router/interface'
+import { IRouterList } from '@/typescript/shared/interface/router'
 import { ROUTE_PATH, ROUTE_TITLE } from './RouteConst'
 import Dashboard from '@/views/dashboard'
 import Personal from '@/views/personal'

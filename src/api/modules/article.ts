@@ -7,12 +7,12 @@ import {
   IArticleBasic,
   IArticleCategory,
   IArticleCategoryByLazy
-} from '@/typescript/article/interface'
+} from '@/typescript/shared/interface/article'
 import {
   ArticleCategoryModel,
   ArticleInsertOrEditModel,
   ArticleListParamsModel
-} from '@/typescript/article/model'
+} from '@/typescript/shared/model/article'
 /** 获取文章列表数据 */
 export const articleListApi = (
   params: ArticleListParamsModel

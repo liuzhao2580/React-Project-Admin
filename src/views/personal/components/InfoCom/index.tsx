@@ -1,6 +1,6 @@
 import React from 'react'
 import "./index.scss"
-import { IUserBaseInfo } from '@/typescript/user/interface'
+import { IUserBaseInfo } from '@/typescript/shared/interface/user'
 
 interface InfoComInter {
   userInfo: IUserBaseInfo

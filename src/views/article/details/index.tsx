@@ -8,15 +8,15 @@ import {
   articleSaveOrUpdateApi,
   getArticleDetailsByIdApi
 } from '@/api/modules/article'
-import { IArticleBasic } from '@/typescript/article/interface'
 import { ResultCodeEnum } from '@/typescript/shared/enum'
 import ArticleStatusCom from '../components/ArticleStatus'
 import { ROUTE_PATH } from '@/routes/RouteConst'
 import Permission from '@/components/Permission'
-import { UserRolesEnum } from '@/typescript/user/enum'
 import RejectReasonCom from './components/RejectReasonCom'
-import { EArticleStatus } from '@/typescript/article/enum'
 import { getUserIdStorage } from '@/utils/modules/commonSave'
+import { IArticleBasic } from '@/typescript/shared/interface/article'
+import { EArticleStatus } from '@/typescript/shared/enum/article'
+import { UserRolesEnum } from '@/typescript/shared/enum/user'
 
 const ArticleDetails = () => {
   const history = useHistory()

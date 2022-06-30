@@ -5,7 +5,7 @@ import './index.scss'
 import InfoCom from './components/InfoCom'
 import PersonalHeader from './components/HeaderCom'
 
-import { IUserBaseInfo } from '@/typescript/user/interface'
+import { IUserBaseInfo } from '@/typescript/shared/interface/user'
 
 interface IProps {
   userInfo: IUserBaseInfo

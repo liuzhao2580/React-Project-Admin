@@ -1,6 +1,6 @@
 import axios from '../axiosConfig'
 import { ResultModel } from '@/typescript/shared/model'
-import { IUserBaseInfo, ILoginParams, IUploadUserInfo } from '@/typescript/user/interface'
+import { IUserBaseInfo, ILoginParams, IUploadUserInfo } from '@/typescript/shared/interface/user'
 /** 用户登录 */
 export const loginApi = (
   params: ILoginParams

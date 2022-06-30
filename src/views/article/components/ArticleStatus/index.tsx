@@ -8,8 +8,8 @@ import {
   InboxOutlined
 } from '@ant-design/icons'
 
-import { EArticleStatus } from '@/typescript/article/enum'
 import CustomMapToText from '@/utils/modules/CustomMapToText'
+import { EArticleStatus } from '@/typescript/shared/enum/article'
 
 interface ICom {
   status: EArticleStatus

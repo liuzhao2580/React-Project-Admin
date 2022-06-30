@@ -6,19 +6,19 @@ import './index.scss'
 import { ROUTE_PATH } from '@/routes/RouteConst'
 
 import { articleListApi, articleDeleteApi } from '@/api/modules/article'
-import { IArticleBasic } from '@/typescript/article/interface'
-import { EArticleStatus } from '@/typescript/article/enum'
 
 import { ITimeType, formateNormalTime } from '@/utils/modules/time-utils'
 import { ResultCodeEnum } from '@/typescript/shared/enum'
 
 import SelectBoxCom from './components/SelectBox'
 import { useTableHooks } from '@/utils/hooks'
-import { ArticleListParamsModel } from '@/typescript/article/model'
 import ArticleStatusCom from '../components/ArticleStatus'
 import Permission from '@/components/Permission'
 import { ColumnType } from 'antd/lib/table/interface'
 import { getUserIdStorage } from '@/utils/modules/commonSave'
+import { ArticleListParamsModel } from '@/typescript/shared/model/article'
+import { IArticleBasic } from '@/typescript/shared/interface/article'
+import { EArticleStatus } from '@/typescript/shared/enum/article'
 
 const articleOperation = {
   /** 预览 */

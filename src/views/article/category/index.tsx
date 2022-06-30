@@ -3,8 +3,8 @@ import { Table, Pagination, Spin } from 'antd'
 import './index.scss'
 
 import { getArticleCategoryListApi } from '@/api/modules/article'
-import { ArticleCategoryModel } from '@/typescript/article/model'
-import { IArticleCategory } from '@/typescript/article/interface'
+import { ArticleCategoryModel } from '@/typescript/shared/model/article'
+import { IArticleCategory } from '@/typescript/shared/interface/article'
 
 import { useTableHooks } from '@/utils/hooks'
 

@@ -1,5 +1,5 @@
-import { EArticleStatus } from "@/typescript/article/enum"
-import { UserRolesEnum } from "@/typescript/user/enum"
+import { EArticleStatus } from "@/typescript/shared/enum/article"
+import { UserRolesEnum } from "@/typescript/shared/enum/user"
 
 /** 定义常用 map 对象,处理键值对转换为 文字 */
 class CustomMapToText {

@@ -5,14 +5,14 @@ import { Upload, message } from 'antd'
 import ImgCrop from 'antd-img-crop'
 import './avatar-upload.scss'
 
-import { IUserBaseInfo } from '@/typescript/user/interface'
+import { IUserBaseInfo } from '@/typescript/shared/interface/user'
 import { uploadUserAvatarApi } from '@/api/modules/common'
 import { uploadUserInfoApi } from '@/api/modules/user'
 
 import { ResultCodeEnum } from '@/typescript/shared/enum'
-import { MUploadUserInfo } from '@/typescript/user/modules/uploadUserInfo'
 
 import appActions from '@/store/modules/app/actions'
+import { MUploadUserInfo } from '@/typescript/shared/model/user'
 interface ICom {
   userInfo: IUserBaseInfo,
   isNeedUserInfo: any

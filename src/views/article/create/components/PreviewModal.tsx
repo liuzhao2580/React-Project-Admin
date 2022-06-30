@@ -14,12 +14,12 @@ import { PlusOutlined } from '@ant-design/icons'
 import { connect } from 'react-redux'
 import { getUserIdStorage } from '@/utils/modules/commonSave'
 
-import { IArticleCategory, IArticleCover } from '@/typescript/article/interface'
-import { EArticleSaveType } from '@/typescript/article/enum'
 
-import { ArticleInsertOrEditModel } from '@/typescript/article/model'
 import { uploadPictureApi } from '@/api/modules/common'
 import { ResultCodeEnum } from '@/typescript/shared/enum'
+import { IArticleCategory, IArticleCover } from '@/typescript/shared/interface/article'
+import { ArticleInsertOrEditModel } from '@/typescript/shared/model/article'
+import { EArticleSaveType } from '@/typescript/shared/enum/article'
 
 interface IPreviewModal {
   /** 弹出框的 visible */

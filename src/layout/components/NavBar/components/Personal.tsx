@@ -4,7 +4,7 @@ import { Menu, Dropdown } from 'antd'
 import type { MenuProps } from 'antd'
 import { DownOutlined, UserOutlined, ExportOutlined } from '@ant-design/icons'
 import { useHistory } from 'react-router-dom'
-import { IUserBaseInfo } from '@/typescript/user/interface'
+import { IUserBaseInfo } from '@/typescript/shared/interface/user'
 import { clearLoginData } from '@/utils'
 import { ROUTE_PATH } from '@/routes/RouteConst'
 

@@ -1,6 +1,6 @@
 import React, { useState, useLayoutEffect } from 'react'
 import { connect } from 'react-redux'
-import { UserRolesEnum } from '@/typescript/user/enum'
+import { UserRolesEnum } from '@/typescript/shared/enum/user'
 import IStoreState from '@/typescript/store'
 
 interface ICom {

@@ -1,6 +1,6 @@
 import React, { useReducer, useImperativeHandle, forwardRef } from 'react'
 import { Modal, Input, message } from 'antd'
-import { EArticleStatus } from '@/typescript/article/enum'
+import { EArticleStatus } from '@/typescript/shared/enum/article'
 
 interface ICom {
   // ref:any
