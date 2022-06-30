@@ -36,6 +36,25 @@ export const getRouteTitle = (routePath: string): string => {
   return ROUTE_TITLE[getKey]
 }
 
+type keyType = string | number | undefined
+/** ts中的枚举字段 转换为枚举中文字段 */
+export function EnumFieldToTransformText<
+  T extends Record<string, keyType>,
+  S extends Record<string, keyType>
+>(enumField: T, enumTransform: S, field: keyType) {
+  let getFindKey = ''
+  for (const key in enumField) {
+    const element = enumField[key]
+    if(element === field) {
+      getFindKey = key
+      break
+    }
+  }
+  const getTextValue = enumTransform[getFindKey]
+  if(getTextValue) return getTextValue
+  else console.warn('错误,未匹配到')
+}
+
 /** 深拷贝 */
 export const deepCype = (obj: Record<string, any>) => {
   // 首先 判断该对象是不是数据
