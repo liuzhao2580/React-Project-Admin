@@ -1,5 +1,5 @@
 import React from 'react'
-import { Switch, Route, Redirect, useHistory, withRouter } from 'react-router-dom'
+import { Switch, Route, Redirect, withRouter, useLocation } from 'react-router-dom'
 import { constRoutes } from './routerConfig'
 
 import Login from '@/views/login'
@@ -7,6 +7,7 @@ import Layout from '@/layout'
 import ErrorPage404 from '@/views/errorPage/404'
 import PrivateRoute from '@/routes/PrivateRoute'
 import { ROUTE_PATH } from '@/routes/RouteConst'
+import { getRouteTitle } from '@/utils'
 
 /** 登录之后的路由 */
 export const Routes = () => {
@@ -44,10 +45,9 @@ export const Routes = () => {
  * withRouter 可以监听路由的变化
  */
 export const BaseRouter = withRouter(() => {
-  const history = useHistory()
-  console.log(history, 'his')
+  const { pathname } = useLocation()
   // 用于设置 浏览器的 title 显示
-  document.title = '1234'
+  document.title = '小火车况且况且-' + getRouteTitle(pathname)
   return (
     <Switch>
       <Route path={ROUTE_PATH.LOGIN} exact component={Login}></Route>

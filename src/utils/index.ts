@@ -1,3 +1,4 @@
+import { ROUTE_PATH, ROUTE_TITLE } from '@/routes/RouteConst'
 import { createBrowserHistory } from 'history'
 import { removeToken, removeUserId } from './modules/commonSave'
 /** 一些常用的 工具类 */
@@ -20,6 +21,19 @@ export const tokenExpired = () => {
 export const toLoginPage = () => {
   const history = createBrowserHistory()
   history.replace('login')
+}
+
+/** 通过路由path 获取路由的title */
+export const getRouteTitle = (routePath: string): string => {
+  let getKey = ''
+  for (const key in ROUTE_PATH) {
+    const path = ROUTE_PATH[key]
+    if (path === routePath) {
+      getKey = key
+      break
+    }
+  }
+  return ROUTE_TITLE[getKey]
 }
 
 /** 深拷贝 */

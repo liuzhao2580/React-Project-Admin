@@ -33,7 +33,7 @@ export const ROUTE_PATH = {
   MULTILEVEL_FOUR: '/multilevel-menu/first-one-menu/third-two-menu/four-menu',
 }
 
-export const ROUTE_NAME = {
+export const ROUTE_TITLE = {
   /** 登录页面 */
   LOGIN: '登录',
   /** 首页 */
