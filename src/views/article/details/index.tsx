@@ -11,7 +11,7 @@ import {
 import { IArticleBasic } from '@/typescript/article/interface'
 import { ResultCodeEnum } from '@/typescript/shared/enum'
 import ArticleStatusCom from '../components/ArticleStatus'
-import ROUTE_PATH from '@/routes/routePath'
+import { ROUTE_PATH } from '@/routes/RouteConst'
 import Permission from '@/components/Permission'
 import { UserRolesEnum } from '@/typescript/user/enum'
 import RejectReasonCom from './components/RejectReasonCom'

@@ -11,7 +11,7 @@ import { loginApi } from '@/api/modules/user'
 import { setUserIdStorage, setToken } from '@/utils/modules/commonSave'
 import { ILoginParams } from '@/typescript/user/interface'
 import userActions from '@/store/modules/user/actions'
-import ROUTE_PATH from '@/routes/routePath'
+import { ROUTE_PATH } from '@/routes/RouteConst'
 
 interface IProps {
   userInfoFetch: () => Promise<void>

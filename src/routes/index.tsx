@@ -6,7 +6,7 @@ import Login from '@/views/login'
 import Layout from '@/layout'
 import ErrorPage404 from '@/views/errorPage/404'
 import PrivateRoute from '@/routes/PrivateRoute'
-import ROUTE_PATH from '@/routes/routePath'
+import { ROUTE_PATH } from '@/routes/RouteConst'
 
 /** 登录之后的路由 */
 export const Routes = () => {

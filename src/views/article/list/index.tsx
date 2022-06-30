@@ -3,7 +3,7 @@ import { useHistory } from 'react-router-dom'
 import { Table, Space, Button, Popconfirm, message, Pagination } from 'antd'
 import { CloseOutlined, EditOutlined, EyeOutlined } from '@ant-design/icons'
 import './index.scss'
-import ROUTE_PATH from '@/routes/routePath'
+import { ROUTE_PATH } from '@/routes/RouteConst'
 
 import { articleListApi, articleDeleteApi } from '@/api/modules/article'
 import { IArticleBasic } from '@/typescript/article/interface'

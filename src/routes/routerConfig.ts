@@ -8,7 +8,7 @@ import {
 } from '@ant-design/icons'
 
 import { IRouterList } from '@/typescript/router/interface'
-import ROUTE_PATH from './routePath'
+import ROUTE_PATH from './RouteConstt'
 import Dashboard from '@/views/dashboard'
 import Personal from '@/views/personal'
 import Document from '@/views/document'

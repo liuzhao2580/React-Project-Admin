@@ -6,7 +6,7 @@ import { DownOutlined, UserOutlined, ExportOutlined } from '@ant-design/icons'
 import { useHistory } from 'react-router-dom'
 import { IUserBaseInfo } from '@/typescript/user/interface'
 import { clearLoginData } from '@/utils'
-import ROUTE_PATH from '@/routes/routePath'
+import { ROUTE_PATH } from '@/routes/RouteConst'
 
 interface IProps {
   userInfo: IUserBaseInfo
