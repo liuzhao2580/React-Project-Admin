@@ -1,8 +1,9 @@
 import initState from './state'
 import ACTIONS_TYPE from './actions-type'
 import { IAction } from '../shared/interface'
+import IAppState from '@/typescript/store/modules/app'
 
-const reducers = (state = new initState(), action: IAction) => {
+const reducers = (state = new initState(), action: IAction<any>):IAppState => {
   switch (action.type) {
   case ACTIONS_TYPE.CHANGE_SIDER_STATUS:
     return {

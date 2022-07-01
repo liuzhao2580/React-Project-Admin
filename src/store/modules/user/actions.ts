@@ -4,10 +4,11 @@ import { Dispatch } from 'redux'
 import ACTIONS_TYPE from './actions-type'
 import appActions from '../app/actions'
 import { tokenExpired } from '@/utils'
+import { IUserBaseInfo } from '@/typescript/shared/interface/user'
 
 const actions = {
   /** 获取用户的基本信息 */
-  getUserInfo(data: any) {
+  getUserInfo(data: IUserBaseInfo) {
     return {
       type: ACTIONS_TYPE.GET_USER_INFO,
       data
