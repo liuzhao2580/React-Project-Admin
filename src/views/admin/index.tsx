@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from 'react'
 import { connect } from 'react-redux'
 import { Radio, RadioChangeEvent } from 'antd'
+import './index.scss'
 import IStoreState from '@/typescript/store'
 import { MUserInfo } from '@/typescript/shared/model/user'
 import { EnumFieldToTransformText } from '@/utils'
@@ -16,12 +17,11 @@ const AdminManagement = ({ userInfo }: IProps) => {
     UserRolesTextEnum,
     userInfo.roleId
   )
-  const [radioValue, setRadioValue] = useState<number>(()=>userInfo.roleId)
-  
-  console.log(userInfo.roleId, '1234')
-  // useEffect(()=> {
-  //   setRadioValue(userInfo.roleId)
-  // }, [userInfo.roleId])
+  const [radioValue, setRadioValue] = useState<number>(userInfo.roleId)
+
+  useEffect(() => {
+    setRadioValue(userInfo.roleId)
+  }, [userInfo.roleId])
 
   /** radio 的点击改变事件 */
   const radioChange = (e: RadioChangeEvent) => {
@@ -29,20 +29,28 @@ const AdminManagement = ({ userInfo }: IProps) => {
   }
   return (
     <div className="admin-management-box">
-      <h2>{getCurrentRoleText}</h2>
-      <Radio.Group
-        value={radioValue}
-        buttonStyle="solid"
-        onChange={radioChange}
-      >
-        {Object.keys(UserRolesTextEnum).map((item, index) => {
-          return (
-            <Radio.Button value={UserRolesEnum[item]} key={index}>
-              {UserRolesTextEnum[item]}
-            </Radio.Button>
-          )
-        })}
-      </Radio.Group>
+      <div className="admin-management-box-header">
+        <span>当前的角色: </span>
+        <span className="admin-management-box-header-text">
+          {getCurrentRoleText}
+        </span>
+      </div>
+      <div className='admin-management-box-radio'>
+        <span>切换用户的权限: </span>
+        <Radio.Group
+          value={radioValue}
+          buttonStyle="solid"
+          onChange={radioChange}
+        >
+          {Object.keys(UserRolesTextEnum).map((item, index) => {
+            return (
+              <Radio.Button value={UserRolesEnum[item]} key={index}>
+                {UserRolesTextEnum[item]}
+              </Radio.Button>
+            )
+          })}
+        </Radio.Group>
+      </div>
     </div>
   )
 }

@@ -1,4 +1,3 @@
-import { UserRolesEnum } from "@/typescript/shared/enum/user"
 import { IUploadUserInfo, IUserBaseInfo } from "@/typescript/shared/interface/user"
 
 export class MUserInfo implements IUserBaseInfo {
@@ -9,7 +8,7 @@ export class MUserInfo implements IUserBaseInfo {
   /** 昵称 */
   nickName
   /** 用户的权限 */
-  roleId = UserRolesEnum.user
+  roleId
   /** 头像 */
   avatar
   /** 性别 true代表 男  false代表女 */
