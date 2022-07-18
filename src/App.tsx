@@ -3,7 +3,8 @@ import { BrowserRouter as Router } from 'react-router-dom'
 
 import setting from '@/setting'
 import { BaseRouter } from './routes'
-const App = () => {
+
+function App() {
   return (
     <div id="App">
       <Router basename={setting.basePath}>

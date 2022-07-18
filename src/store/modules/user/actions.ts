@@ -30,7 +30,7 @@ const actions = {
           // 清除全局的加载状态
           dispatch(appActions.layoutLoadingStatus(false))
           // 页面的刷新flag 为 false
-          dispatch(appActions.isNeedUserInfo(false))
+          dispatch(appActions.needUserInfoFlag(false))
           reslove()
         }
       })

@@ -1,27 +1,22 @@
 import React, { FC } from 'react'
-import { connect } from 'react-redux'
-import { Dispatch } from 'redux'
 import { Upload, message } from 'antd'
 import ImgCrop from 'antd-img-crop'
 import './avatar-upload.scss'
-
-import { IUserBaseInfo } from '@/typescript/shared/interface/user'
 import { uploadUserAvatarApi } from '@/api/modules/common'
 import { uploadUserInfoApi } from '@/api/modules/user'
-
 import { ResultCodeEnum } from '@/typescript/shared/enum'
-
-import appActions from '@/store/modules/app/actions'
 import { MUploadUserInfo } from '@/typescript/shared/model/user'
+import { IUserBaseInfo } from '@/typescript/shared/interface/user'
+import { useStore } from '@/store'
 interface ICom {
-  userInfo: IUserBaseInfo,
-  isNeedUserInfo: any
+  userInfo: IUserBaseInfo
 }
 
 /** 用户上传头像组件 */
-const ChangeAvatarCom: FC<ICom> = ({ userInfo, isNeedUserInfo }) => {
+const ChangeAvatarCom: FC<ICom> = ({ userInfo }) => {
   const { avatar, id } = userInfo
-
+  const { appStore } = useStore()
+  const needUserInfoFlag = appStore.changeNeedUserInfoFlag
   /** 自定义上传方法 */
   const customRequest = async file => {
     const formData = new FormData()
@@ -34,7 +29,7 @@ const ChangeAvatarCom: FC<ICom> = ({ userInfo, isNeedUserInfo }) => {
       uploadUser.avatar = urlData.data.url
       const data = await uploadUserInfoApi(id, uploadUser)
       if (data.code === ResultCodeEnum.SUCCESS) {
-        isNeedUserInfo(true)
+        needUserInfoFlag(true)
         message.success('更新成功')
       }
       else {
@@ -61,13 +56,4 @@ const ChangeAvatarCom: FC<ICom> = ({ userInfo, isNeedUserInfo }) => {
   )
 }
 
-const mapAppDispatchToProps = (dispatch: Dispatch) => {
-  return {
-    // 用来设置需要重新获取用户数据
-    isNeedUserInfo(status:boolean) {
-      return dispatch(appActions.isNeedUserInfo(status))
-    }
-  }
-}
-
-export default connect(null, mapAppDispatchToProps)(ChangeAvatarCom)
+export default ChangeAvatarCom

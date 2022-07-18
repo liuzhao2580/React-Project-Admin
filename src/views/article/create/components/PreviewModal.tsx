@@ -11,7 +11,6 @@ import {
   message
 } from 'antd'
 import { PlusOutlined } from '@ant-design/icons'
-import { connect } from 'react-redux'
 import { getUserIdStorage } from '@/utils/modules/commonSave'
 
 
@@ -258,4 +257,4 @@ const PreviewModalCom = (props: IPreviewModal) => {
 
 /** 获取用户的基本信息 */
 
-export default connect()(PreviewModalCom)
+export default PreviewModalCom

@@ -1,5 +1,4 @@
 import React from 'react'
-import { connect } from 'react-redux'
 import { Row, Col } from 'antd'
 import './index.scss'
 import HomeCard from './components/HomeCard'
@@ -38,9 +37,9 @@ const HomeDom = () => {
         </Row>
       </div>
       {/* todolist 组件 */}
-      <TodoList />
+      {/* <TodoList /> */}
     </div>
   )
 }
 
-export default connect()(HomeDom)
+export default HomeDom

@@ -1,17 +1,14 @@
 import React, { useEffect, useState } from 'react'
-import { connect } from 'react-redux'
 import { Radio, RadioChangeEvent } from 'antd'
 import './index.scss'
-import IStoreState from '@/typescript/store'
-import { MUserInfo } from '@/typescript/shared/model/user'
 import { EnumFieldToTransformText } from '@/utils'
 import { UserRolesEnum, UserRolesTextEnum } from '@/typescript/shared/enum/user'
+import { useStore } from '@/store'
 
-interface IProps {
-  userInfo: MUserInfo
-}
 
-const AdminManagement = ({ userInfo }: IProps) => {
+const AdminManagement = () => {
+  const { userStore } = useStore()
+  const userInfo = userStore.userInfo
   const getCurrentRoleText = EnumFieldToTransformText(
     UserRolesEnum,
     UserRolesTextEnum,
@@ -55,10 +52,4 @@ const AdminManagement = ({ userInfo }: IProps) => {
   )
 }
 
-const mapStateToProps = (state: IStoreState) => {
-  return {
-    userInfo: state.user.userInfo
-  }
-}
-
-export default connect(mapStateToProps)(AdminManagement)
+export default AdminManagement

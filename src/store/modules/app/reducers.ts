@@ -20,7 +20,7 @@ const reducers = (state = new initState(), action: IAction<any>):IAppState => {
   case ACTIONS_TYPE.CHNAGE_ISNEED_USERINFO:
     return {
       ...state,
-      isNeedUserInfo: action.data
+      needUserInfoFlag: action.data
     }
   default:
     return state

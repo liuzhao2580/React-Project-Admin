@@ -4,5 +4,5 @@ export default interface IAppState {
   /** 全局的加载状态 */
   layoutLoading: boolean,
   /** 是否需要重新获取用户的基本信息 true 需要 */
-  isNeedUserInfo: boolean
+  needUserInfoFlag: boolean
 }

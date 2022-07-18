@@ -16,7 +16,7 @@ const actions = {
     }
   },
   /** 是否需要重新获取用户的基本信息 */
-  isNeedUserInfo(data: boolean) {
+  needUserInfoFlag(data: boolean) {
     return {
       type: ACTIONS_TYPE.CHNAGE_ISNEED_USERINFO,
       data

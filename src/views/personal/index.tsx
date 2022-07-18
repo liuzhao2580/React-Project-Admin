@@ -1,17 +1,14 @@
 import React from 'react'
-import { connect } from 'react-redux'
 import './index.scss'
 
 import InfoCom from './components/InfoCom'
 import PersonalHeader from './components/HeaderCom'
+import { useStore } from '@/store'
 
-import { IUserBaseInfo } from '@/typescript/shared/interface/user'
-
-interface IProps {
-  userInfo: IUserBaseInfo
-}
 /** 个人中心页面 */
-const PersonalPage = ({ userInfo }: IProps) => {
+const PersonalPage = () => {
+  const { userStore } = useStore()
+  const userInfo = userStore.userInfo
   return (
     <div className="personal-page-box">
       <PersonalHeader userInfo={userInfo}/>
@@ -20,10 +17,4 @@ const PersonalPage = ({ userInfo }: IProps) => {
   )
 }
 
-const mapUserInfoStateToProps = state => {
-  return {
-    userInfo: state.user.userInfo
-  }
-}
-
-export default connect(mapUserInfoStateToProps)(PersonalPage)
+export default PersonalPage

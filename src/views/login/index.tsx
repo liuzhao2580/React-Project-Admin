@@ -1,7 +1,6 @@
 import React, { useState } from 'react'
-import { connect } from 'react-redux'
+import { observer } from 'mobx-react-lite'
 import { useHistory } from 'react-router-dom'
-import { Dispatch } from 'redux'
 
 import { Form, Input, Button, Checkbox, message } from 'antd'
 import { UserOutlined, LockOutlined } from '@ant-design/icons'
@@ -10,18 +9,15 @@ import './login.scss'
 import { loginApi } from '@/api/modules/user'
 import { setUserIdStorage, setToken } from '@/utils/modules/commonSave'
 import { ILoginParams } from '@/typescript/shared/interface/user'
-import userActions from '@/store/modules/user/actions'
 import { ROUTE_PATH } from '@/routes/RouteConst'
+import { useStore } from '@/store'
 
-interface IProps {
-  userInfoFetch: () => Promise<void>
-}
-
-const LoginDom = ({ userInfoFetch }: IProps) => {
+const LoginDom = () => {
   const history = useHistory()
   const [loginForm] = useState({ userName: 'liuzhao', password: 123456 })
   const [loading, setLoading] = useState(false)
-
+  const { userStore, appStore } = useStore()
+  const userInfoFetch = userStore.userInfoFetchDispatch(appStore)
   /** 登录请求 */
   const onFinish = async values => {
     setLoading(true)
@@ -34,7 +30,7 @@ const LoginDom = ({ userInfoFetch }: IProps) => {
       message.success('登录成功')
       setUserIdStorage(data.id)
       setToken(`Bearer ${data.token}`)
-      userInfoFetch().then(()=> {
+      userInfoFetch.then(() => {
         history.push(ROUTE_PATH.DASHBOARD)
       })
     } finally {
@@ -94,10 +90,4 @@ const LoginDom = ({ userInfoFetch }: IProps) => {
   )
 }
 
-const mapDispatchToProps = (dispatch: Dispatch) => {
-  return {
-    userInfoFetch: userActions.userInfoFetchDispatch(dispatch)
-  }
-}
-
-export default connect(null, mapDispatchToProps)(LoginDom)
+export default observer(LoginDom)

@@ -1,17 +1,18 @@
 import React, { useEffect } from 'react'
 import { Layout, Spin } from 'antd'
-import { connect } from 'react-redux'
 import './index.scss'
 import SiderDom from './components/SideBar'
 import NavBarDom from './components/NavBar'
 import ContentDom from './components/Content'
-import resizeMethods from '../utils/modules/onResize'
-import IStoreState from '@/typescript/store'
-interface IProps {
-  layoutLoading: boolean
-}
+import OnResize from '../utils/modules/onResize'
+import { useStore } from '@/store'
+import { observer } from 'mobx-react-lite'
 
-const LayoutDom = ({ layoutLoading }: IProps) => {
+const LayoutDom = () => {
+  const { appStore } = useStore()
+  const layoutLoading = appStore.layoutLoading
+  const changeSideStatus = appStore.changeSideStatus
+  const resizeMethods = new OnResize(changeSideStatus)
   useEffect(() => {
     resizeMethods.onResize()
     resizeMethods.listenResize()
@@ -41,10 +42,4 @@ const LayoutDom = ({ layoutLoading }: IProps) => {
   )
 }
 
-const mapUserInfoStateToProps = (state: IStoreState) => {
-  return {
-    layoutLoading: state.app.layoutLoading
-  }
-}
-
-export default connect(mapUserInfoStateToProps)(LayoutDom)
+export default observer(LayoutDom)

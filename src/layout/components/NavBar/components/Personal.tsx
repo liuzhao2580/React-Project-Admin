@@ -1,20 +1,18 @@
 import React from 'react'
-import { connect } from 'react-redux'
 import { Menu, Dropdown } from 'antd'
 import type { MenuProps } from 'antd'
 import { DownOutlined, UserOutlined, ExportOutlined } from '@ant-design/icons'
 import { useHistory } from 'react-router-dom'
-import { IUserBaseInfo } from '@/typescript/shared/interface/user'
 import { clearLoginData } from '@/utils'
 import { ROUTE_PATH } from '@/routes/RouteConst'
+import { useStore } from '@/store'
 
-interface IProps {
-  userInfo: IUserBaseInfo
-}
 
 /** 右上角的个人 */
-const Personal = ({ userInfo }: IProps) => {
+const Personal = () => {
   const history = useHistory()
+  const { userStore } = useStore()
+  const userInfo = userStore.userInfo
   // 点击 菜单项
   const menuClick: MenuProps['onClick'] = e => {
     const { key } = e
@@ -61,10 +59,5 @@ const Personal = ({ userInfo }: IProps) => {
   )
 }
 
-const mapUserInfoStateToProps = state => {
-  return {
-    userInfo: state.user.userInfo
-  }
-}
 
-export default connect(mapUserInfoStateToProps)(Personal)
+export default Personal

@@ -1,19 +1,18 @@
 import React, { useState, useMemo, FC } from 'react'
 import { useHistory, withRouter, RouteComponentProps } from 'react-router-dom'
-import { connect } from 'react-redux'
 import { Layout, Menu } from 'antd'
 
 import CustomIconCom from '@/components/CustomIcon'
 import { constRoutes } from '@/routes/routerConfig'
+import { useStore } from '@/store'
 const { Sider } = Layout
 const { SubMenu } = Menu
 
-interface ISideBar extends RouteComponentProps {
-  sideStatus?: boolean
-}
 
-const SideBar: FC<ISideBar> = ({ sideStatus }) => {
+const SideBar: FC<RouteComponentProps> = () => {
   const history = useHistory()
+  const { appStore } = useStore()
+  const sideStatus = appStore.sideStatus
   // 默认选择的侧边栏 当前选中的菜单项 key 数组
   const [selectedKeys, setSelectenMenu] = useState(['/dashboard'])
 
@@ -94,9 +93,4 @@ const SideBar: FC<ISideBar> = ({ sideStatus }) => {
   )
 }
 
-const mapStateToProps = state => {
-  return {
-    sideStatus: state.app.sideStatus
-  }
-}
-export default connect(mapStateToProps)(withRouter(SideBar))
+export default withRouter(SideBar)

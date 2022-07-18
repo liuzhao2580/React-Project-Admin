@@ -1,6 +1,5 @@
 import React, { useRef} from 'react'
 import { Button, Input, List } from 'antd'
-import { connect } from 'react-redux'
 
 import todoListActions from '@/store/modules/todoList/actions'
 const TodoList = ({ todoList, InsertTodoList }) => {
@@ -52,4 +51,4 @@ const mapDispatchToProps = dispatch => {
     }
   }
 }
-export default connect(mapStateToProps, mapDispatchToProps)(TodoList)
+export default TodoList

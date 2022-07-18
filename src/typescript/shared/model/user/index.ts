@@ -6,7 +6,7 @@ export class MUserInfo implements IUserBaseInfo {
   /** 用户名 */
   userName
   /** 昵称 */
-  nickName
+  nickName?
   /** 用户的权限 */
   roleId
   /** 头像 */
