@@ -1,6 +1,7 @@
 import { ROUTE_PATH, ROUTE_TITLE } from '@/routes/RouteConst'
 import { createBrowserHistory } from 'history'
 import { removeToken, removeUserId } from './modules/commonSave'
+import { basePath } from '@/setting'
 /** 一些常用的 工具类 */
 
 /** 退出登录之前, 清除保存的数据 */
@@ -20,7 +21,7 @@ export const tokenExpired = () => {
 /** 跳转到登录页面 */
 export const toLoginPage = () => {
   const history = createBrowserHistory()
-  history.replace('login')
+  history.replace(`/${basePath}/login`)
 }
 
 /** 通过路由path 获取路由的title */
