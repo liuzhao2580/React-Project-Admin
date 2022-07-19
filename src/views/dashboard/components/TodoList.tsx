@@ -1,4 +1,4 @@
-import React, { useRef} from 'react'
+import React, { useRef } from 'react'
 import { Button, Input, List } from 'antd'
 import { observer } from 'mobx-react-lite'
 import { useStore } from '@/store'
@@ -6,7 +6,6 @@ import { useStore } from '@/store'
 const TodoList = () => {
   const inputValueRef = useRef<Input>(null)
   const { todoListStore } = useStore()
-  const todoList = todoListStore.list
   /** 新增按钮 */
   const insertTodo = () => {
     if (inputValueRef.current) {
@@ -31,9 +30,11 @@ const TodoList = () => {
       <List
         header={<div>ToDo List</div>}
         bordered
-        dataSource={todoList}
+        dataSource={todoListStore.dataSourceTodoList}
         renderItem={(item: any) => (
-          <List.Item className="todo-item">{item.title}</List.Item>
+          <List.Item className="todo-item" key={item.key}>
+            {item.title}
+          </List.Item>
         )}
       />
     </div>
