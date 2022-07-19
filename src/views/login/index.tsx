@@ -16,8 +16,8 @@ const LoginDom = () => {
   const history = useHistory()
   const [loginForm] = useState({ userName: 'liuzhao', password: 123456 })
   const [loading, setLoading] = useState(false)
-  const { userStore, appStore } = useStore()
-  const userInfoFetch = userStore.userInfoFetchDispatch(appStore)
+  const { userStore } = useStore()
+  const userInfoFetch = userStore.userInfoFetchDispatch()
   /** 登录请求 */
   const onFinish = async values => {
     setLoading(true)

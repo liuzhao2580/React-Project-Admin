@@ -21,17 +21,16 @@ const PrivateRoute = ({
   const history = useHistory()
   const { appStore, userStore } = useStore()
   const needUserInfoFlag = appStore.needUserInfoFlag
-  const getUserInfoDispatch = userStore.userInfoFetchDispatch(appStore)
   useEffect(() => {
     if (needUserInfoFlag === true) {
-      if (getUserIdStorage()) getUserInfoDispatch
+      if (getUserIdStorage()) userStore.userInfoFetchDispatch()
       else {
         message.info('登录过期')
         tokenExpired()
         history.replace(ROUTE_PATH.LOGIN)
       }
     }
-  }, [getUserInfoDispatch, needUserInfoFlag])
+  }, [needUserInfoFlag])
 
   return (
     <Route

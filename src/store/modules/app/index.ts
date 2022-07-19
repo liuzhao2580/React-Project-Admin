@@ -1,4 +1,4 @@
-import { makeAutoObservable } from 'mobx'
+import { makeAutoObservable, runInAction } from 'mobx'
 import IAppState from '@/typescript/store/modules/app'
 export default class AppStore implements IAppState {
   /** 侧边栏的状态 false 关闭 true 展开 */
@@ -14,7 +14,9 @@ export default class AppStore implements IAppState {
     this.sideStatus = flag
   }
   changeLayoutLoadingStatus(flag: boolean) {
-    this.layoutLoading = flag
+    runInAction(()=> {
+      this.layoutLoading = flag
+    })
   }
   changeNeedUserInfoFlag(flag: boolean) {
     this.needUserInfoFlag = flag

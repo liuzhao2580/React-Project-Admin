@@ -1,14 +1,16 @@
 import React, { useRef} from 'react'
 import { Button, Input, List } from 'antd'
+import { observer } from 'mobx-react-lite'
+import { useStore } from '@/store'
 
-import todoListActions from '@/store/modules/todoList/actions'
-const TodoList = ({ todoList, InsertTodoList }) => {
+const TodoList = () => {
   const inputValueRef = useRef<Input>(null)
+  const { todoListStore } = useStore()
+  const todoList = todoListStore.list
   /** 新增按钮 */
   const insertTodo = () => {
-    console.log(inputValueRef.current)
     if (inputValueRef.current) {
-      InsertTodoList({
+      todoListStore.insertTodoList({
         key: new Date().getTime(),
         title: inputValueRef.current.state.value
       })
@@ -37,18 +39,4 @@ const TodoList = ({ todoList, InsertTodoList }) => {
     </div>
   )
 }
-// todolist的数组
-const mapStateToProps = state => {
-  return {
-    todoList: state.todoList.list
-  }
-}
-// 增加 todolist 元素
-const mapDispatchToProps = dispatch => {
-  return {
-    InsertTodoList(data) {
-      dispatch(todoListActions.insertTodoList(data))
-    }
-  }
-}
-export default TodoList
+export default observer(TodoList)

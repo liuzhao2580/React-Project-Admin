@@ -5,6 +5,7 @@ import { Layout, Menu } from 'antd'
 import CustomIconCom from '@/components/CustomIcon'
 import { constRoutes } from '@/routes/routerConfig'
 import { useStore } from '@/store'
+import { observer } from 'mobx-react-lite'
 const { Sider } = Layout
 const { SubMenu } = Menu
 
@@ -93,4 +94,4 @@ const SideBar: FC<RouteComponentProps> = () => {
   )
 }
 
-export default withRouter(SideBar)
+export default withRouter(observer(SideBar))

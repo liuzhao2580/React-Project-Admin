@@ -37,7 +37,7 @@ const HomeDom = () => {
         </Row>
       </div>
       {/* todolist 组件 */}
-      {/* <TodoList /> */}
+      <TodoList />
     </div>
   )
 }

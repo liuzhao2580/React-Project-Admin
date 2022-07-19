@@ -11,8 +11,7 @@ import { observer } from 'mobx-react-lite'
 const LayoutDom = () => {
   const { appStore } = useStore()
   const layoutLoading = appStore.layoutLoading
-  const changeSideStatus = appStore.changeSideStatus
-  const resizeMethods = new OnResize(changeSideStatus)
+  const resizeMethods = new OnResize(appStore)
   useEffect(() => {
     resizeMethods.onResize()
     resizeMethods.listenResize()
