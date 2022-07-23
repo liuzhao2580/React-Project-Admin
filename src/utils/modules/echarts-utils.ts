@@ -1,5 +1,5 @@
 /** 配置 echarts */
-import { EChartsOption, graphic } from 'echarts'
+import { ECharts, EChartsOption, graphic } from 'echarts'
 
 const yData = ['Angular', 'React', 'Vue', 'JavaScript']
 
@@ -48,6 +48,75 @@ export const LineOptions = (): EChartsOption => {
       }
     ]
   }
+}
+
+/** 自动播放的柱形图 */
+export const BarAutoPlayOptions = (myChart: ECharts): EChartsOption => {
+  const xAxisTopData: number[] = []
+  const xAxisBottomData: string[] = []
+  const whileLength = 10
+  const lineSeriesData: number[] = []
+  const barSeriesData: number[] = []
+  ;(function () {
+    let len = 0
+    let nowData = new Date()
+    while (len < whileLength) {
+      xAxisBottomData.unshift(nowData.toLocaleTimeString().replace(/^\D*/, ''))
+      xAxisTopData.push(len)
+      nowData = new Date(+nowData - 2000)
+      barSeriesData.push(Math.random() * 1000 + len)
+      lineSeriesData.push(Math.random() * 10 + len)
+      len++
+    }
+  })()
+  const getEchartsOption: EChartsOption = {
+    title: {
+      text: '自动播放的柱形图'
+    },
+    tooltip: {
+      trigger: 'axis',
+      axisPointer: {
+        type: 'line',
+        label: {
+          backgroundColor: '#283b56'
+        }
+      }
+    },
+    // 默认 xAxis 数组中第一个元素在下方, 但是使用 position 可以修改所在位置
+    xAxis: [
+      {
+        type: 'category',
+        boundaryGap: true,
+        position: 'top',
+        data: xAxisTopData
+      },
+      {
+        type: 'category',
+        boundaryGap: true,
+        position: 'bottom',
+        data: xAxisBottomData
+      }
+    ],
+    yAxis: [{}, {}],
+    series: [
+      {
+        type: 'bar',
+        xAxisIndex: 1,
+        yAxisIndex: 1,
+        data: barSeriesData
+      },
+      {
+        type: 'line',
+        data: lineSeriesData
+      }
+    ]
+  }
+  console.log(myChart)
+
+  // setInterval(()=> {
+  //   console.log(myChart)
+  // }, 1000)
+  return getEchartsOption
 }
 
 /** 堆叠的柱形图 */

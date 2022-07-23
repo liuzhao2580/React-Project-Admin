@@ -7,17 +7,13 @@ import { tokenExpired } from '@/utils'
 import { ROUTE_PATH } from './RouteConst'
 import { useStore } from '@/store'
 import { observer } from 'mobx-react-lite'
-
 interface IProps {
   component: FC
   [propName: string]: any
 }
 
 /** 用来处理路由拦截 */
-const PrivateRoute = ({
-  component: Component,
-  ...rest
-}: IProps) => {
+const PrivateRoute = ({ component: Component, ...rest }: IProps) => {
   const history = useHistory()
   const { appStore, userStore } = useStore()
   const needUserInfoFlag = appStore.needUserInfoFlag
@@ -31,7 +27,7 @@ const PrivateRoute = ({
       }
     }
   }, [needUserInfoFlag])
-
+  console.log('PrivateRoute')
   return (
     <Route
       {...rest}
@@ -41,4 +37,4 @@ const PrivateRoute = ({
     ></Route>
   )
 }
-export default observer(PrivateRoute)
+export default PrivateRoute

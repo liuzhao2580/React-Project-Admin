@@ -1,4 +1,11 @@
-import React, { useState, useEffect, useLayoutEffect, FC } from 'react'
+import React, {
+  useState,
+  useEffect,
+  useLayoutEffect,
+  forwardRef,
+  ForwardRefRenderFunction,
+  useImperativeHandle
+} from 'react'
 import { ECharts, EChartsOption, init } from 'echarts'
 
 interface ICom {
@@ -6,7 +13,10 @@ interface ICom {
   height?: string
 }
 
-const EchartsCom: FC<ICom> = ({ options, height }) => {
+const EchartsCom: ForwardRefRenderFunction<any, ICom> = (
+  { options, height },
+  ref
+) => {
   /** 设置 echarts的id */
   const echartId: string =
     'echartId-' + new Date().getTime() + Math.floor(Math.random() * 10000)
@@ -14,6 +24,10 @@ const EchartsCom: FC<ICom> = ({ options, height }) => {
   /** 获取 echarts的dom 元素 */
   const [echartDom, setEchartDom] = useState<HTMLElement | null>()
   /** 获取 echarts的实例化对象 */
+
+  useImperativeHandle(ref, () => ({
+    myChart
+  }))
   const [myChart, setMyChart] = useState<ECharts | null>(null)
 
   useLayoutEffect(() => {
@@ -51,4 +65,4 @@ const EchartsCom: FC<ICom> = ({ options, height }) => {
   )
 }
 
-export default EchartsCom
+export default forwardRef(EchartsCom)

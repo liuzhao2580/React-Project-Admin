@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react'
+import React, { useEffect, useMemo } from 'react'
 import { Layout, Spin } from 'antd'
 import './index.scss'
 import SiderDom from './components/SideBar'
@@ -7,10 +7,8 @@ import ContentDom from './components/Content'
 import OnResize from '../utils/modules/onResize'
 import { useStore } from '@/store'
 import { observer } from 'mobx-react-lite'
-
 const LayoutDom = () => {
   const { appStore } = useStore()
-  const layoutLoading = appStore.layoutLoading
   const resizeMethods = new OnResize(appStore)
   useEffect(() => {
     resizeMethods.onResize()
@@ -19,24 +17,29 @@ const LayoutDom = () => {
       window.removeEventListener('resize', resizeMethods.onResize)
     }
   }, [])
+  console.log(1111)
   return (
     <Spin
       tip="加载中..."
       delay={300}
       style={{ maxHeight: 'initial' }}
-      spinning={layoutLoading}
+      spinning={appStore.layoutLoading}
     >
-      <Layout className="layout-box">
-        {/* 侧边栏 */}
-        <SiderDom />
-        {/* 右边内容区域 */}
-        <Layout className="site-layout">
-          {/* 头部 */}
-          <NavBarDom />
-          {/* 内容区域 */}
-          <ContentDom></ContentDom>
-        </Layout>
-      </Layout>
+      {useMemo(() => {
+        return (
+          <Layout className="layout-box">
+            {/* 侧边栏 */}
+            <SiderDom />
+            {/* 右边内容区域 */}
+            <Layout className="site-layout">
+              {/* 头部 */}
+              <NavBarDom />
+              {/* 内容区域 */}
+              <ContentDom></ContentDom>
+            </Layout>
+          </Layout>
+        )
+      }, [])}
     </Spin>
   )
 }
