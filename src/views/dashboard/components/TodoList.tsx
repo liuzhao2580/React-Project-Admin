@@ -28,6 +28,7 @@ const TodoList = () => {
         </Button>
       </div>
       <List
+        style={{ flex: 1 }}
         header={<div>ToDo List</div>}
         bordered
         dataSource={todoListStore.dataSourceTodoList}
@@ -36,7 +37,7 @@ const TodoList = () => {
             {item.title}
           </List.Item>
         )}
-      />
+      ></List>
     </div>
   )
 }

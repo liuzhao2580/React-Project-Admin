@@ -6,7 +6,7 @@ import { getUserIdStorage } from '@/utils/modules/commonSave'
 import AppStore from '../app'
 
 export default class UserStore {
-  /** 获取用户的基本信息 */ 
+  /** 获取用户的基本信息 */
   userInfo = new MUserInfo()
   appStore: AppStore
   constructor(appStore: AppStore) {
