@@ -3,17 +3,15 @@ import { ECharts, EChartsOption, graphic } from 'echarts'
 
 const yData = ['Angular', 'React', 'Vue', 'JavaScript']
 
-
-// let echartsInterval: any = null
+let echartsInterval: any = null
 
 /** 清除 echarts 的定时器 */
 export const clearEchartsInterval = () => {
-  // clearInterval(echartsInterval)
+  clearInterval(echartsInterval)
 }
 
 /** 自动播放的 echart 图表 */
 export const AutoPlayBarEchartsUtils = (myEchart: ECharts): EChartsOption => {
-  console.log(myEchart, 'myEchart')
   const xAxisData: string[] = []
   const barSeriesData: number[] = []
   const lineSeriseData: number[] = []
@@ -29,37 +27,39 @@ export const AutoPlayBarEchartsUtils = (myEchart: ECharts): EChartsOption => {
       len++
     }
   })()
-  // echartsInterval = setInterval(() => {
-  //   const now = new Date()
-  //   xAxisData.shift()
-  //   xAxisData.push(now.toLocaleTimeString().replace(/^\D*/, ''))
-  //   barSeriesData.shift()
-  //   lineSeriseData.shift()
-  //   barSeriesData.push(Math.floor(Math.random() * 1000))
-  //   lineSeriseData.push(Math.floor(Math.random() * 1000))
-  //   myEchart.setOption({
-  //     xAxis: [
-  //       {
-  //         type: 'category',
-  //         boundaryGap: true,
-  //         data: xAxisData
-  //       }
-  //     ],
-  //     series: [
-  //       {
-  //         data: barSeriesData
-  //       },
-  //       {
-  //         data: lineSeriseData
-  //       }
-  //     ]
-  //   })
-  //   myEchart.dispatchAction({
-  //     type: 'showTip',
-  //     seriesIndex: 0,
-  //     dataIndex: 0
-  //   })
-  // }, 2100)
+  if (myEchart) {
+    echartsInterval = setInterval(() => {
+      const now = new Date()
+      xAxisData.shift()
+      xAxisData.push(now.toLocaleTimeString().replace(/^\D*/, ''))
+      barSeriesData.shift()
+      lineSeriseData.shift()
+      barSeriesData.push(Math.floor(Math.random() * 1000))
+      lineSeriseData.push(Math.floor(Math.random() * 1000))
+      myEchart.setOption({
+        xAxis: [
+          {
+            type: 'category',
+            boundaryGap: true,
+            data: xAxisData
+          }
+        ],
+        series: [
+          {
+            data: barSeriesData
+          },
+          {
+            data: lineSeriseData
+          }
+        ]
+      })
+      myEchart.dispatchAction({
+        type: 'showTip',
+        seriesIndex: 0,
+        dataIndex: 0
+      })
+    }, 2100)
+  }
   return {
     title: {
       text: '自动播放的 echart 图表'

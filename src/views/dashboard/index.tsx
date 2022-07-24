@@ -8,12 +8,21 @@ import EchartsCom from '@/components/EchartsCom'
 import {
   LineOptions,
   AutoPlayBarEchartsUtils,
+  clearEchartsInterval,
   BarOptions,
   BarOtherOptions,
   BarScrollOptions
 } from '@/utils/modules/echarts-utils'
+import { useEffect } from 'react'
 const HomeDom = () => {
-  const autoPlayEchartRef = useRef<ECharts>()
+  const autoPlayEchartRef = useRef<{
+    myChart: ECharts
+  }>()
+  useEffect(() => {
+    return () => {
+      clearEchartsInterval()
+    }
+  }, [])
   return (
     <div>
       {/* 头部分块 */}
@@ -24,7 +33,9 @@ const HomeDom = () => {
         {/* 可以自动播放的柱形图 */}
         <EchartsCom
           ref={autoPlayEchartRef}
-          options={AutoPlayBarEchartsUtils(autoPlayEchartRef.current as ECharts)}
+          options={AutoPlayBarEchartsUtils(
+            autoPlayEchartRef.current?.myChart as ECharts
+          )}
         />
         <Row className="echart-component-main" gutter={10}>
           <Col xs={{ span: 24 }} xl={{ span: 8 }} className="echart-item-col">
