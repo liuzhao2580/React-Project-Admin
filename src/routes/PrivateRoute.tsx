@@ -9,11 +9,10 @@ import userActions from '@/store/modules/user/actions'
 import IStoreState from '@/typescript/store'
 import { tokenExpired } from '@/utils'
 import { ROUTE_PATH } from './RouteConst'
-
 interface IProps {
   component: FC
   getUserInfoDispatch: () => Promise<void>
-  isNeedUserInfo: boolean
+  refreshUserInfoFlag: boolean
   [propName: string]: any
 }
 
@@ -21,12 +20,13 @@ interface IProps {
 const PrivateRoute = ({
   component: Component,
   getUserInfoDispatch,
-  isNeedUserInfo,
+  refreshUserInfoFlag,
   ...rest
 }: IProps) => {
   const history = useHistory()
+  console.log('PrivateRoute')
   useEffect(() => {
-    if (isNeedUserInfo === true) {
+    if (refreshUserInfoFlag === true) {
       if (getUserIdStorage()) getUserInfoDispatch()
       else {
         message.info('登录过期')
@@ -34,7 +34,7 @@ const PrivateRoute = ({
         history.replace(ROUTE_PATH.LOGIN)
       }
     }
-  }, [getUserInfoDispatch, isNeedUserInfo])
+  }, [refreshUserInfoFlag])
 
   return (
     <Route
@@ -48,7 +48,7 @@ const PrivateRoute = ({
 
 const mapAppStateToProps = (state: IStoreState) => {
   return {
-    isNeedUserInfo: state.app.isNeedUserInfo
+    refreshUserInfoFlag: state.app.refreshUserInfoFlag
   }
 }
 

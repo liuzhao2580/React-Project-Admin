@@ -15,11 +15,11 @@ import appActions from '@/store/modules/app/actions'
 import { MUploadUserInfo } from '@/typescript/shared/model/user'
 interface ICom {
   userInfo: IUserBaseInfo,
-  isNeedUserInfo: any
+  refreshUserInfoFlag: any
 }
 
 /** 用户上传头像组件 */
-const ChangeAvatarCom: FC<ICom> = ({ userInfo, isNeedUserInfo }) => {
+const ChangeAvatarCom: FC<ICom> = ({ userInfo, refreshUserInfoFlag }) => {
   const { avatar, id } = userInfo
 
   /** 自定义上传方法 */
@@ -34,7 +34,7 @@ const ChangeAvatarCom: FC<ICom> = ({ userInfo, isNeedUserInfo }) => {
       uploadUser.avatar = urlData.data.url
       const data = await uploadUserInfoApi(id, uploadUser)
       if (data.code === ResultCodeEnum.SUCCESS) {
-        isNeedUserInfo(true)
+        refreshUserInfoFlag(true)
         message.success('更新成功')
       }
       else {
@@ -64,8 +64,8 @@ const ChangeAvatarCom: FC<ICom> = ({ userInfo, isNeedUserInfo }) => {
 const mapAppDispatchToProps = (dispatch: Dispatch) => {
   return {
     // 用来设置需要重新获取用户数据
-    isNeedUserInfo(status:boolean) {
-      return dispatch(appActions.isNeedUserInfo(status))
+    refreshUserInfoFlag(status:boolean) {
+      return dispatch(appActions.refreshUserInfoFlag(status))
     }
   }
 }

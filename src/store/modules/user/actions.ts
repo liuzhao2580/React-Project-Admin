@@ -16,24 +16,16 @@ const actions = {
   },
   /** 异步获取用户基本信息 */
   userInfoFetchDispatch(dispatch: Dispatch) {
-    return () => {
-      return new Promise<void>(async reslove => {
-        // 添加当前的全局加载状态
-        dispatch(appActions.layoutLoadingStatus(true))
-        try {
-          const getData = await getUserInfoApi(getUserIdStorage())
-          dispatch(this.getUserInfo(getData.data))
-        } catch (error) {
-          console.log(error)
-          tokenExpired()
-        } finally {
-          // 清除全局的加载状态
-          dispatch(appActions.layoutLoadingStatus(false))
-          // 页面的刷新flag 为 false
-          dispatch(appActions.isNeedUserInfo(false))
-          reslove()
-        }
-      })
+    return async () => {
+      try {
+        const getData = await getUserInfoApi(getUserIdStorage())
+        dispatch(this.getUserInfo(getData.data))
+      } catch (error) {
+        tokenExpired()
+      } finally {
+        // 清除全局的加载状态
+        dispatch(appActions.layoutLoadingStatus(false))
+      }
     }
   }
 }
