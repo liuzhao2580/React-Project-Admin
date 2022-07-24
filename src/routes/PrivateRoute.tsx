@@ -24,7 +24,6 @@ const PrivateRoute = ({
   ...rest
 }: IProps) => {
   const history = useHistory()
-  console.log('PrivateRoute')
   useEffect(() => {
     if (refreshUserInfoFlag === true) {
       if (getUserIdStorage()) getUserInfoDispatch()

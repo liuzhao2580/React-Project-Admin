@@ -1,6 +1,6 @@
 import React, { useRef } from 'react'
 import { Row, Col } from 'antd'
-import { ECharts } from 'echarts'
+import { ECharts, EChartsOption } from 'echarts'
 import './index.scss'
 import HomeCard from './components/HomeCard'
 import TodoList from './components/TodoList'
@@ -14,15 +14,25 @@ import {
   BarScrollOptions
 } from '@/utils/modules/echarts-utils'
 import { useEffect } from 'react'
+import { useState } from 'react'
 const HomeDom = () => {
   const autoPlayEchartRef = useRef<{
     myChart: ECharts
   }>()
+  const [autoPlayBarEchartsOption, setAutoPlayBarEchartsOption] =
+    useState<EChartsOption>(() =>
+      AutoPlayBarEchartsUtils(autoPlayEchartRef.current?.myChart as ECharts)
+    )
   useEffect(() => {
+    setTimeout(() => {
+      setAutoPlayBarEchartsOption(() =>
+        AutoPlayBarEchartsUtils(autoPlayEchartRef.current?.myChart as ECharts)
+      )
+    })
     return () => {
       clearEchartsInterval()
     }
-  }, [])
+  }, [autoPlayEchartRef])
   return (
     <div>
       {/* 头部分块 */}
@@ -33,9 +43,7 @@ const HomeDom = () => {
         {/* 可以自动播放的柱形图 */}
         <EchartsCom
           ref={autoPlayEchartRef}
-          options={AutoPlayBarEchartsUtils(
-            autoPlayEchartRef.current?.myChart as ECharts
-          )}
+          options={autoPlayBarEchartsOption as EChartsOption}
         />
         <Row className="echart-component-main" gutter={10}>
           <Col xs={{ span: 24 }} xl={{ span: 8 }} className="echart-item-col">

@@ -16,9 +16,7 @@ const EchartsCom: ForwardRefRenderFunction<any, ICom> = ({ options, height }, re
   /** 获取 echarts的实例化对象 */
   const [myChart, setMyChart] = useState<ECharts | null>(null)
 
-  useImperativeHandle(ref, ()=> ({
-    myChart
-  }))
+  
 
   useLayoutEffect(() => {
     setEchartDom(document.getElementById(`${echartId}`))
@@ -45,6 +43,10 @@ const EchartsCom: ForwardRefRenderFunction<any, ICom> = ({ options, height }, re
     }
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [myChart])
+
+  useImperativeHandle(ref, ()=> ({
+    myChart
+  }), [myChart])
 
   return (
     <div
